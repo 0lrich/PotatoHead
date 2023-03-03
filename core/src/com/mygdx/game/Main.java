@@ -3,29 +3,42 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Main extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+	Player potato;
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	 potato = new Player(0,0, 10, 50,50,new ShapeRenderer());
+
+
 	}
+
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		ScreenUtils.clear(.5f, .5f, .5f, 1);
+		//region UPDATES
+
+
+		potato.update();
+
+
+		//endregion
+
+
+		//region RENDERS
+
+
+		potato.render();
+
+
+		//endregion
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+
 	}
 }
