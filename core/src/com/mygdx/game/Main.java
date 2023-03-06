@@ -8,10 +8,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Main extends ApplicationAdapter {
 	Player potato;
+	Platform platformOne;
 	@Override
 	public void create () {
 	 potato = new Player(0,0, 10, 50,50,new ShapeRenderer());
-
+	 platformOne = new Platform(200,400,150,400,new ShapeRenderer(),false, false, true, 0, 0);
 
 	}
 
@@ -23,7 +24,7 @@ public class Main extends ApplicationAdapter {
 
 
 		potato.update();
-
+		platformOne.update(potato);
 
 		//endregion
 
@@ -32,7 +33,7 @@ public class Main extends ApplicationAdapter {
 
 
 		potato.render();
-
+		platformOne.render();
 
 		//endregion
 	}
