@@ -3,9 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
-
 public class Platform {
     float x;
     float y;
@@ -39,15 +36,7 @@ public class Platform {
      *   V
      */
     public void update(Player player){
-        Vector2 TL = new Vector2(x,y+length); //top left corner
-        Vector2 TR = new Vector2(x + width,y);//top right corner
-        Vector2 BR = new Vector2(x+width,y);// bottom right corner
-        Vector2 BL = new Vector2(x,y); // bottom left corner
-        if (tangible){
-            if (player.x <= TL.y){
 
-            }
-        }
 
 
 
@@ -64,5 +53,19 @@ public class Platform {
         floor.setColor(0,0,0,1);
         floor.rect(x,y,width,length);
         floor.end();
+    }
+    public boolean floorstuff(Player player, Platform platform){//gonna be really messy way to figure out how to do floor physics
+        Vector2 TL = new Vector2(x,y+length); //top left corner
+        Vector2 TR = new Vector2(x + width,y);//top right corner
+        Vector2 BR = new Vector2(x+width,y);// bottom right corner
+        Vector2 BL = new Vector2(x,y); // bottom left corner
+        if (tangible){
+            if (player.x + player.width >= TL.x && player.x <= TR.x && player.y <= BL.y && player.y <= TL.y){
+                if (platform.canFallThrough == false){
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }

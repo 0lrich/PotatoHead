@@ -22,9 +22,9 @@ public class Main extends ApplicationAdapter {
 		ScreenUtils.clear(.5f, .5f, .5f, 1);
 		//region UPDATES
 
-
-		potato.update();
 		platformOne.update(potato);
+		potato.update(platformOne);
+
 
 		//endregion
 

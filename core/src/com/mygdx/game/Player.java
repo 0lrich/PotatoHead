@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Player {
     float x;
@@ -11,6 +10,8 @@ public class Player {
     float health;
     float length;
     float width;
+    float xVelocity = 0;
+    float yVelocity = 0;
     ShapeRenderer body = new ShapeRenderer();
 
     public Player(float x, float y, float health, float length, float width, ShapeRenderer body) {
@@ -30,33 +31,10 @@ public class Player {
      *  \ /
      *   V
      */
-    public void update(){
-        //region BASIC MOVEMENT
-    if(Gdx.input.isKeyPressed(Input.Keys.W)){
-        y += 5;
-    }
-    if(Gdx.input.isKeyPressed(Input.Keys.S)){
-        y -= 5;
-    }
-    if(Gdx.input.isKeyPressed(Input.Keys.A)){
-        x -= 5;
-    }
-    if(Gdx.input.isKeyPressed(Input.Keys.D)){
-        x += 5;
-    }
-        //endregion
+    public void update(Platform platform){
+        calculateVelocity();
+        movement();
 
-        if(x < 0 ){
-            x += 5;
-        } else if(x + width >  Gdx.graphics.getWidth()){
-            x  -= 5;
-        }
-
-        if(y + length >  Gdx.graphics.getHeight()){
-            y -= 5;
-        }else if(y < 0) {
-            y += 5;
-        }
     }
 
     /**
@@ -75,6 +53,39 @@ public class Player {
     }
     public void dispose () {
 
+
+    }
+
+    /**
+     * Sets the X and Y Velocity property based on keyboard input
+     * x velocity should be set based on if A or D is pressed
+     * y velocity should be set based on if ONLY W is pressed :) and you're gonna have to add gravity
+     * (^^^ should check to see of their allowed to jump, no double jumps ^^^)
+     */
+    private void calculateVelocity(){
+        //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            x -= 5;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+            x += 5;
+        }
+    }
+
+    /**
+     *attempts to mvove along a vector (xVelocity,yVelocity) from current position and will stop being
+     * able to move in said direction if there's something in the way
+     * also has to make sure you cant go offscreen
+     */
+    private void movement(){
+    //fixme placeholder
+        x += xVelocity;
+        y += yVelocity;
+
+        if (y < 0){//so it wont fall off later on just a placeholder
+            y = 0;
+            yVelocity = 0;
+        }
 
     }
 }
