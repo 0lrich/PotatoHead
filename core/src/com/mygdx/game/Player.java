@@ -82,7 +82,7 @@ public class Player {
         x += xVelocity;
         y += yVelocity;
 
-        if (y < 0){//so it wont fall off later on just a placeholder
+        if (y < 0){//so it won't fall off later on just a placeholder
             y = 0;
             yVelocity = 0;
         }
