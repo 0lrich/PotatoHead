@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import static com.badlogic.gdx.math.MathUtils.lerp;
+
 public class Player {
     float x;
     float y;
@@ -64,11 +66,11 @@ public class Player {
      */
     private void calculateVelocity(){
         //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            x -= 5;
+        if(Gdx.input.isKeyPressed(Input.Keys.A) && xVelocity != -5){
+            xVelocity -= 5;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            x += 5;
+        if(Gdx.input.isKeyPressed(Input.Keys.D) && xVelocity != 5){
+            xVelocity += 5;
         }
     }
 
@@ -81,11 +83,14 @@ public class Player {
     //fixme placeholder
         x += xVelocity;
         y += yVelocity;
-
+        xVelocity = lerp(xVelocity, 0, 0.25f);
+        /*
         if (y < 0){//so it won't fall off later on just a placeholder
             y = 0;
             yVelocity = 0;
         }
+
+         */
 
     }
 }
