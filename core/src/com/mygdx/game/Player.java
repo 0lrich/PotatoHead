@@ -12,7 +12,10 @@ public class Player {
     float width;
     float xVelocity = 0;
     float yVelocity = 0;
+    float gravity = 5;
+    float speed = 5;
     ShapeRenderer body = new ShapeRenderer();
+    boolean canJump = true;
 
     public Player(float x, float y, float health, float length, float width, ShapeRenderer body) {
         this.x = x;
@@ -32,9 +35,9 @@ public class Player {
      *   V
      */
     public void update(Platform platform){
+        y -= gravity;
         calculateVelocity();
         movement();
-
     }
 
     /**
@@ -51,10 +54,7 @@ public class Player {
         body.rect(x,y,width,length);
         body.end();
     }
-    public void dispose () {
-
-
-    }
+    public void dispose () {}
 
     /**
      * Sets the X and Y Velocity property based on keyboard input
@@ -65,15 +65,20 @@ public class Player {
     private void calculateVelocity(){
         //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            x -= 5;
+            x -= speed;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            x += 5;
+            x += speed;
+        }
+        if(canJump == true){
+        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+            y += 10;
+        }
         }
     }
 
     /**
-     *attempts to mvove along a vector (xVelocity,yVelocity) from current position and will stop being
+     *attempts to move along a vector (xVelocity,yVelocity) from current position and will stop being
      * able to move in said direction if there's something in the way
      * also has to make sure you cant go offscreen
      */
