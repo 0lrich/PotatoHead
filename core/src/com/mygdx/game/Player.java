@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
+import static java.lang.Math.min;
 
 public class Player {
     float x;
@@ -14,10 +15,10 @@ public class Player {
     float width;
     float xVelocity = 0;
     float yVelocity = 0;
-    float gravity = 5;
-    float speed = 15;
-
-
+    float gravity = 2;
+    float speed = 8;
+    float jumpHeight = 30;
+    boolean jumpPressed = false;
     ShapeRenderer body = new ShapeRenderer();
     boolean canJump = true;
 
@@ -67,7 +68,6 @@ public class Player {
      */
     private void calculateVelocity() {
         //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
-        //xVelocity = 0;
         yVelocity -= gravity;
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             xVelocity -= speed;
@@ -77,10 +77,22 @@ public class Player {
         }
         if (canJump == true) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-                yVelocity += 60;
+                yVelocity += jumpHeight;
                 canJump = false;
             }
         }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W)){
+            jumpPressed = true;
+        }
+        else{
+            if (jumpPressed){
+                yVelocity = min(yVelocity,2);
+            }
+            jumpPressed = false;
+        }
+
+
         xVelocity = lerp(xVelocity, 0, 0.25f);
     }
 
