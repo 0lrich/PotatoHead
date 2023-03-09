@@ -15,7 +15,7 @@ public class Player {
     float xVelocity = 0;
     float yVelocity = 0;
     float gravity = 5;
-    float speed = 30;
+    float speed = 15;
 
 
     ShapeRenderer body = new ShapeRenderer();
@@ -40,6 +40,7 @@ public class Player {
      */
     public void update(Platform platform){
         movement();
+        tempCollision();
     }
 
     /**
@@ -66,7 +67,7 @@ public class Player {
      */
     private void calculateVelocity() {
         //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
-        xVelocity = 0;
+        //xVelocity = 0;
         yVelocity -= gravity;
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             xVelocity -= speed;
@@ -80,6 +81,7 @@ public class Player {
                 canJump = false;
             }
         }
+        xVelocity = lerp(xVelocity, 0, 0.25f);
     }
 
     /**
@@ -92,7 +94,9 @@ public class Player {
         calculateVelocity();
         x += xVelocity;
         y += yVelocity;
-        xVelocity = lerp(xVelocity, 0, 0.25f);
+    }
+
+    private void tempCollision(){
         if (y < 0){
             y = 0;
             yVelocity = 0;
