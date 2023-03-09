@@ -1,28 +1,25 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Platform {
     float x;
     float y;
-    float length;
+    float height;
     float width;
     ShapeRenderer floor;
-    Boolean canJumpThrough;
-    Boolean canFallThrough;
+
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
     float xSpeed;
     float ySpeed;
-    public Platform(float x, float y, float length, float width, ShapeRenderer floor, Boolean canJumpThrough, Boolean canFallThrough, Boolean tangible, float xSpeed, float ySpeed) {
+    public Platform(float x, float y, float length, float width, ShapeRenderer floor, Boolean tangible, float xSpeed, float ySpeed) {
         this.x = x;
         this.y = y;
-        this.length = length;
+        this.height = length;
         this.width = width;
         this.floor = floor;
-        this.canJumpThrough = canJumpThrough;
-        this.canFallThrough = canFallThrough;
         this.tangible = tangible;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
@@ -51,20 +48,27 @@ public class Platform {
     public void render () {
         floor.begin(ShapeRenderer.ShapeType.Filled);
         floor.setColor(0,0,0,1);
-        floor.rect(x,y,width,length);
+        floor.rect(x,y,width, height);
         floor.end();
     }
-    public boolean floorstuff(Player player, Platform platform){//gonna be really messy way to figure out how to do floor physics
-        Vector2 TL = new Vector2(x,y+length); //top left corner
-        Vector2 TR = new Vector2(x + width,y);//top right corner
-        Vector2 BR = new Vector2(x+width,y);// bottom right corner
-        Vector2 BL = new Vector2(x,y); // bottom left corner
-        if (tangible){
-            if (player.x + player.width >= TL.x && player.x <= TR.x && player.y <= BL.y && player.y <= TL.y){
-                if (platform.canFallThrough == false){
-                    return false;
-                }
+
+    /**
+     * Should only return true if the player yVelocity is negative
+     * @param player the player to check for collision
+     * @return returns true if the platform is considered colliding with the player
+     */
+    public boolean platformStanding(Player player) {//gonna be really messy way to figure out how to do floor physics
+        Rectangle playerRectangle = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getLength());
+        Rectangle platformRectangle = new Rectangle(x, y, width, height);
+        if (platformRectangle.overlaps(playerRectangle)){
+            if (player.getyVelocity() < 0 && player.canFallThrough == false) {
+                return true;
             }
+            player.canFallThrough = true;
+
+        }else {
+            player.canFallThrough = false;
+            return false;
         }
         return false;
     }

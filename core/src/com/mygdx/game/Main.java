@@ -9,11 +9,12 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class Main extends ApplicationAdapter {
 	Player potato;
 	Platform platformOne;
+	Platform platformTwo;
 	@Override
 	public void create () {
 	 potato = new Player(0,0, 10, 50,50,new ShapeRenderer());
-	 platformOne = new Platform(200,400,150,400,new ShapeRenderer(),false, false, true, 0, 0);
-
+	 platformOne = new Platform(400,100,20,400,new ShapeRenderer(),true,0, 0);
+	 platformTwo = new Platform(1000,300,20,400,new ShapeRenderer(),true,0,0);
 	}
 
 
@@ -21,17 +22,17 @@ public class Main extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(.5f, .5f, .5f, 1);
 		//region UPDATES
-
+		platformTwo.update(potato);
 		platformOne.update(potato);
 		potato.update(platformOne);
-
+		potato.update(platformTwo);
 
 		//endregion
 
 
 		//region RENDERS
 
-
+		platformTwo.render();
 		potato.render();
 		platformOne.render();
 

@@ -8,19 +8,21 @@ import static com.badlogic.gdx.math.MathUtils.lerp;
 import static java.lang.Math.min;
 
 public class Player {
-    float x;
-    float y;
-    float health;
-    float length;
-    float width;
-    float xVelocity = 0;
-    float yVelocity = 0;
-    float gravity = 2;
-    float speed = 8;
-    float jumpHeight = 30;
-    boolean jumpPressed = false;
-    ShapeRenderer body = new ShapeRenderer();
-    boolean canJump = true;
+    private float x;
+    private float y;
+    private float health;
+    private float length;
+    private float width;
+    private float xVelocity = 0;
+    private float yVelocity = 0;
+    private float gravity = 2;
+    private float speed = 8;
+    private float jumpHeight = 30;
+    private boolean jumpPressed = false;
+    private ShapeRenderer body = new ShapeRenderer();
+    private boolean canJump = true;
+
+     boolean canFallThrough = false;
 
     public Player(float x, float y, float health, float length, float width, ShapeRenderer body) {
         this.x = x;
@@ -40,8 +42,9 @@ public class Player {
      *   V
      */
     public void update(Platform platform){
-        movement();
-        tempCollision();
+
+        movement(platform);
+
     }
 
     /**
@@ -68,7 +71,9 @@ public class Player {
      */
     private void calculateVelocity() {
         //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
+
         yVelocity -= gravity;
+
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             xVelocity -= speed;
         }
@@ -91,7 +96,9 @@ public class Player {
             }
             jumpPressed = false;
         }
-
+        if (Gdx.input.isKeyPressed(Input.Keys.S)){
+            canFallThrough = true;
+        }
 
         xVelocity = lerp(xVelocity, 0, 0.25f);
     }
@@ -101,18 +108,54 @@ public class Player {
      * able to move in said direction if there's something in the way
      * also has to make sure you cant go offscreen
      */
-    private void movement(){
+    private void movement(Platform platform){
     //fixme placeholder
         calculateVelocity();
         x += xVelocity;
         y += yVelocity;
+        tempCollision(platform);
     }
 
-    private void tempCollision(){
+    private boolean tempCollision(Platform platform){
+        if (platform.platformStanding(this)){
+            while(platform.platformStanding(this)){
+                y +=1;
+            }
+            yVelocity = 0;
+            canJump = true;
+            return true;
+        }
         if (y < 0){
             y = 0;
             yVelocity = 0;
             canJump = true;
+            return true;
         }
+        return false;
     }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getxVelocity() {
+        return xVelocity;
+    }
+
+    public float getyVelocity() {
+        return yVelocity;
+    }
+
+    public float getLength() {
+        return length;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
 }
