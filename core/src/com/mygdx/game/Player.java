@@ -14,6 +14,7 @@ public class Player {
     float width;
     float xVelocity = 0;
     float yVelocity = 0;
+    float speed = 5;
     ShapeRenderer body = new ShapeRenderer();
 
     public Player(float x, float y, float health, float length, float width, ShapeRenderer body) {
@@ -34,9 +35,7 @@ public class Player {
      *   V
      */
     public void update(Platform platform){
-        calculateVelocity();
         movement();
-
     }
 
     /**
@@ -53,10 +52,7 @@ public class Player {
         body.rect(x,y,width,length);
         body.end();
     }
-    public void dispose () {
-
-
-    }
+    public void dispose () {}
 
     /**
      * Sets the X and Y Velocity property based on keyboard input
@@ -66,11 +62,11 @@ public class Player {
      */
     private void calculateVelocity(){
         //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
-        if(Gdx.input.isKeyPressed(Input.Keys.A) && xVelocity != -5){
-            xVelocity -= 5;
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            xVelocity -= speed;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D) && xVelocity != 5){
-            xVelocity += 5;
+        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+            xVelocity += speed;
         }
     }
 
@@ -81,16 +77,13 @@ public class Player {
      */
     private void movement(){
     //fixme placeholder
+        calculateVelocity();
         x += xVelocity;
         y += yVelocity;
         xVelocity = lerp(xVelocity, 0, 0.25f);
-        /*
-        if (y < 0){//so it won't fall off later on just a placeholder
+        if (y < 0){
             y = 0;
             yVelocity = 0;
         }
-
-         */
-
     }
 }
