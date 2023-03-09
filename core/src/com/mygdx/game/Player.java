@@ -15,7 +15,7 @@ public class Player {
     float xVelocity = 0;
     float yVelocity = 0;
     float gravity = 5;
-    float speed = 5;
+    float speed = 30;
 
 
     ShapeRenderer body = new ShapeRenderer();
