@@ -14,6 +14,7 @@ public class Player {
     float yVelocity = 0;
     float gravity = 5;
     float speed = 5;
+    int jumpTime;
     ShapeRenderer body = new ShapeRenderer();
     boolean canJump = true;
 
@@ -62,18 +63,21 @@ public class Player {
      * y velocity should be set based on if ONLY W is pressed :) and you're gonna have to add gravity
      * (^^^ should check to see of their allowed to jump, no double jumps ^^^)
      */
-    private void calculateVelocity(){
+    private void calculateVelocity() {
         //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            x -= speed;
+        xVelocity = 0;
+        yVelocity -= gravity;
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            xVelocity -= speed;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            x += speed;
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            xVelocity += speed;
         }
-        if(canJump == true){
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            y += 10;
-        }
+        if (canJump == true) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                yVelocity += 60;
+                canJump = false;
+            }
         }
     }
 
@@ -90,6 +94,7 @@ public class Player {
         if (y < 0){//so it wont fall off later on just a placeholder
             y = 0;
             yVelocity = 0;
+            canJump = true;
         }
 
     }
