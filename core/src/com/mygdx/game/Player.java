@@ -131,6 +131,7 @@ public class Player {
             canJump = true;
             return true;
         }
+        canJump = false;
         return false;
     }
 
