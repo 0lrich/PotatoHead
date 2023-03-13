@@ -15,8 +15,8 @@ public class Player {
     private float width;
     private float xVelocity = 0;
     private float yVelocity = 0;
-    private float gravity = 2;
-    private float speed = 8;
+    private float gravity = 1;
+    private float speed = 5;
     private float jumpHeight = 30;
     private boolean jumpPressed = false;
     private ShapeRenderer body = new ShapeRenderer();
