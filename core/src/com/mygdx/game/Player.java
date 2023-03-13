@@ -22,7 +22,7 @@ public class Player {
     private ShapeRenderer body = new ShapeRenderer();
     private boolean canJump = true;
 
-     boolean canFallThrough = false;
+    private boolean canFallThrough = false;
 
     public Player(float x, float y, float health, float length, float width, ShapeRenderer body) {
         this.x = x;
@@ -96,6 +96,7 @@ public class Player {
             }
             jumpPressed = false;
         }
+        canFallThrough = false;
         if (Gdx.input.isKeyPressed(Input.Keys.S)){
             canFallThrough = true;
         }
@@ -158,4 +159,7 @@ public class Player {
         return width;
     }
 
+    public boolean getCanFallThrough() {
+        return canFallThrough;
+    }
 }
