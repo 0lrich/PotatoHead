@@ -14,6 +14,8 @@ public class Platform {
     Boolean tangible;
     float xSpeed;
     float ySpeed;
+
+    boolean isFallingThrough = false;
     public Platform(float x, float y, float length, float width, ShapeRenderer floor, Boolean tangible, float xSpeed, float ySpeed) {
         this.x = x;
         this.y = y;
@@ -61,13 +63,15 @@ public class Platform {
         Rectangle playerRectangle = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getLength());
         Rectangle platformRectangle = new Rectangle(x, y, width, height);
         if (platformRectangle.overlaps(playerRectangle)){
-            if (player.getyVelocity() < 0 && player.canFallThrough == false) {
+            if (player.getCanFallThrough()){
+                isFallingThrough = true;
+            }
+            if (player.getyVelocity() < 0 && isFallingThrough == false) {
                 return true;
             }
-            player.canFallThrough = true;
 
         }else {
-            player.canFallThrough = false;
+            isFallingThrough = false;
             return false;
         }
         return false;
