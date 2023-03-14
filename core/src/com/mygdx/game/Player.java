@@ -80,6 +80,9 @@ public class Player {
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             xVelocity += speed;
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+
+        }
         if (canJump == true) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
                 yVelocity += jumpHeight;
