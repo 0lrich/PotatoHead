@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import static com.mygdx.game.Constants.bulletHolder;
+
 public class Main extends ApplicationAdapter {
 	Player potato;
 	Platform platformOne;
@@ -15,6 +17,8 @@ public class Main extends ApplicationAdapter {
 	 potato = new Player(0,0, 10, 50,50,new ShapeRenderer());
 	 platformOne = new Platform(400,100,20,400,new ShapeRenderer(),true,0, 0);
 	 platformTwo = new Platform(1000,300,20,400,new ShapeRenderer(),true,0,0);
+
+
 	}
 
 
@@ -26,6 +30,7 @@ public class Main extends ApplicationAdapter {
 		platformOne.update(potato);
 		potato.update(platformOne);
 		potato.update(platformTwo);
+		bulletHolder.update();
 
 		//endregion
 
@@ -35,6 +40,7 @@ public class Main extends ApplicationAdapter {
 		platformTwo.render();
 		potato.render();
 		platformOne.render();
+		bulletHolder.render();
 
 		//endregion
 	}

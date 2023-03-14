@@ -1,13 +1,15 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Bullet {
-    float x;
-    float y;
-    ShapeRenderer shapeRenderer;
-    float xSpeed;
-    float ySpeed;
+    private float x;
+    private float y;
+    private float size = 30;
+    private ShapeRenderer shapeRenderer;
+    private float xSpeed;
+    private float ySpeed;
 
     public Bullet(float x, float y, ShapeRenderer shapeRenderer, float xSpeed, float ySpeed) {
         this.x = x;
@@ -26,8 +28,14 @@ public class Bullet {
      *   V
      */
     public void update(){
-
-
+        x += xSpeed;
+        y += ySpeed;
+    }
+    public float getX(){
+        return x;
+    }
+    public float getY(){
+        return y;
     }
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
@@ -37,6 +45,11 @@ public class Bullet {
      *      V
      */
     public void render () {
-
+        //Rectangle playerRectangle = new Rectangle(Bullet.getX(), Bullet.getY(), Bullet.getWidth(), Bullet.getLength());
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(0,0,0,1);
+        //the rectangle shape is drawn from the bottom left corner just so u know
+        shapeRenderer.rect(x,y,size,size);
+        shapeRenderer.end();
     }
 }

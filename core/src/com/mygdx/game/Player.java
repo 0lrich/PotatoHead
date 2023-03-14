@@ -3,8 +3,10 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
+import static com.mygdx.game.Constants.bulletHolder;
 import static java.lang.Math.min;
 
 public class Player {
@@ -21,7 +23,7 @@ public class Player {
     private boolean jumpPressed = false;
     private ShapeRenderer body = new ShapeRenderer();
     private boolean canJump = true;
-
+    private float bulletSpeed = 0;
      boolean canFallThrough = false;
 
     public Player(float x, float y, float health, float length, float width, ShapeRenderer body) {
@@ -81,7 +83,29 @@ public class Player {
             xVelocity += speed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-
+            float tempSpeedx = 0;
+            float tempSpeedy = 0;
+            boolean isAim = false;
+            if(Gdx.input.isKeyPressed(Input.Keys.I)){
+                tempSpeedy = bulletSpeed;
+                isAim = true;
+                System.out.println("YOU ARE SHOOTING UP");
+            } else if(Gdx.input.isKeyPressed(Input.Keys.K)){
+                tempSpeedy = -bulletSpeed;
+                isAim = true;
+                System.out.println("YOU ARE SHOOTING DOWN");
+            }
+            if(Gdx.input.isKeyPressed(Input.Keys.J)){
+                tempSpeedx = -bulletSpeed;
+                isAim = true;
+                System.out.println("YOU ARE SHOOTING LEFT");
+            } else if(Gdx.input.isKeyPressed(Input.Keys.L)){
+                tempSpeedx = bulletSpeed;
+                isAim = true;
+                System.out.println("YOU ARE SHOOTING RIGHT");
+            }
+            if(isAim) bulletHolder.addBullet(x, y, tempSpeedx, tempSpeedy);
+            System.out.println(isAim);
         }
         if (canJump == true) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {

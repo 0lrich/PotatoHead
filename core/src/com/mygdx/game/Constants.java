@@ -1,5 +1,9 @@
 package com.mygdx.game;
 
+
+import com.mygdx.game.BulletHolder;
+
 public class Constants {
-    public Bulletholder bulletholder = Bulletholder();
+    public static BulletHolder bulletHolder = new BulletHolder();
+
 }
