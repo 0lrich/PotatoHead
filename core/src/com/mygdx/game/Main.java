@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -28,8 +29,8 @@ public class Main extends ApplicationAdapter {
 		//region UPDATES
 		platformTwo.update(potato);
 		platformOne.update(potato);
-		potato.update(platformOne);
-		potato.update(platformTwo);
+		potato.update(platformOne, Gdx.graphics.getDeltaTime());
+		potato.update(platformTwo, Gdx.graphics.getDeltaTime());
 		bulletHolder.update();
 
 		//endregion

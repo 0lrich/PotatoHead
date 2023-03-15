@@ -23,8 +23,11 @@ public class Player {
     private boolean jumpPressed = false;
     private ShapeRenderer body = new ShapeRenderer();
     private boolean canJump = true;
-    private float bulletSpeed = 0;
-     boolean canFallThrough = false;
+    private float bulletSpeed = 50;
+    boolean canFallThrough = false;
+    boolean isFacingRight = true;
+    float reload = 0;
+    float fireRate = 1;
 
     public Player(float x, float y, float health, float length, float width, ShapeRenderer body) {
         this.x = x;
@@ -43,10 +46,10 @@ public class Player {
      *  \ /
      *   V
      */
-    public void update(Platform platform){
-
+    public void update(Platform platform, float deltaTime){
+        shoot(deltaTime);
         movement(platform);
-
+        if (reload > 0) reload -= 60 * deltaTime;
     }
 
     /**
@@ -78,35 +81,13 @@ public class Player {
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             xVelocity -= speed;
+            isFacingRight = false;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             xVelocity += speed;
+            isFacingRight = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            float tempSpeedx = 0;
-            float tempSpeedy = 0;
-            boolean isAim = false;
-            if(Gdx.input.isKeyPressed(Input.Keys.I)){
-                tempSpeedy = bulletSpeed;
-                isAim = true;
-                System.out.println("YOU ARE SHOOTING UP");
-            } else if(Gdx.input.isKeyPressed(Input.Keys.K)){
-                tempSpeedy = -bulletSpeed;
-                isAim = true;
-                System.out.println("YOU ARE SHOOTING DOWN");
-            }
-            if(Gdx.input.isKeyPressed(Input.Keys.J)){
-                tempSpeedx = -bulletSpeed;
-                isAim = true;
-                System.out.println("YOU ARE SHOOTING LEFT");
-            } else if(Gdx.input.isKeyPressed(Input.Keys.L)){
-                tempSpeedx = bulletSpeed;
-                isAim = true;
-                System.out.println("YOU ARE SHOOTING RIGHT");
-            }
-            if(isAim) bulletHolder.addBullet(x, y, tempSpeedx, tempSpeedy);
-            System.out.println(isAim);
-        }
+
         if (canJump == true) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
                 yVelocity += jumpHeight;
@@ -141,6 +122,38 @@ public class Player {
         x += xVelocity;
         y += yVelocity;
         tempCollision(platform);
+    }
+    public void shoot(float deltaTime) {
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
+
+            float tempSpeedx = 0;
+            float tempSpeedy = 0;
+            boolean isAim = false;
+
+            if (Gdx.input.isKeyPressed(Input.Keys.I)) {
+                tempSpeedy = bulletSpeed;
+                isAim = true;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.K)) {
+                tempSpeedy = -bulletSpeed;
+                isAim = true;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.J)) {
+                tempSpeedx = -bulletSpeed;
+                isAim = true;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+                tempSpeedx = bulletSpeed;
+                isAim = true;
+            }
+            if (isAim) {
+                bulletHolder.addBullet(x , y, tempSpeedx, tempSpeedy);
+            } else if (isFacingRight) {
+                bulletHolder.addBullet(x, y, bulletSpeed, 0);
+            } else {
+                bulletHolder.addBullet(x, y, -bulletSpeed, 0);
+            }
+            reload = 60/fireRate;
+        }
+
     }
 
     private boolean tempCollision(Platform platform){

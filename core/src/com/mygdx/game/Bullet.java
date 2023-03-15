@@ -12,8 +12,8 @@ public class Bullet {
     private float ySpeed;
 
     public Bullet(float x, float y, ShapeRenderer shapeRenderer, float xSpeed, float ySpeed) {
-        this.x = x;
-        this.y = y;
+        this.x = x + size/2;
+        this.y = y + size/2;
         this.shapeRenderer = shapeRenderer;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
