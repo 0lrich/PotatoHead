@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Rectangle;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.bulletHolder;
+import static com.mygdx.game.Globals.platforms;
 import static java.lang.Math.min;
 
 public class Player {
@@ -88,7 +90,7 @@ public class Player {
             isFacingRight = true;
         }
 
-        if (canJump == true) {
+        if (canJump == true ) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
                 yVelocity += jumpHeight;
                 canJump = false;
@@ -119,9 +121,37 @@ public class Player {
     private void movement(Platform platform){
     //fixme placeholder
         calculateVelocity();
-        x += xVelocity;
-        y += yVelocity;
-        tempCollision(platform);
+        // x += xVelocity;
+        //y += yVelocity;
+        //tempCollision(platform);
+        moveAndSlide(xVelocity, yVelocity);
+    }
+
+    public void moveAndSlide(float x, float y){
+        if(y >= 0){
+            this.x += x;
+            this.y += y;
+            return;
+        }
+        Rectangle testRect = new Rectangle(getX() + x, getY() + y, getWidth(), getLength());
+        for(Platform p : Globals.platforms){
+
+            if(this.y > p.y + p.height){
+                continue;
+            }
+
+            Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
+            if(testRect.overlaps(platformRectangle)){
+                this.x += x;
+                this.y = p.y + p.height;
+                canJump = true;
+                yVelocity = 0;
+                return;
+            }
+        }
+        this.x += x;
+        this.y += y;
+        return;
     }
     public void shoot(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
