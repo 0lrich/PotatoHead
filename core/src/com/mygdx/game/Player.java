@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
-import static com.mygdx.game.Constants.bulletHolder;
+import static com.mygdx.game.Globals.bulletHolder;
 import static java.lang.Math.min;
 
 public class Player {

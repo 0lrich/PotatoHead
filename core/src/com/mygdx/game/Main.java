@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import static com.mygdx.game.Constants.bulletHolder;
+import static com.mygdx.game.Globals.bulletHolder;
 
 public class Main extends ApplicationAdapter {
 	Player potato;

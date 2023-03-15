@@ -23,6 +23,7 @@ public class Platform {
         this.tangible = tangible;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+        Globals.platforms.add(this);
     }
     /**
      * this is where stuff that happens every frame is gonna go
