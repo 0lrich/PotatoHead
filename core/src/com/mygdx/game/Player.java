@@ -29,9 +29,11 @@ public class Player {
     float reload = 0;
     float fireRate = 3;
 
+
     public Player(float x, float y, float health, float height, float width, ShapeRenderer body) {
         this.posX = x;
         this.posY = y;
+
         this.health = health;
         this.height = height;
         this.width = width;
@@ -104,6 +106,7 @@ public class Player {
             }
             jumpPressed = false;
         }
+        canFallThrough = false;
         if (Gdx.input.isKeyPressed(Input.Keys.S)){
             canFallThrough = true;
         }
@@ -201,6 +204,7 @@ public class Player {
             canJump = true;
             return true;
         }
+        canJump = false;
         return false;
     }
 
@@ -228,4 +232,7 @@ public class Player {
         return width;
     }
 
+    public boolean getCanFallThrough() {
+        return canFallThrough;
+    }
 }

@@ -12,9 +12,11 @@ public class Platform {
 
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
+
     public Platform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible) {
         // OLRICH READ THIS!!!! I removed speed because moving platforms should be a different class extending Platform ~ George
         // ALSO don't name the variable length, it's confusing, name them height ~ George
+
         this.x = x;
         this.y = y;
         this.height = height;
@@ -56,13 +58,15 @@ public class Platform {
         Rectangle playerRectangle = new Rectangle(player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
         Rectangle platformRectangle = new Rectangle(x, y, width, height);
         if (platformRectangle.overlaps(playerRectangle)){
-            if (player.getyVelocity() < 0 && player.canFallThrough == false) {
+            if (player.getCanFallThrough()){
+                isFallingThrough = true;
+            }
+            if (player.getyVelocity() < 0 && isFallingThrough == false) {
                 return true;
             }
-            player.canFallThrough = true;
 
         }else {
-            player.canFallThrough = false;
+            isFallingThrough = false;
             return false;
         }
         return false;
