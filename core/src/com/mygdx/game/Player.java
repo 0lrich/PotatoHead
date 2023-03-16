@@ -22,7 +22,9 @@ public class Player {
     private ShapeRenderer body = new ShapeRenderer();
     private boolean canJump = true;
 
-    private boolean canFallThrough = false;
+    private float bulletSpeed = 2;
+     boolean canFallThrough = false;
+
 
     public Player(float x, float y, float health, float length, float width, ShapeRenderer body) {
         this.x = x;

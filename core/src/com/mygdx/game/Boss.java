@@ -1,17 +1,24 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Boss {
     float x;
     float y;
     float health;
+    float width;
+    float length;
     ShapeRenderer shapeRenderer;
 
-    public Boss(float x, float y, float health, ShapeRenderer shapeRenderer) {
+
+    public Boss(float x, float y, float health, float width, float length, ShapeRenderer shapeRenderer) {
         this.x = x;
         this.y = y;
         this.health = health;
+        this.width = width;
+        this.length = length;
         this.shapeRenderer = shapeRenderer;
     }
 
