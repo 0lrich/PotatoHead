@@ -12,18 +12,16 @@ public class Platform {
 
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
-    float xSpeed;
-    float ySpeed;
-    public Platform(float x, float y, float length, float width, ShapeRenderer floor, Boolean tangible, float xSpeed, float ySpeed) {
+    public Platform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible) {
+        // OLRICH READ THIS!!!! I removed speed because moving platforms should be a different class extending Platform ~ George
+        // ALSO don't name the variable length, it's confusing, name them height ~ George
         this.x = x;
         this.y = y;
-        this.height = length;
+        this.height = height;
         this.width = width;
         this.floor = floor;
         this.tangible = tangible;
-        this.xSpeed = xSpeed;
-        this.ySpeed = ySpeed;
-        Globals.platforms.add(this);
+        //Globals.platformHolder.addPlatform(this);
     }
     /**
      * this is where stuff that happens every frame is gonna go
@@ -34,10 +32,6 @@ public class Platform {
      *   V
      */
     public void update(Player player){
-
-
-
-
     }
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
@@ -59,7 +53,7 @@ public class Platform {
      * @return returns true if the platform is considered colliding with the player
      */
     public boolean platformStanding(Player player) {//gonna be really messy way to figure out how to do floor physics
-        Rectangle playerRectangle = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getLength());
+        Rectangle playerRectangle = new Rectangle(player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
         Rectangle platformRectangle = new Rectangle(x, y, width, height);
         if (platformRectangle.overlaps(playerRectangle)){
             if (player.getyVelocity() < 0 && player.canFallThrough == false) {

@@ -3,19 +3,17 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.bulletHolder;
-import static com.mygdx.game.Globals.platforms;
 import static java.lang.Math.min;
 
 public class Player {
-    private float x;
-    private float y;
+    private float posX;
+    private float posY;
     private float health;
-    private float length;
+    private float height;
     private float width;
     private float xVelocity = 0;
     private float yVelocity = 0;
@@ -29,13 +27,13 @@ public class Player {
     boolean canFallThrough = false;
     boolean isFacingRight = true;
     float reload = 0;
-    float fireRate = 1;
+    float fireRate = 3;
 
-    public Player(float x, float y, float health, float length, float width, ShapeRenderer body) {
-        this.x = x;
-        this.y = y;
+    public Player(float x, float y, float health, float height, float width, ShapeRenderer body) {
+        this.posX = x;
+        this.posY = y;
         this.health = health;
-        this.length = length;
+        this.height = height;
         this.width = width;
         this.body = body;
     }
@@ -48,9 +46,9 @@ public class Player {
      *  \ /
      *   V
      */
-    public void update(Platform platform, float deltaTime){
+    public void update(float deltaTime){
         shoot(deltaTime);
-        movement(platform);
+        movement();
         if (reload > 0) reload -= 60 * deltaTime;
     }
 
@@ -65,7 +63,7 @@ public class Player {
         body.begin(ShapeRenderer.ShapeType.Filled);
         body.setColor(0,0,0,1);
         //the rectangle shape is drawn from the bottom left corner just so u know
-        body.rect(x,y,width,length);
+        body.rect(posX, posY,width, height);
         body.end();
     }
     public void dispose () {}
@@ -118,39 +116,41 @@ public class Player {
      * able to move in said direction if there's something in the way
      * also has to make sure you cant go offscreen
      */
-    private void movement(Platform platform){
+    private void movement(){
     //fixme placeholder
         calculateVelocity();
-        // x += xVelocity;
-        //y += yVelocity;
-        //tempCollision(platform);
+        System.out.println("we're calling move and slide");
         moveAndSlide(xVelocity, yVelocity);
     }
 
-    public void moveAndSlide(float x, float y){
-        if(y >= 0){
-            this.x += x;
-            this.y += y;
+    public void moveAndSlide(float velX, float velY){
+
+
+        // This checks if you're going up so that there are no upwards collisions
+        if(velY >= 0){
+            this.posX += velX;
+            this.posY += velY;
             return;
         }
-        Rectangle testRect = new Rectangle(getX() + x, getY() + y, getWidth(), getLength());
-        for(Platform p : Globals.platforms){
 
-            if(this.y > p.y + p.height){
+        // This makes a fake player that detects if the players final position collides with the platform
+        Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
+        for(Platform p : Globals.platformHolder.getPlatforms()){
+            System.out.println("heyo");
+            if(this.posY < p.y + p.height -1){
                 continue;
             }
-
             Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
             if(testRect.overlaps(platformRectangle)){
-                this.x += x;
-                this.y = p.y + p.height;
+                this.posX += velX;
+                this.posY = p.y + p.height;
                 canJump = true;
                 yVelocity = 0;
                 return;
             }
         }
-        this.x += x;
-        this.y += y;
+        this.posX += velX;
+        this.posY += velY;
         return;
     }
     public void shoot(float deltaTime) {
@@ -175,11 +175,11 @@ public class Player {
                 isAim = true;
             }
             if (isAim) {
-                bulletHolder.addBullet(x , y, tempSpeedx, tempSpeedy);
+                bulletHolder.addBullet(posX, posY, tempSpeedx, tempSpeedy);
             } else if (isFacingRight) {
-                bulletHolder.addBullet(x, y, bulletSpeed, 0);
+                bulletHolder.addBullet(posX, posY, bulletSpeed, 0);
             } else {
-                bulletHolder.addBullet(x, y, -bulletSpeed, 0);
+                bulletHolder.addBullet(posX, posY, -bulletSpeed, 0);
             }
             reload = 60/fireRate;
         }
@@ -189,14 +189,14 @@ public class Player {
     private boolean tempCollision(Platform platform){
         if (platform.platformStanding(this)){
             while(platform.platformStanding(this)){
-                y +=1;
+                posY +=1;
             }
             yVelocity = 0;
             canJump = true;
             return true;
         }
-        if (y < 0){
-            y = 0;
+        if (posY < 0){
+            posY = 0;
             yVelocity = 0;
             canJump = true;
             return true;
@@ -204,12 +204,12 @@ public class Player {
         return false;
     }
 
-    public float getX() {
-        return x;
+    public float getPosX() {
+        return posX;
     }
 
-    public float getY() {
-        return y;
+    public float getPosY() {
+        return posY;
     }
 
     public float getxVelocity() {
@@ -220,8 +220,8 @@ public class Player {
         return yVelocity;
     }
 
-    public float getLength() {
-        return length;
+    public float getHeight() {
+        return height;
     }
 
     public float getWidth() {
