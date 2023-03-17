@@ -37,6 +37,9 @@ public class Bullet {
     public float getY(){
         return y;
     }
+    public float getSize(){
+        return size;
+    }
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
      *     | |

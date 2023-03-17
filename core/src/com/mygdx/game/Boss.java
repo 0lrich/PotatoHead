@@ -9,16 +9,16 @@ public class Boss {
     float y;
     float health;
     float width;
-    float length;
+    float height;
     ShapeRenderer shapeRenderer;
 
 
-    public Boss(float x, float y, float health, float width, float length, ShapeRenderer shapeRenderer) {
+    public Boss(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
         this.x = x;
         this.y = y;
         this.health = health;
         this.width = width;
-        this.length = length;
+        this.height = height;
         this.shapeRenderer = shapeRenderer;
     }
 
