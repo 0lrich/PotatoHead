@@ -12,6 +12,7 @@ public class Platform {
 
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
+    Boolean isFallingThrough;
 
     public Platform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible) {
         // OLRICH READ THIS!!!! I removed speed because moving platforms should be a different class extending Platform ~ George
