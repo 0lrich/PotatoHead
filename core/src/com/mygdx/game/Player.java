@@ -122,7 +122,6 @@ public class Player {
     private void movement(){
     //fixme placeholder
         calculateVelocity();
-        System.out.println("we're calling move and slide");
         moveAndSlide(xVelocity, yVelocity);
     }
 
@@ -139,7 +138,6 @@ public class Player {
         // This makes a fake player that detects if the players final position collides with the platform
         Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
         for(Platform p : Globals.platformHolder.getPlatforms()){
-            System.out.println("heyo");
             if(this.posY < p.y + p.height -1){
                 continue;
             }

@@ -11,7 +11,6 @@ public class PlatformHolder {
         platforms.add(new Platform(x, y, height, width, floor, tangible));
     }
     public ArrayList<Platform> getPlatforms(){
-        System.out.println(platforms.size() + "platforms.size()");
         return platforms;
     }
     public Platform getPlatform(int platform){

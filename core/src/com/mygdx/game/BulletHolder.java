@@ -11,7 +11,6 @@ public class BulletHolder {
 
     }
     public void addBullet(float x, float y, float speedX, float speedY){
-        System.out.println("hey!");
         bullets.add(new Bullet(x, y, new ShapeRenderer(), speedX, speedY));
     }
     public void update() {
@@ -22,7 +21,6 @@ public class BulletHolder {
         }
     }
     public void render(){
-        System.out.println(bullets.size());
         if(bullets != null) {
             for (int i = 0; i < bullets.size(); i++) {
                 bullets.get(i).render();
