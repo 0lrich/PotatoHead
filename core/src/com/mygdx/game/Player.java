@@ -149,6 +149,7 @@ public class Player {
                 yVelocity = 0;
                 return;
             }
+            canJump = false;
         }
         this.posX += velX;
         this.posY += velY;
