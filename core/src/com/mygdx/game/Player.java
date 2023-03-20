@@ -21,7 +21,7 @@ public class Player {
     private float speed = 4;
     private float jumpHeight = 23;
     private boolean jumpPressed = false;
-    private ShapeRenderer body = new ShapeRenderer();
+    private ShapeRenderer body;
     private boolean canJump = true;
     private float bulletSpeed = 50;
     boolean canFallThrough = false;
@@ -63,7 +63,7 @@ public class Player {
      */
     public void render () {
         body.begin(ShapeRenderer.ShapeType.Filled);
-        body.setColor(0,0,0,1);
+        body.setColor(1,0,0,1);
         //the rectangle shape is drawn from the bottom left corner just so u know
         body.rect(posX, posY,width, height);
         body.end();
@@ -122,14 +122,14 @@ public class Player {
     private void movement(){
     //fixme placeholder
         calculateVelocity();
-        moveAndSlide(xVelocity, yVelocity);
+        moveAndSlide(xVelocity, yVelocity, canFallThrough);
     }
 
-    public void moveAndSlide(float velX, float velY){
+    public void moveAndSlide(float velX, float velY, boolean canFallThrough){
 
 
         // This checks if you're going up so that there are no upwards collisions
-        if(velY >= 0){
+        if(velY >= 0 || canFallThrough){
             this.posX += velX;
             this.posY += velY;
             return;

@@ -13,11 +13,12 @@ public class Platform {
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
     Boolean isFallingThrough;
+    Boolean isFallThrough;
 
-    public Platform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible) {
+    public Platform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible, boolean isFallThrough) {
         // OLRICH READ THIS!!!! I removed speed because moving platforms should be a different class extending Platform ~ George
         // ALSO don't name the variable length, it's confusing, name them height ~ George
-
+        this.isFallThrough = isFallThrough;
         this.x = x;
         this.y = y;
         this.height = height;
@@ -71,5 +72,8 @@ public class Platform {
             return false;
         }
         return false;
+    }
+    public boolean getIsFallThrough(){
+        return isFallThrough;
     }
 }

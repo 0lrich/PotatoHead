@@ -15,9 +15,9 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void create () { // All the objects in the game are created here
 	 potato = new Player(0,20, 10, 50,50,new ShapeRenderer());
-	 platformHolder.addPlatform(400,100,20,400,new ShapeRenderer(),true);
-	 platformHolder.addPlatform(1000,300,50,400,new ShapeRenderer(),true);
-	 platformHolder.addPlatform(0,0,20,2000,new ShapeRenderer(),true);
+	 for(int i = 0; i < 20; i++){
+		 platformHolder.addPlatform(0,0 + i*20,1,4000,new ShapeRenderer(),true, true);
+	 }
 	}
 	@Override
 	public void render () {
@@ -28,10 +28,9 @@ public class Main extends ApplicationAdapter {
 		//endregion
 
 		//region RENDERS
-
+		platformHolder.render();
 		potato.render();
 		bulletHolder.render();
-		platformHolder.render();
 
 		//endregion
 	}
