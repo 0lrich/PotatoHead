@@ -12,12 +12,17 @@ public class FirstBoss extends Boss {
     Texture defaultTexture;
     Texture hitTexture;
     Texture currentTexture;
+    Texture deathTexture;
+
+    Boolean canGetHurt = true;
     private ShapeRenderer bossBody = new ShapeRenderer();
 
     public FirstBoss(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
         super(x, y, health, width, height, shapeRenderer);
+        currentTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
         defaultTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
         hitTexture = new Texture(Gdx.files.internal("Hurt Hand.png"));
+        deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
 
         bossBody.begin(ShapeRenderer.ShapeType.Filled);
         // bossBody.setColor(100,100,100,.01f);
@@ -36,11 +41,22 @@ public class FirstBoss extends Boss {
      * V
      */
     public void update() {
-        for (int i = 0; i < Globals.bulletHolder.bullets.size(); i++) {
-            if (amIHit(Globals.bulletHolder.bullets.get(i))) {
-
+        if (health > 0) {
+            if (canGetHurt = true) {
+                for (int i = 0; i < Globals.bulletHolder.bullets.size(); i++) {
+                    if (amIHit(Globals.bulletHolder.bullets.get(i))) {
+                        currentTexture = hitTexture;
+                        health = health - Globals.bulletHolder.bullets.get(i).damage;
+                        Globals.bulletHolder.bullets.get(i).alreadyHitSomething();
+                    } else {
+                        currentTexture = defaultTexture;
+                    }
+                }
             }
+        }else if(health <= 0){
+            currentTexture = deathTexture;
         }
+
     }
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
@@ -52,7 +68,7 @@ public class FirstBoss extends Boss {
     public void render(SpriteBatch batch) {
 
 
-        batch.draw(texture, x, y, width, height);
+        batch.draw(currentTexture, x, y, width, height);
 
     }
 

@@ -62,6 +62,7 @@ public class Player {
      *      V
      */
     public void render () {
+
         body.begin(ShapeRenderer.ShapeType.Filled);
         body.setColor(0,0,0,1);
         //the rectangle shape is drawn from the bottom left corner just so u know

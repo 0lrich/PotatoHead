@@ -1,7 +1,11 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 
 public class Bullet {
     private float x;
@@ -11,12 +15,18 @@ public class Bullet {
     private float xSpeed;
     private float ySpeed;
 
+    Texture defaultTexture;
+    float damage;
+
     public Bullet(float x, float y, ShapeRenderer shapeRenderer, float xSpeed, float ySpeed) {
         this.x = x + size/2;
         this.y = y + size/2;
         this.shapeRenderer = shapeRenderer;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+        damage = 1;
+        defaultTexture = new Texture(Gdx.files.internal("Blurry potato.png"));
+
     }
 
     /**
@@ -47,12 +57,17 @@ public class Bullet {
      *     \ /
      *      V
      */
-    public void render () {
+    public void render (SpriteBatch batch) {
+
         //Rectangle playerRectangle = new Rectangle(Bullet.getX(), Bullet.getY(), Bullet.getWidth(), Bullet.getLength());
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0,0,0,1);
         //the rectangle shape is drawn from the bottom left corner just so u know
         shapeRenderer.rect(x,y,size,size);
         shapeRenderer.end();
+        batch.draw(defaultTexture, x, y, size, size);
+    }
+    public void alreadyHitSomething(){
+        damage = 0;
     }
 }

@@ -18,6 +18,7 @@ public class PlatformHolder {
         return platforms.get(platform);
     }
     public void render(){
+
         for(int i = 0; i < platforms.size(); i++){
             platforms.get(i).render();
         }

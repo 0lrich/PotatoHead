@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class BulletHolder {
         System.out.println(bullets.size());
         if(bullets != null) {
             for (int i = 0; i < bullets.size(); i++) {
-                bullets.get(i).render();
+                bullets.get(i).render(new SpriteBatch());
             }
         }
     }
