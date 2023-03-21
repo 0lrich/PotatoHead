@@ -20,9 +20,9 @@ public class Main extends ApplicationAdapter {
 	 potato = new Player(0,20, 10, 50,50,new ShapeRenderer());
 
 	 farmer = new FirstBoss(500,500,20,450,450,new ShapeRenderer());
-	 platformHolder.addPlatform(400,100,20,400,new ShapeRenderer(),true);
-	 platformHolder.addPlatform(1000,300,50,400,new ShapeRenderer(),true);
-	 platformHolder.addPlatform(0,0,20,2000,new ShapeRenderer(),true);
+	 platformHolder.addPlatform(400,100,20,400,new ShapeRenderer(),true, true);
+	 platformHolder.addPlatform(1000,300,50,400,new ShapeRenderer(),true,true);
+	 platformHolder.addPlatform(0,0,20,2000,new ShapeRenderer(),true,false);
 	 /*
 	 for(int i = 0; i < 20; i++){
 		 platformHolder.addPlatform(0,0 + i*20,1,4000,new ShapeRenderer(),true, true);
@@ -46,7 +46,6 @@ public class Main extends ApplicationAdapter {
 		potato.render();
 		batch.begin();
 		farmer.render(batch);
-
 		batch.end();
 		bulletHolder.render();
 

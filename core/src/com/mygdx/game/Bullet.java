@@ -27,6 +27,12 @@ public class Bullet {
         damage = 1;
         defaultTexture = new Texture(Gdx.files.internal("Blurry potato.png"));
 
+        //Rectangle playerRectangle = new Rectangle(Bullet.getX(), Bullet.getY(), Bullet.getWidth(), Bullet.getLength());
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(0,0,1,1);
+        //the rectangle shape is drawn from the bottom left corner just so u know
+        shapeRenderer.rect(x,y,size,size);
+        shapeRenderer.end();
     }
 
     /**
@@ -59,13 +65,9 @@ public class Bullet {
      */
     public void render (SpriteBatch batch) {
 
-        //Rectangle playerRectangle = new Rectangle(Bullet.getX(), Bullet.getY(), Bullet.getWidth(), Bullet.getLength());
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0,0,1,1);
-        //the rectangle shape is drawn from the bottom left corner just so u know
-        shapeRenderer.rect(x,y,size,size);
-        shapeRenderer.end();
+       batch.begin();
         batch.draw(defaultTexture, x, y, size, size);
+        batch.end();
     }
     public void alreadyHitSomething(){
         damage = 0;

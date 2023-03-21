@@ -77,7 +77,6 @@ public class FirstBoss extends Boss {
     }
 
     public boolean amIHit(Bullet bullet) {
-        //idk why it forces me to make them all integers but im not gonna fix it i dont think it matters
         Rectangle bulletRectangle = new Rectangle(bullet.getX(), bullet.getY(), bullet.getSize(), bullet.getSize());
         Rectangle bossRectangle = new Rectangle(x, y, width, height);
         if (bossRectangle.overlaps(bulletRectangle)) {

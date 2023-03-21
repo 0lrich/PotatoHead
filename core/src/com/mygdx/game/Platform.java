@@ -16,8 +16,8 @@ public class Platform {
     Boolean isFallThrough;
 
     public Platform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible, boolean isFallThrough) {
-        // OLRICH READ THIS!!!! I removed speed because moving platforms should be a different class extending Platform ~ George
-        // ALSO don't name the variable length, it's confusing, name them height ~ George
+        // GEORGE!!!!!!!! makes sense why you took out the speed you should instead of talking to me like this just message thru the Teams to me
+        //                  cause i could  miss this or if u put it in a weird spot and i just skip over it
         this.isFallThrough = isFallThrough;
         this.x = x;
         this.y = y;
