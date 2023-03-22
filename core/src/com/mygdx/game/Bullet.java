@@ -17,7 +17,7 @@ public class Bullet {
 
     Texture defaultTexture;
     float damage;
-
+    boolean isActive = true;
     public Bullet(float x, float y, ShapeRenderer shapeRenderer, float xSpeed, float ySpeed) {
         this.x = x + size/2;
         this.y = y + size/2;
@@ -46,6 +46,9 @@ public class Bullet {
     public void update(){
         x += xSpeed;
         y += ySpeed;
+        if(x>Gdx.graphics.getWidth() || y>Gdx.graphics.getHeight() || x<0 || y<0){
+            isActive= false;
+        }
     }
     public float getX(){
         return x;
@@ -71,5 +74,6 @@ public class Bullet {
     }
     public void alreadyHitSomething(){
         damage = 0;
+        isActive =false;
     }
 }

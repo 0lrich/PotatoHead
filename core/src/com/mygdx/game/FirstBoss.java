@@ -16,6 +16,7 @@ public class FirstBoss extends Boss {
 
     Boolean canGetHurt = true;
     private ShapeRenderer bossBody = new ShapeRenderer();
+    boolean bettername = false;
 
     public FirstBoss(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
         super(x, y, health, width, height, shapeRenderer);
@@ -41,7 +42,9 @@ public class FirstBoss extends Boss {
      * V
      */
     public void update() {
+
         if (health > 0) {
+            movementpattern();
             if (canGetHurt = true) {
                 for (int i = 0; i < Globals.bulletHolder.bullets.size(); i++) {
                     if (amIHit(Globals.bulletHolder.bullets.get(i))) {
@@ -53,11 +56,12 @@ public class FirstBoss extends Boss {
                     }
                 }
             }
-        }else if(health <= 0){
+        } else if (health <= 0) {
             currentTexture = deathTexture;
         }
 
     }
+
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
      * | |
@@ -74,14 +78,29 @@ public class FirstBoss extends Boss {
 
     public void movementpattern() {// boss probably moves around or maybe he doesnt this is just a test boss im making him do whatever but it should be here anyways
 
+        if (x+width > Gdx.graphics.getWidth()){
+            bettername = true;
+        }
+        if (x < 0){
+            bettername = false;
+        }
+        if (bettername){
+            x-= 5;
+            y = (float) Math.sin(x*.01f)*100 + Gdx.graphics.getHeight()/2f;
+        }else {
+            x+= 10;
+            y = (float) Math.sin(x*.5)* 10 + Gdx.graphics.getHeight()/2f;
+
+        }
     }
+
+
+
 
     public boolean amIHit(Bullet bullet) {
         Rectangle bulletRectangle = new Rectangle(bullet.getX(), bullet.getY(), bullet.getSize(), bullet.getSize());
         Rectangle bossRectangle = new Rectangle(x, y, width, height);
         if (bossRectangle.overlaps(bulletRectangle)) {
-
-
 
         return true;
         }

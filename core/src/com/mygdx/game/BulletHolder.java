@@ -17,7 +17,12 @@ public class BulletHolder {
     public void update() {
         if (bullets != null) {
             for (int i = 0; i < bullets.size(); i++) {
+
                 bullets.get(i).update();
+                if(bullets.get(i).isActive==false){
+                    bullets.remove(i);
+                    i--;
+                }
             }
         }
     }
