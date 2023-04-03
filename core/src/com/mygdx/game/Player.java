@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.bulletHolder;
+import static com.mygdx.game.Globals.platformHolder;
 import static java.lang.Math.min;
 
 public class Player {
@@ -107,12 +108,13 @@ public class Player {
             }
             jumpPressed = false;
         }
-        canFallThrough = false;
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
+
+        canFallThrough = platformHolder.getPlatform(2).getCanFallThroughPlat();
+        if (Gdx.input.isKeyPressed(Input.Keys.S) && canFallThrough == true){
             canFallThrough = true;
         }
-
         xVelocity = lerp(xVelocity, 0, 0.25f);
+
     }
 
     /**
