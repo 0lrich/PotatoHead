@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.bulletHolder;
+import static com.mygdx.game.Globals.platformHolder;
 import static java.lang.Math.min;
 
 public class Player {
@@ -124,6 +125,7 @@ public class Player {
     //fixme placeholder
         calculateVelocity();
         moveAndSlide(xVelocity, yVelocity, canFallThrough);
+        changeSceneToggle();
     }
 
     public void moveAndSlide(float velX, float velY, boolean canFallThrough){
@@ -187,6 +189,19 @@ public class Player {
             reload = 60/fireRate;
         }
 
+    }
+
+    public void changeSceneToggle(){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            if(platformHolder.getPlatformScene() == 0){
+                platformHolder.setPlatformScene(1);
+            } else if(platformHolder.getPlatformScene() == 1){
+                platformHolder.setPlatformScene(2);
+            } else{
+                platformHolder.setPlatformScene(0);
+            }
+
+        }
     }
 
     private boolean tempCollision(Platform platform){
