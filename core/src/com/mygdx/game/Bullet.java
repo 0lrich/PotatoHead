@@ -18,12 +18,15 @@ public class Bullet {
     Texture defaultTexture;
     float damage;
     boolean isActive = true;
+
+    boolean isFriendly = true;
     public Bullet(float x, float y, ShapeRenderer shapeRenderer, float xSpeed, float ySpeed) {
         this.x = x + size/2;
         this.y = y + size/2;
         this.shapeRenderer = shapeRenderer;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+        this.isFriendly = isFriendly;
         damage = 1;
         defaultTexture = new Texture(Gdx.files.internal("Blurry potato.png"));
 

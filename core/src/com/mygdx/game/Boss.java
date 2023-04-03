@@ -2,7 +2,12 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ModelInfluencer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
+import java.util.Random;
+
+import static com.mygdx.game.Globals.bulletHolder;
 
 public class Boss {
     float x;
@@ -12,6 +17,9 @@ public class Boss {
     float height;
     ShapeRenderer shapeRenderer;
 
+    float attackDelay;
+    Random attackChoosing = new Random();
+    float attackChoice;
 
     public Boss(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
         this.x = x;
@@ -31,7 +39,35 @@ public class Boss {
      *   V
      */
     public void update(){
+        if (attackDelay == 10){
+            attackDelay = 0;
+            attackChoice = attackChoosing.nextInt(7);
+             switch ((int) attackChoice){
+                 case 1 :
 
+                     break;
+                 case 2 :
+
+                     break;
+                 case 3 :
+
+                     break;
+                 case 4 :
+
+                     break;
+                 case 5 :
+
+                     break;
+                 case 6 :
+
+                     break;
+
+             }
+
+
+        }
+
+        attackDelay++;
 
     }
     /**
