@@ -9,7 +9,7 @@ import java.util.Random;
 
 import static com.mygdx.game.Globals.bulletHolder;
 
-public class Boss {
+public abstract class Boss {
     float x;
     float y;
     float health;
@@ -38,38 +38,15 @@ public class Boss {
      *  \ /
      *   V
      */
-    public void update(){
-        if (attackDelay == 10){
-            attackDelay = 0;
-            attackChoice = attackChoosing.nextInt(7);
-             switch ((int) attackChoice){
-                 case 1 :
+    public void update(Player player){
 
-                     break;
-                 case 2 :
-
-                     break;
-                 case 3 :
-
-                     break;
-                 case 4 :
-
-                     break;
-                 case 5 :
-
-                     break;
-                 case 6 :
-
-                     break;
-
-             }
 
 
         }
 
-        attackDelay++;
 
-    }
+
+
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
      *     | |

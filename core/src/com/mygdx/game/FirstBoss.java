@@ -14,6 +14,10 @@ public class FirstBoss extends Boss {
     Texture currentTexture;
     Texture deathTexture;
 
+    Texture shooting1;
+    Texture shooting2;
+    Texture shooting3;
+
     Boolean canGetHurt = true;
     private ShapeRenderer bossBody = new ShapeRenderer();
     boolean bettername = false;
@@ -24,9 +28,11 @@ public class FirstBoss extends Boss {
         defaultTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
         hitTexture = new Texture(Gdx.files.internal("Hurt Hand.png"));
         deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
-
+        shooting1 = new Texture(Gdx.files.internal("Shoot Hand 1.png"));
+        shooting2 = new Texture(Gdx.files.internal("Shoot Hand 2.png"));
+        shooting3 = new Texture(Gdx.files.internal("Shoot Hand 3.png"));
         bossBody.begin(ShapeRenderer.ShapeType.Filled);
-        // bossBody.setColor(100,100,100,.01f);
+
 
         //the rectangle shape is drawn from the bottom left corner just so u know
         bossBody.rect(x, y, width, height);
@@ -41,7 +47,7 @@ public class FirstBoss extends Boss {
      * \ /
      * V
      */
-    public void update() {
+    public void update(Player player) {
 
         if (health > 0) {
             movementpattern();
@@ -56,8 +62,44 @@ public class FirstBoss extends Boss {
                     }
                 }
             }
+            attackDelay++;
+            if (attackDelay == 600) {
+                attackDelay = 0;
+                attackChoice = attackChoosing.nextInt(7) + 1;
+                switch ((int) attackChoice) {
+
+                    case 1:
+                        System.out.println("1st attack");
+                        //homingFireShot(player);
+                        break;
+                    case 2:
+                        System.out.println("2nd attack");
+
+                        break;
+                    case 3:
+                        System.out.println("3rd attack");
+
+                        break;
+                    case 4:
+                        System.out.println("4th attack");
+
+                        break;
+                    case 5:
+                        System.out.println("5th attack");
+
+                        break;
+                    case 6:
+                        System.out.println("6th attack");
+
+                        break;
+                    case 7:
+                        System.out.println("oh this is why");
+                        break;
+                }
+            }
         } else if (health <= 0) {
             currentTexture = deathTexture;
+
         }
 
     }
@@ -93,7 +135,13 @@ public class FirstBoss extends Boss {
 
         }
     }
+    public void homingFireShot(Player player){
+    currentTexture = shooting1;
 
+
+
+
+    }
 
 
 

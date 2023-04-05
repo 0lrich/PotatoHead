@@ -178,11 +178,11 @@ public class Player {
                 isAim = true;
             }
             if (isAim) {
-                bulletHolder.addBullet(posX, posY, tempSpeedx, tempSpeedy);
+                bulletHolder.addBullet(posX, posY, tempSpeedx, tempSpeedy, true);
             } else if (isFacingRight) {
-                bulletHolder.addBullet(posX, posY, bulletSpeed, 0);
+                bulletHolder.addBullet(posX, posY, bulletSpeed, 0, true);
             } else {
-                bulletHolder.addBullet(posX, posY, -bulletSpeed, 0);
+                bulletHolder.addBullet(posX, posY, -bulletSpeed, 0, true);
             }
             reload = 60/fireRate;
         }

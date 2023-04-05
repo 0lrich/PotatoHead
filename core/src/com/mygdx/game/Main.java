@@ -36,7 +36,7 @@ public class Main extends ApplicationAdapter {
 		//region UPDATES
 		bulletHolder.update();
 		potato.update(Gdx.graphics.getDeltaTime());
-		farmer.update();
+		farmer.update(potato);
 		//endregion
 
 		//region RENDERS

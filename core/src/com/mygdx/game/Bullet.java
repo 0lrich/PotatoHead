@@ -20,7 +20,7 @@ public class Bullet {
     boolean isActive = true;
 
     boolean isFriendly = true;
-    public Bullet(float x, float y, ShapeRenderer shapeRenderer, float xSpeed, float ySpeed) {
+    public Bullet(float x, float y, ShapeRenderer shapeRenderer, float xSpeed, float ySpeed, Boolean isFriendly) {
         this.x = x + size/2;
         this.y = y + size/2;
         this.shapeRenderer = shapeRenderer;

@@ -11,8 +11,8 @@ public class BulletHolder {
     public BulletHolder(){
 
     }
-    public void addBullet(float x, float y, float speedX, float speedY){
-        bullets.add(new Bullet(x, y, new ShapeRenderer(), speedX, speedY));
+    public void addBullet(float x, float y, float speedX, float speedY, boolean isFriendly){
+        bullets.add(new Bullet(x, y, new ShapeRenderer(), speedX, speedY, isFriendly));
     }
     public void update() {
         if (bullets != null) {
