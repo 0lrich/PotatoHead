@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
-import static com.mygdx.game.Globals.bulletHolder;
+import static com.mygdx.game.Globals.*;
 import static java.lang.Math.min;
 
 public class Player {
@@ -19,7 +19,7 @@ public class Player {
     private float yVelocity = 0;
     private float gravity = 1;
     private float speed = 4;
-    private float jumpHeight = 23;
+    private float jumpForce = 23;
     private boolean jumpPressed = false;
     private ShapeRenderer body;
     private boolean canJump = true;
@@ -29,10 +29,27 @@ public class Player {
     float reload = 0;
     float fireRate = 3;
 
+    float maxCoyoteSeconds = 0.08f;
+    float coyoteSeconds = 0;
+
+    boolean isOnFloor = false;
+
 
     public Player(float x, float y, float health, float height, float width, ShapeRenderer body) {
         this.posX = x;
         this.posY = y;
+
+        this.health = health;
+        this.height = height;
+        this.width = width;
+        this.body = body;
+    }
+    public void init(float x, float y, float health, float height, float width, ShapeRenderer body){
+        this.posX = x;
+        this.posY = y;
+
+        yVelocity = 0;
+        xVelocity = 0;
 
         this.health = health;
         this.height = height;
@@ -91,9 +108,20 @@ public class Player {
             isFacingRight = true;
         }
 
+        if (isOnFloor){
+            canJump = true;
+            coyoteSeconds = maxCoyoteSeconds;
+        } else{
+            if (coyoteSeconds > 0){
+                coyoteSeconds -= Gdx.graphics.getDeltaTime();
+            }else{
+                canJump = false;
+            }
+        }
+
         if (canJump == true ) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-                yVelocity += jumpHeight;
+                yVelocity = jumpForce;
                 canJump = false;
             }
         }
@@ -124,10 +152,12 @@ public class Player {
     //fixme placeholder
         calculateVelocity();
         moveAndSlide(xVelocity, yVelocity, canFallThrough);
+        changeSceneToggle();
     }
 
     public void moveAndSlide(float velX, float velY, boolean canFallThrough){
 
+        isOnFloor = false;
 
         // This checks if you're going up so that there are no upwards collisions
         if(velY >= 0 || canFallThrough){
@@ -146,11 +176,12 @@ public class Player {
             if(testRect.overlaps(platformRectangle)){
                 this.posX += velX;
                 this.posY = p.y + p.height;
-                canJump = true;
+
+                isOnFloor = true;
                 yVelocity = 0;
                 return;
             }
-            canJump = false;
+
         }
         this.posX += velX;
         this.posY += velY;
@@ -187,6 +218,21 @@ public class Player {
             reload = 60/fireRate;
         }
 
+    }
+
+    public void changeSceneToggle(){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            if(sceneHolder.getScene() == 0){
+                sceneHolder.switchScene(1);
+            } else if(platformHolder.getPlatformScene() == 1){
+                sceneHolder.switchScene(2);
+            } else if(platformHolder.getPlatformScene() == 2){
+                sceneHolder.switchScene(3);
+            } else{
+                sceneHolder.switchScene(0);
+            }
+
+        }
     }
 
     private boolean tempCollision(Platform platform){
