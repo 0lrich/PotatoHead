@@ -47,7 +47,7 @@ public class SceneHolder {
     public void update(){
         potato.update(Gdx.graphics.getDeltaTime());
         if(scene == 1){
-            farmer.update();
+            farmer.update(potato);
         }
     }
     public void render(SpriteBatch batch) {

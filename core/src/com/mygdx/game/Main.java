@@ -28,8 +28,8 @@ public class Main extends ApplicationAdapter {
 		sceneHolder.update();
 		bulletHolder.update();
 
-		potato.update(Gdx.graphics.getDeltaTime());
-		farmer.update(potato);
+		//potato.update(Gdx.graphics.getDeltaTime());
+		//farmer.update(potato);
 
 		//endregion
 
