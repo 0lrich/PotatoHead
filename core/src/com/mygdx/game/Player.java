@@ -23,11 +23,15 @@ public class Player {
     private boolean jumpPressed = false;
     private ShapeRenderer body;
     private boolean canJump = true;
+    private boolean canFallThroughPlat;
     private float bulletSpeed = 50;
     boolean canFallThrough = false;
     boolean isFacingRight = true;
     float reload = 0;
     float fireRate = 3;
+    float floorTop;
+    float floorSideL;
+    float floorSideR;
 
 
     public Player(float x, float y, float health, float height, float width, ShapeRenderer body) {
@@ -108,7 +112,15 @@ public class Player {
             jumpPressed = false;
         }
         canFallThrough = false;
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
+        floorSideR = Globals.platformHolder.getPlatform(2).getSide();
+        floorTop = Globals.platformHolder.getPlatform(2).getTop();
+        floorSideL = Globals.platformHolder.getPlatform(2).getX();
+        if(posY == floorTop && posX < floorSideR && posX > floorSideL){
+            canFallThroughPlat = Globals.platformHolder.getPlatform(2).getCanFallThroughPlat();
+        }else{
+            canFallThroughPlat = true;
+        }
+        if((Gdx.input.isKeyPressed(Input.Keys.S) && canFallThroughPlat == true)){
             canFallThrough = true;
         }
 

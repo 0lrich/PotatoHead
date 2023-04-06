@@ -9,22 +9,26 @@ public class Platform {
     float height;
     float width;
     ShapeRenderer floor;
+    float top;
+    float side;
 
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
     Boolean isFallingThrough;
-    Boolean isFallThrough;
+    Boolean canFallThroughPlat;
 
     public Platform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible, boolean isFallThrough) {
         // GEORGE!!!!!!!! makes sense why you took out the speed you should instead of talking to me like this just message thru the Teams to me
         //                  cause i could  miss this or if u put it in a weird spot and i just skip over it
-        this.isFallThrough = isFallThrough;
+        this.canFallThroughPlat = isFallThrough;
         this.x = x;
         this.y = y;
         this.height = height;
         this.width = width;
         this.floor = floor;
         this.tangible = tangible;
+        this.top = this.height + this.y;
+        this.side = this.width + this.x;
         //Globals.platformHolder.addPlatform(this);
     }
     /**
@@ -73,7 +77,16 @@ public class Platform {
         }
         return false;
     }
-    public boolean getIsFallThrough(){
-        return isFallThrough;
+    public boolean getCanFallThroughPlat(){
+        return canFallThroughPlat;
+    }
+    public float getTop(){
+        return this.top;
+    }
+    public float getSide(){
+        return this.side;
+    }
+    public float getX(){
+        return this.x;
     }
 }
