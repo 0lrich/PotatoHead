@@ -57,4 +57,13 @@ public abstract class Boss {
     public void render () {
 
     }
+
+    protected void init(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
+        this.x = x;
+        this.y = y;
+        this.health = health;
+        this.width = width;
+        this.height = height;
+        this.shapeRenderer = shapeRenderer;
+    }
 }

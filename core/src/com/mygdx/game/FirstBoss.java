@@ -38,6 +38,20 @@ public class FirstBoss extends Boss {
         bossBody.rect(x, y, width, height);
         bossBody.end();
     }
+    public void init(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
+        super.init(x, y, health, width, height, shapeRenderer);
+        currentTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
+        defaultTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
+        hitTexture = new Texture(Gdx.files.internal("Hurt Hand.png"));
+        deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
+
+        bossBody.begin(ShapeRenderer.ShapeType.Filled);
+        // bossBody.setColor(100,100,100,.01f);
+
+        //the rectangle shape is drawn from the bottom left corner just so u know
+        bossBody.rect(x, y, width, height);
+        bossBody.end();
+    }
 
     /**
      * this is where stuff that happens every frame is gonna go
@@ -112,10 +126,7 @@ public class FirstBoss extends Boss {
      * V
      */
     public void render(SpriteBatch batch) {
-
-
         batch.draw(currentTexture, x, y, width, height);
-
     }
 
     public void movementpattern() {// boss probably moves around or maybe he doesnt this is just a test boss im making him do whatever but it should be here anyways

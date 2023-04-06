@@ -26,6 +26,14 @@ public class BulletHolder {
             }
         }
     }
+
+    public void removeBullets(){
+        if(bullets != null) {
+            for (int i = bullets.size()-1; i >= 0; i--) {
+                bullets.remove(i);
+            }
+        }
+    }
     public void render(){
         if(bullets != null) {
             for (int i = 0; i < bullets.size(); i++) {
