@@ -51,8 +51,8 @@ public class PlatformHolder {
                 float slices = 24;
                 for(int i = 0; i < slices; i++) {
                     float width = lerp(baseWidth, topWidth, i/slices);
-                    float shift = ((baseWidth - width) / i) * 1f;
-                    addPlatform(200 + shift,0 + (i * 30),20,width, new ShapeRenderer(),true,false);
+                    float shift = ((baseWidth - width)/2);
+                    addPlatform(200 + shift,0 + (i * 30),20, width, new ShapeRenderer(),true,false);
                 }
                 break;
             case 1:
@@ -66,6 +66,14 @@ public class PlatformHolder {
                 addPlatform(900,0,400,200,new ShapeRenderer(),true,false);
                 addPlatform(1300,0,400,700,new ShapeRenderer(),true,false);
                 break;
+            case 3:
+                piramid(50, 40, 100, 50);
+                break;
+        }
+    }
+    public void piramid(int slices, float topWidth, float baseWidth, float height) {
+        for(int i = 0; i < slices; i++) {
+            addPlatform(0, 11*i + 100, 10, 500, new ShapeRenderer(), true, false);
         }
     }
 }

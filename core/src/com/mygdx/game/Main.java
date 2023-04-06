@@ -23,10 +23,10 @@ public class Main extends ApplicationAdapter {
 	}
 	@Override
 	public void render () {
-		ScreenUtils.clear(.5f, .5f, .5f, 1);
+		//ScreenUtils.clear(.5f, .5f, .5f, 1);
 		//region UPDATES
-		bulletHolder.update();
 		sceneHolder.update();
+		bulletHolder.update();
 		//endregion
 
 		//region RENDERS

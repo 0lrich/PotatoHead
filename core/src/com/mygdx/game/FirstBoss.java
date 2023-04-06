@@ -83,10 +83,7 @@ public class FirstBoss extends Boss {
      * V
      */
     public void render(SpriteBatch batch) {
-
-
         batch.draw(currentTexture, x, y, width, height);
-
     }
 
     public void movementpattern() {// boss probably moves around or maybe he doesnt this is just a test boss im making him do whatever but it should be here anyways

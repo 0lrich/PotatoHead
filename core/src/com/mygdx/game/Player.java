@@ -226,6 +226,8 @@ public class Player {
                 sceneHolder.switchScene(1);
             } else if(platformHolder.getPlatformScene() == 1){
                 sceneHolder.switchScene(2);
+            } else if(platformHolder.getPlatformScene() == 2){
+                sceneHolder.switchScene(3);
             } else{
                 sceneHolder.switchScene(0);
             }
