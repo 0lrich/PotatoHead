@@ -142,7 +142,7 @@ public class Player {
 
 
         // This checks if you're going up so that there are no upwards collisions
-        if(velY >= 0 || canFallThrough){
+        if(velY >= 0){
             this.posX += velX;
             this.posY += velY;
             return;
@@ -154,6 +154,9 @@ public class Player {
             if(this.posY < p.y + p.height -1){
                 continue;
             }
+            if (p.canFallThroughPlat  && canFallThrough){
+                continue;
+            }
             Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
             if(testRect.overlaps(platformRectangle)){
                 this.posX += velX;
@@ -162,6 +165,7 @@ public class Player {
                 yVelocity = 0;
                 return;
             }
+
             canJump = false;
         }
         this.posX += velX;
