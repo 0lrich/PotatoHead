@@ -13,10 +13,10 @@ public class Platform {
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
     Boolean isFallingThrough;
-    Boolean isFallThrough;
+    Boolean canFallThroughPlat;
 
     public Platform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible, boolean isFallThrough) {
-        this.isFallThrough = isFallThrough;
+        this.canFallThroughPlat = isFallThrough;
         this.height = height;
         this.width = width;
         this.floor = floor;
@@ -44,7 +44,12 @@ public class Platform {
      */
     public void render () {
         floor.begin(ShapeRenderer.ShapeType.Filled);
-        floor.setColor(0,0,0,1);
+        if(canFallThroughPlat == true){
+            floor.setColor(0.5f,0.5f,0.5f,1);
+        }else{
+            floor.setColor(0,0,0,1);
+        }
+
         floor.rect(x,y,width, height);
         floor.end();
     }
@@ -71,7 +76,7 @@ public class Platform {
         }
         return false;
     }
-    public boolean getIsFallThrough(){
-        return isFallThrough;
+    public boolean getCanFallThroughPlat(){
+        return canFallThroughPlat;
     }
 }

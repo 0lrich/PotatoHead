@@ -28,10 +28,8 @@ public class Player {
     boolean isFacingRight = true;
     float reload = 0;
     float fireRate = 3;
-
     float maxCoyoteSeconds = 0.08f;
     float coyoteSeconds = 0;
-
     boolean isOnFloor = false;
 
 
@@ -136,6 +134,7 @@ public class Player {
             jumpPressed = false;
         }
         canFallThrough = false;
+
         if (Gdx.input.isKeyPressed(Input.Keys.S)){
             canFallThrough = true;
         }
@@ -160,7 +159,7 @@ public class Player {
         isOnFloor = false;
 
         // This checks if you're going up so that there are no upwards collisions
-        if(velY >= 0 || canFallThrough){
+        if(velY >= 0){
             this.posX += velX;
             this.posY += velY;
             return;
@@ -170,6 +169,9 @@ public class Player {
         Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
         for(Platform p : Globals.platformHolder.getPlatforms()){
             if(this.posY < p.y + p.height -1){
+                continue;
+            }
+            if (p.canFallThroughPlat  && canFallThrough){
                 continue;
             }
             Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
