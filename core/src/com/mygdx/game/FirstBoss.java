@@ -13,6 +13,7 @@ public class FirstBoss extends Boss {
     Texture hitTexture;
     Texture currentTexture;
     Texture deathTexture;
+    Attack currentAttack;
 
     Texture shooting1;
     Texture shooting2;
@@ -77,14 +78,19 @@ public class FirstBoss extends Boss {
                     }
                 }
             }
-            attackDelay++;
-            if (attackDelay == 200) {
-                attackDelay = 0;
-                if (!alreadyattacking) {
-                    attackChoice = attackChoosing.nextInt(7) + 1;
-                }
-                choiceAttackMethod(attackChoice, player);
+            if(!alreadyattacking) {
+                //get random number
+                Random 
+                //set currentAttack to appropriate Attack
             }
+            else {
+                alreadyattacking = true;
+                currentAttack.update(player);
+                if(currentAttack.isdone()){
+                    alreadyattacking = false;
+                }
+            }
+
         } else if (health <= 0) {
             currentTexture = deathTexture;
 
@@ -120,136 +126,9 @@ public class FirstBoss extends Boss {
 
         }
     }
-    public void choiceAttackMethod(float attackChoice, Player player){
-        if (attackChoice == 1 && !alreadyattacking){
-            System.out.println("1st attack");
-           // prepShot(player);
-            alreadyattacking = true;
-        }else if(attackChoice == 1 && alreadyattacking){
-            System.out.println("1st attack again");
-            fullSHOTattack(player);
 
 
-            alreadyattacking = false;
 
-        }
-        if (attackChoice == 2 && !alreadyattacking){
-            System.out.println("2nd attack");
-           // prepShot(player);
-            alreadyattacking = true;
-        }else if(attackChoice == 2 && alreadyattacking){
-            System.out.println("2nd attack again");
-            fullSHOTattack(player);
-            alreadyattacking = false;
-        }
-        if (attackChoice == 3 && !alreadyattacking){
-            System.out.println("3rd attack");
-          //  prepShot(player);
-            alreadyattacking = true;
-        }else if(attackChoice == 3 && alreadyattacking){
-            System.out.println("3rd attack again");
-          //  fullSHOTattack(player);
-            alreadyattacking = false;
-        }
-        if (attackChoice == 4 && !alreadyattacking){
-            System.out.println("4th attack");
-         //   prepShot(player);
-            alreadyattacking = true;
-        }else if(attackChoice == 4 && alreadyattacking){
-            System.out.println("4th attack again");
-            fullSHOTattack(player);
-            alreadyattacking = false;
-        }
-        if (attackChoice == 5 && !alreadyattacking){
-            System.out.println("5th attack");
-          //  prepShot(player);
-            alreadyattacking = true;
-        }else if(attackChoice == 5 && alreadyattacking){
-            System.out.println("5th attack again");
-
-            alreadyattacking = false;
-        }
-        if (attackChoice == 6 && !alreadyattacking){
-            System.out.println("6th attack");
-          //  prepShot(player);
-            alreadyattacking = true;
-        }else if(attackChoice == 6 && alreadyattacking){
-            System.out.println("6th attack again");
-
-            alreadyattacking = false;
-        }
-        if (attackChoice == 7 && !alreadyattacking){
-            System.out.println("7th attack");
-           // prepShot(player);
-            alreadyattacking = true;
-        }else if(attackChoice == 7 && alreadyattacking){
-            System.out.println("7th attack again");
-
-            alreadyattacking = false;
-        }
-
-
-    }
-    public void prepShot(Player player){
-        currentTexture = shooting1;
-
-    }
-    public void shootShot(Player player){
-        currentTexture = shooting1;
-
-    }
-    public void pauseShot(Player player){
-        currentTexture = shooting1;
-    }
-
-    public void fullSHOTattack(Player player){
-        for (int i = 0; i < 600; i++) {
-            if(i == 0){
-                shootShot(player);
-            }
-            if (i == 60){
-                pauseShot(player);
-            }
-
-            if (i == 120){
-                prepShot(player);
-            }
-            if (i == 180){
-                shootShot(player);
-
-            }
-            if (i == 240){
-                pauseShot(player);
-
-            }
-            if (i == 300){
-                prepShot(player);
-
-            }
-            if (i == 360){
-                shootShot(player);
-
-            }
-            if (i == 420){
-                pauseShot(player);
-
-            }
-            if (i == 480){
-                prepShot(player);
-
-            }
-
-            if (i == 540){
-                shootShot(player);
-
-            }
-            if (i == 600){
-                pauseShot(player);
-
-                alreadyattacking = false;
-            }
-        }
-    }
     public boolean amIHit(Bullet bullet) {
         Rectangle bulletRectangle = new Rectangle(bullet.getX(), bullet.getY(), bullet.getSize(), bullet.getSize());
         Rectangle bossRectangle = new Rectangle(x, y, width, height);
