@@ -16,10 +16,9 @@ public abstract class Boss {
     float width;
     float height;
     ShapeRenderer shapeRenderer;
+    Texture currentTexture;
 
-    float attackDelay;
-    Random attackChoosing = new Random();
-    float attackChoice;
+
 
     public Boss(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
         this.x = x;
@@ -28,6 +27,7 @@ public abstract class Boss {
         this.width = width;
         this.height = height;
         this.shapeRenderer = shapeRenderer;
+        this.currentTexture = currentTexture;
     }
 
     /**

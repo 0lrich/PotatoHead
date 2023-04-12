@@ -1,8 +1,12 @@
 package com.mygdx.game;
 
-public class TestBossFingerBullet implements Attack {
+public class TestBossFingerBullet implements FirstBossAttacks {
+
+
     @Override
-    public void update(Player player) {
+    public void update(Player player, FirstBoss boss){
+
+        boss.currentTexture = boss.shooting1;
 
     }
 

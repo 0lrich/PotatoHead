@@ -6,15 +6,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import java.awt.*;
+import java.util.Random;
 
 public class FirstBoss extends Boss {
 
     Texture defaultTexture;
     Texture hitTexture;
-    Texture currentTexture;
-    Texture deathTexture;
-    Attack currentAttack;
 
+    Texture deathTexture;
+    FirstBossAttacks currentAttack;
+
+    Random attackchoice;
     Texture shooting1;
     Texture shooting2;
     Texture shooting3;
@@ -80,12 +82,30 @@ public class FirstBoss extends Boss {
             }
             if(!alreadyattacking) {
                 //get random number
-                Random 
+                float chosenattack;
+               chosenattack = attackchoice.nextInt(5)+1;
                 //set currentAttack to appropriate Attack
+                switch ((int) chosenattack) {
+                    case 1:
+                        TestBossFingerBullet.
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+
+                        break;
+                    case 5:
+
+                        break;
+                }
+
             }
             else {
-                alreadyattacking = true;
-                currentAttack.update(player);
+                currentAttack.update(player,this);
                 if(currentAttack.isdone()){
                     alreadyattacking = false;
                 }
