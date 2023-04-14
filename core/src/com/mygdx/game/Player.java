@@ -211,7 +211,7 @@ public class Player {
                 isAim = true;
             }
             if (isAim) {
-                bulletHolder.addBullet(posX, posY, tempSpeedx, tempSpeedy);
+                objectHolder.addObject(new Bullet(posX,posY,bulletSpeed,0));
             } else if (isFacingRight) {
                 bulletHolder.addBullet(posX, posY, bulletSpeed, 0);
             } else {

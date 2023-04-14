@@ -6,20 +6,20 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import java.util.ArrayList;
 
 public class ObjectHolder {
-    ArrayList<Object> objects = new ArrayList<>();
+    ArrayList<InGameObj> objects = new ArrayList<>();
 
     public ObjectHolder(){
 
     }
-    public void addObject(){
-        objects.add(new Object());
+    public void addObject(InGameObj obj){
+        objects.add(obj);
     }
     public void update() {
         if (objects != null) {
             for (int i = 0; i < objects.size(); i++) {
 
                 objects.get(i).update();
-                if(objects.get(i).isActive==false){
+                if(objects.get(i).free==true){
                     objects.remove(i);
                     i--;
                 }

@@ -12,7 +12,7 @@ public class BulletHolder {
 
     }
     public void addBullet(float x, float y, float speedX, float speedY){
-        bullets.add(new Bullet(x, y, new ShapeRenderer(), speedX, speedY));
+        bullets.add(new Bullet(x, y,  speedX, speedY));
     }
     public void update() {
         if (bullets != null) {
