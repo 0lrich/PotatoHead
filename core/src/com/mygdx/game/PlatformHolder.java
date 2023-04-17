@@ -67,14 +67,13 @@ public class PlatformHolder {
                 addPlatform(1300,0,400,700,new ShapeRenderer(),true,false);
                 break;
             case 3:
-                xFormation(200, 40, 100, 50);
+                pyramid(20, 40, 100, 50);
                 break;
         }
     }
-    public void xFormation(int slices, float topWidth, float baseWidth, float height) {
+    public void pyramid(int slices, float topWidth, float baseWidth, float height) {
         for(int i = 0; i < slices; i++) {
-            addPlatform(i + 315, i+100, 10, 20, new ShapeRenderer(), true, true);
-            addPlatform(-i + 515, i+100, 10, 20, new ShapeRenderer(), true, true);
+            addPlatform(315+i*5, 20*i+100, 10, 200-i*10, new ShapeRenderer(), true, true);
         }
     }
 }
