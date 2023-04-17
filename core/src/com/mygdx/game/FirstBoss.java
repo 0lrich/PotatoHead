@@ -3,28 +3,34 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+
 import java.awt.*;
 import java.util.Random;
+import java.util.Vector;
 
 public class FirstBoss extends Boss {
-
+    float rotation;
     Texture defaultTexture;
     Texture hitTexture;
 
     Texture deathTexture;
     FirstBossAttacks currentAttack;
 
-    Random attackchoice;
+    Random attackchoice= new Random();
     Texture shooting1;
     Texture shooting2;
     Texture shooting3;
-
+    Texture closedfist;
     Boolean canGetHurt = true;
-    private final ShapeRenderer bossBody = new ShapeRenderer();
+    ShapeRenderer bossBody = new ShapeRenderer();
     boolean bettername = false;
     boolean alreadyattacking = false;
+    boolean disabledMovementpattern = false;
+
     public FirstBoss(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
         super(x, y, health, width, height, shapeRenderer);
         currentTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
@@ -34,7 +40,7 @@ public class FirstBoss extends Boss {
         shooting1 = new Texture(Gdx.files.internal("Shoot Hand 1.png"));
         shooting2 = new Texture(Gdx.files.internal("Shoot Hand 2.png"));
         shooting3 = new Texture(Gdx.files.internal("Shoot Hand 3.png"));
-
+        closedfist = new Texture(Gdx.files.internal("Test boss closed fist.png"));
         bossBody.begin(ShapeRenderer.ShapeType.Filled);
 
 
@@ -83,41 +89,57 @@ public class FirstBoss extends Boss {
             if(!alreadyattacking) {
                 //get random number
                 float chosenattack;
+
                chosenattack = attackchoice.nextInt(5)+1;
                 //set currentAttack to appropriate Attack
                 switch ((int) chosenattack) {
                     case 1:
-                        TestBossFingerBullet.
+                        currentAttack = new TestBossFingerBullet(player,this);
+                        System.out.println("UNO");
+                        alreadyattacking = true;
                         break;
                     case 2:
-
+                        currentAttack = new TestBossTargetedPunch(player,this);
+                        System.out.println("dos");
+                        alreadyattacking = true;
                         break;
                     case 3:
-
+                        currentAttack = new TestBossTargetedPunch(player,this);
+                        System.out.println("tres");
+                        alreadyattacking = true;
                         break;
                     case 4:
-
+                        currentAttack = new TestBossFingerBullet(player,this);
+                        System.out.println("quatro");
                         break;
                     case 5:
-
+                        currentAttack = new TestBossFingerBullet(player,this);
+                        System.out.println("Sinco");
                         break;
                 }
 
             }
             else {
                 currentAttack.update(player,this);
-                if(currentAttack.isdone()){
+                if(currentAttack.isdone(this)){
                     alreadyattacking = false;
                 }
             }
-
-        } else if (health <= 0) {
+            Vector2 center = new Vector2(x +width/2, y +height/2);
+            Vector2 pCenter = new Vector2(player.getPosX()+ player.getWidth()/2, player.getPosY() +player.getHeight()/2);
+            float hypot =center.dst(pCenter);
+            opposite = center.x -pCenter.x;
+            if (!disabledMovementpattern) {
+                rotation = (float) Math.asin(opposite / hypot);
+            }
+            } else if (health <= 0) {
             currentTexture = deathTexture;
 
         }
 
-    }
 
+    }
+float opposite;
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
      * | |
@@ -126,32 +148,43 @@ public class FirstBoss extends Boss {
      * V
      */
     public void render(SpriteBatch batch) {
-        batch.draw(currentTexture, x, y, width, height);
+
+        if (opposite < 0) {
+
+            batch.draw(currentTexture, x, y, (width / 2), (height / 2), width, height, 1, 1, 90-(float) Math.toDegrees(rotation), 0, 0, currentTexture.getWidth(), currentTexture.getHeight(), false, true);
+
+        } else {
+            batch.draw(currentTexture, x, y, (width / 2), (height / 2), width, height, 1, 1, 90-(float) Math.toDegrees(rotation), 0, 0, currentTexture.getWidth(), currentTexture.getHeight(), false, false);
+        }
     }
 
     public void movementpattern() {// boss probably moves around or maybe he doesnt this is just a test boss im making him do whatever but it should be here anyways
+        if (!disabledMovementpattern) {
+            if (x + width > Gdx.graphics.getWidth()) {
+                bettername = true;
+            }
+            if (x < 0) {
+                bettername = false;
+            }
+            if (bettername) {
+                x -= 5;
+                y = (float) Math.sin(x * .01f) * 100 + Gdx.graphics.getHeight() / 2f;
+            } else {
+                x += 10;
+                y = (float) Math.sin(x * .5) * 10 + Gdx.graphics.getHeight() / 2f;
 
-        if (x+width > Gdx.graphics.getWidth()){
-            bettername = true;
-        }
-        if (x < 0){
-            bettername = false;
-        }
-        if (bettername){
-            x-= 5;
-            y = (float) Math.sin(x*.01f)*100 + Gdx.graphics.getHeight()/2f;
-        }else {
-            x+= 10;
-            y = (float) Math.sin(x*.5)* 10 + Gdx.graphics.getHeight()/2f;
-
+            }
         }
     }
 
 
 
     public boolean amIHit(Bullet bullet) {
-        Rectangle bulletRectangle = new Rectangle(bullet.getX(), bullet.getY(), bullet.getSize(), bullet.getSize());
-        Rectangle bossRectangle = new Rectangle(x, y, width, height);
-        return bossRectangle.overlaps(bulletRectangle);
+        if (bullet.isFriendly) {
+            Rectangle bulletRectangle = new Rectangle(bullet.getX(), bullet.getY(), bullet.getSize(), bullet.getSize());
+            Rectangle bossRectangle = new Rectangle(x, y, width, height);
+            return bossRectangle.overlaps(bulletRectangle);
+        }
+        return false;
     }
 }

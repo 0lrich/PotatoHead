@@ -38,6 +38,17 @@ public class Bullet {
         shapeRenderer.end();
     }
 
+    public Bullet(float x, float y, float size, float xSpeed, float ySpeed, Texture defaultTexture, float damage, boolean isFriendly) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+        this.defaultTexture = defaultTexture;
+        this.damage = damage;
+        this.isFriendly = isFriendly;
+    }
+
     /**
      * this is where stuff that happens every frame is gonna go
      *  | |
@@ -76,6 +87,7 @@ public class Bullet {
         batch.end();
     }
     public void alreadyHitSomething(){
+
         damage = 0;
         isActive =false;
     }

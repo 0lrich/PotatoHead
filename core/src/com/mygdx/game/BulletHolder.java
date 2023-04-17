@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -13,6 +14,9 @@ public class BulletHolder {
     }
     public void addBullet(float x, float y, float speedX, float speedY, boolean isFriendly){
         bullets.add(new Bullet(x, y, new ShapeRenderer(), speedX, speedY, isFriendly));
+    }
+    public void addBullet(float x, float y,float size, float speedX, float speedY, Texture texture,float damage, boolean isFriendly){
+        bullets.add(new Bullet(x, y,size,  speedX, speedY, texture, damage, isFriendly));
     }
     public void update() {
         if (bullets != null) {
@@ -40,6 +44,8 @@ public class BulletHolder {
                 bullets.get(i).render(new SpriteBatch());
             }
         }
+        //SET A TEMPORORY IF STATEMENT BREAK POINT THAT CHECKS IF BULLETS FRIENDLY
+
     }
 
 }
