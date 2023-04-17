@@ -9,7 +9,7 @@ import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.*;
 import static java.lang.Math.min;
 
-public class Player {
+public class Player extends InGameObj{
     private float posX;
     private float posY;
     private float health;

@@ -9,7 +9,7 @@ import java.util.Random;
 
 import static com.mygdx.game.Globals.bulletHolder;
 
-public class Boss {
+public class Boss extends InGameObj{
     float x;
     float y;
     float health;

@@ -34,10 +34,10 @@ public class ObjectHolder {
             }
         }
     }
-    public void render(){
+    public void render(SpriteBatch batch){
         if(objects != null) {
             for (int i = 0; i < objects.size(); i++) {
-                objects.get(i).render(new SpriteBatch());
+                objects.get(i).render(batch);
             }
         }
     }

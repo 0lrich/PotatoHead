@@ -4,17 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.FirstBoss;
+import com.mygdx.game.Player;
 
-import static com.mygdx.game.Globals.bulletHolder;
-import static com.mygdx.game.Globals.platformHolder;
+import static com.mygdx.game.Globals.*;
 
 public class SceneHolder {
     FirstBoss farmer;
-    Player potato;
     int scene;
     public SceneHolder(){
-        potato = new Player(0,20, 10, 50,50,new ShapeRenderer());
-        farmer = new FirstBoss(500,500,20,450,450,new ShapeRenderer());
+        objectHolder.addObject(new Player(0,20, 10, 50,50,globalRender));
+        objectHolder.addObject(new FirstBoss(500,500,20,450,450,globalRender));
     }
     public void setScene(int scene){}
     public int getScene() {return scene;}

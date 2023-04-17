@@ -9,7 +9,6 @@ public class InGameObj {
     public void update(){
 
     }
-
     public void render(SpriteBatch batch){
 
     }
