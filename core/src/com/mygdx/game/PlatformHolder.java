@@ -73,7 +73,7 @@ public class PlatformHolder {
     }
     public void pyramid(int slices, float topWidth, float baseWidth, float height) {
         for(int i = 0; i < slices; i++) {
-            addPlatform(315+i*5, 20*i+100, 10, 200-i*10, new ShapeRenderer(), true, true);
+            addPlatform(0, 11*i + 100, 10, 500, new ShapeRenderer(), true, true);
         }
     }
 }
