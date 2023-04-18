@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import java.awt.*;
 
+import static com.mygdx.game.Globals.globalRender;
+
 public class FirstBoss extends Boss {
 
     Texture defaultTexture;
@@ -14,36 +16,35 @@ public class FirstBoss extends Boss {
     Texture currentTexture;
     Texture deathTexture;
     Boolean canGetHurt = true;
-    private ShapeRenderer bossBody = new ShapeRenderer();
     boolean bettername = false;
 
-    public FirstBoss(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
-        super(x, y, health, width, height, shapeRenderer);
+    public FirstBoss(float x, float y, float health, float width, float height) {
+        super(x, y, health, width, height);
         currentTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
         defaultTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
         hitTexture = new Texture(Gdx.files.internal("Hurt Hand.png"));
         deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
 
-        bossBody.begin(ShapeRenderer.ShapeType.Filled);
+        globalRender.begin(ShapeRenderer.ShapeType.Filled);
         // bossBody.setColor(100,100,100,.01f);
 
         //the rectangle shape is drawn from the bottom left corner just so u know
-        bossBody.rect(x, y, width, height);
-        bossBody.end();
+        globalRender.rect(x, y, width, height);
+        globalRender.end();
     }
-    public void init(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
+    public void init(float x, float y, float health, float width, float height) {
         super.init(x, y, health, width, height, shapeRenderer);
         currentTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
         defaultTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
         hitTexture = new Texture(Gdx.files.internal("Hurt Hand.png"));
         deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
 
-        bossBody.begin(ShapeRenderer.ShapeType.Filled);
+        globalRender.begin(ShapeRenderer.ShapeType.Filled);
         // bossBody.setColor(100,100,100,.01f);
 
         //the rectangle shape is drawn from the bottom left corner just so u know
-        bossBody.rect(x, y, width, height);
-        bossBody.end();
+        globalRender.rect(x, y, width, height);
+        globalRender.end();
     }
 
     /**

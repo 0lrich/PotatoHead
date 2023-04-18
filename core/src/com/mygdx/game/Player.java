@@ -21,7 +21,6 @@ public class Player extends InGameObj{
     private float speed = 4;
     private float jumpForce = 23;
     private boolean jumpPressed = false;
-    private ShapeRenderer body;
     private boolean canJump = true;
     private float bulletSpeed = 50;
     boolean canFallThrough = false;
@@ -33,16 +32,15 @@ public class Player extends InGameObj{
     boolean isOnFloor = false;
 
 
-    public Player(float x, float y, float health, float height, float width, ShapeRenderer body) {
+    public Player(float x, float y, float health, float height, float width) {
         this.posX = x;
         this.posY = y;
 
         this.health = health;
         this.height = height;
         this.width = width;
-        this.body = body;
     }
-    public void init(float x, float y, float health, float height, float width, ShapeRenderer body){
+    public void init(float x, float y, float health, float height, float width){
         this.posX = x;
         this.posY = y;
 
@@ -52,7 +50,6 @@ public class Player extends InGameObj{
         this.health = health;
         this.height = height;
         this.width = width;
-        this.body = body;
     }
 
     /**
@@ -78,11 +75,11 @@ public class Player extends InGameObj{
      */
     public void render () {
 
-        body.begin(ShapeRenderer.ShapeType.Filled);
-        body.setColor(1,0,0,1);
+        globalRender.begin(ShapeRenderer.ShapeType.Filled);
+        globalRender.setColor(1,0,0,1);
         //the rectangle shape is drawn from the bottom left corner just so u know
-        body.rect(posX, posY,width, height);
-        body.end();
+        globalRender.rect(posX, posY,width, height);
+        globalRender.end();
     }
     public void dispose () {}
 
@@ -150,7 +147,8 @@ public class Player extends InGameObj{
     private void movement(){
     //fixme placeholder
         calculateVelocity();
-        moveAndSlide(xVelocity, yVelocity, canFallThrough);
+        //moveAndSlide(xVelocity, yVelocity, canFallThrough);
+        moveAndSlideWalls(xVelocity, yVelocity);
         changeSceneToggle();
     }
 
@@ -189,6 +187,24 @@ public class Player extends InGameObj{
         this.posY += velY;
         return;
     }
+    public void moveAndSlideWalls(float velX, float velY){
+
+        // This makes a fake player that detects if the players final position collides with the platform
+        Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
+        for(Platform p : Globals.platformHolder.getPlatforms()){
+            Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
+            if(testRect.overlaps(platformRectangle)){
+                for(int i = 0; i < 1; i++){
+
+                }
+                this.posX = testRect.getX();
+                this.posY = testRect.getY();
+                return;
+            }
+
+        }
+        return;
+    }
     public void shoot(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
 
@@ -211,7 +227,7 @@ public class Player extends InGameObj{
                 isAim = true;
             }
             if (isAim) {
-                objectHolder.addObject(new Bullet(posX,posY,bulletSpeed,0));
+                bulletHolder.addBullet(posX,posY,tempSpeedx,tempSpeedy);
             } else if (isFacingRight) {
                 bulletHolder.addBullet(posX, posY, bulletSpeed, 0);
             } else {

@@ -23,7 +23,6 @@ public class Platform extends InGameObj {
         this.tangible = tangible;
         this.x = x;
         this.y = y;
-        //Globals.platformHolder.addPlatform(this);
     }
     /**
      * this is where stuff that happens every frame is gonna go
@@ -33,7 +32,7 @@ public class Platform extends InGameObj {
      *  \ /
      *   V
      */
-    public void update(Player player){
+    public void update(){
     }
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
@@ -59,7 +58,7 @@ public class Platform extends InGameObj {
      * @param player the player to check for collision
      * @return returns true if the platform is considered colliding with the player
      */
-    public boolean platformStanding(Player player) {//gonna be really messy way to figure out how to do floor physics
+    public boolean platformStanding(Player player) {
         Rectangle playerRectangle = new Rectangle(player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
         Rectangle platformRectangle = new Rectangle(x, y, width, height);
         if (platformRectangle.overlaps(playerRectangle)){

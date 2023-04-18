@@ -1,13 +1,8 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ModelInfluencer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.Random;
-
-import static com.mygdx.game.Globals.bulletHolder;
 
 public class Boss extends InGameObj{
     float x;
@@ -21,7 +16,7 @@ public class Boss extends InGameObj{
     Random attackChoosing = new Random();
     float attackChoice;
 
-    public Boss(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
+    public Boss(float x, float y, float health, float width, float height) {
         this.x = x;
         this.y = y;
         this.health = health;

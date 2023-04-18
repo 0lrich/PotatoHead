@@ -68,7 +68,7 @@ public class PlatformHolder {
                 addPlatform(1300,0,400,700,new ShapeRenderer(),true,false);
                 break;
             case 3:
-                piramid(20, 40, 100, 50);
+                piramid(5, 40, 100, 50);
                 break;
         }
     }

@@ -2,17 +2,17 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import static com.mygdx.game.Globals.globalRender;
+
 public class Wall {
     float x;
     float y;
     float height;
     float width;
-    ShapeRenderer wall;
 
-    public Wall(float x, float y, float height, float width, ShapeRenderer wall) {
+    public Wall(float x, float y, float height, float width) {
         this.height = height;
         this.width = width;
-        this.wall = wall;
         this.x = x;
         this.y = y;
     }
@@ -24,7 +24,7 @@ public class Wall {
      *  \ /
      *   V
      */
-    public void update(Player player){
+    public void update(){
     }
     /**
      * this is where stuff that's drawn to the screen is going to go (as in you put it in there it'll be drawn always)
@@ -34,8 +34,8 @@ public class Wall {
      *      V
      */
     public void render () {
-        wall.begin(ShapeRenderer.ShapeType.Filled);
-        wall.rect(x,y,width, height);
-        wall.end();
+        globalRender.begin(ShapeRenderer.ShapeType.Filled);
+        globalRender.rect(x,y,width, height);
+        globalRender.end();
     }
 }
