@@ -11,7 +11,7 @@ public class TestBossFingerBullet implements FirstBossAttacks {
     float timer= 0f;
 
 
-    public TestBossFingerBullet(Player player,FirstBoss boss){
+    public TestBossFingerBullet(Player player, FirstBossHand boss){
         boss.currentTexture = boss.shooting1;
         update(player, boss);
 
@@ -20,7 +20,7 @@ public class TestBossFingerBullet implements FirstBossAttacks {
 
     }
     @Override
-    public void update(Player player, FirstBoss boss){
+    public void update(Player player, FirstBossHand boss){
         Vector2 bossCenter = new Vector2(boss.x +boss.width/2, boss.y +boss.height/2);
         Vector2 playerCenter = new Vector2(player.getPosX()+ player.getWidth()/2, player.getPosY() +player.getHeight()/2);
         float opposite = bossCenter.x -playerCenter.x;
@@ -40,7 +40,7 @@ public class TestBossFingerBullet implements FirstBossAttacks {
     }
 
     @Override
-    public boolean isdone(FirstBoss boss) {
+    public boolean isdone(FirstBossHand boss) {
         if (timer>=10) {
             return true;
         }

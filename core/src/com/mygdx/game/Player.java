@@ -172,7 +172,7 @@ public class Player {
 
         if(posY<=-50){
             this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
-            init(playerSpawn.x, playerSpawn.y, 3-damage, 50,50,new ShapeRenderer());
+            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50,new ShapeRenderer());
             damage++;
             if(health<=0){damage = 1;}
             System.out.println(health);

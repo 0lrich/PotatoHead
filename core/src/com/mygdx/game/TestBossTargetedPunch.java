@@ -1,24 +1,19 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-
-import java.awt.*;
-
-import static com.mygdx.game.Globals.bulletHolder;
 
 public class TestBossTargetedPunch implements FirstBossAttacks{
         float damage = 1;
         float timer= 0;
 
-    public TestBossTargetedPunch(Player player, FirstBoss boss) {
+    public TestBossTargetedPunch(Player player, FirstBossHand boss) {
         boss.currentTexture = boss.closedfist;
         update(player,boss);
     }
 
     @Override
-    public void update(Player player, FirstBoss boss) {
+    public void update(Player player, FirstBossHand boss) {
 
         Vector2 bossCenter = new Vector2(boss.x +boss.width/2, boss.y +boss.height/2);
 
@@ -56,7 +51,7 @@ public class TestBossTargetedPunch implements FirstBossAttacks{
     }
 
     @Override
-    public boolean isdone(FirstBoss boss) {
+    public boolean isdone(FirstBossHand boss) {
         if (timer>=10) {
             boss.disabledMovementpattern = false;
             return true;

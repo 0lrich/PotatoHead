@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 public interface FirstBossAttacks {
 
-    public void update(Player player, FirstBoss boss);
+    public void update(Player player, FirstBossHand boss);
 
-    public boolean isdone(FirstBoss boss);
+    public boolean isdone(FirstBossHand boss);
 }

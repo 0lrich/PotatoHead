@@ -3,16 +3,13 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import java.awt.*;
 import java.util.Random;
-import java.util.Vector;
 
-public class FirstBoss extends Boss {
+public class FirstBossHand extends Boss {
     float rotation;
     Texture defaultTexture;
     Texture hitTexture;
@@ -31,10 +28,10 @@ public class FirstBoss extends Boss {
     boolean alreadyattacking = false;
     boolean disabledMovementpattern = false;
 
-    public FirstBoss(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
+    public FirstBossHand(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
         super(x, y, health, width, height, shapeRenderer);
-        currentTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
-        defaultTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
+        currentTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
+        defaultTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         hitTexture = new Texture(Gdx.files.internal("Hurt Hand.png"));
         deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
         shooting1 = new Texture(Gdx.files.internal("Shoot Hand 1.png"));
@@ -50,8 +47,8 @@ public class FirstBoss extends Boss {
     }
     public void init(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
         super.init(x, y, health, width, height, shapeRenderer);
-        currentTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
-        defaultTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
+        currentTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
+        defaultTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         hitTexture = new Texture(Gdx.files.internal("Hurt Hand.png"));
         deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
 
@@ -160,18 +157,18 @@ float opposite;
 
     public void movementpattern() {// boss probably moves around or maybe he doesnt this is just a test boss im making him do whatever but it should be here anyways
         if (!disabledMovementpattern) {
-            if (x + width > Gdx.graphics.getWidth()) {
+            if (y + height > Gdx.graphics.getHeight()) {
                 bettername = true;
             }
-            if (x < 0) {
+            if (y < 0) {
                 bettername = false;
             }
             if (bettername) {
-                x -= 5;
-                y = (float) Math.sin(x * .01f) * 100 + Gdx.graphics.getHeight() / 2f;
+
+                y -=10;
             } else {
-                x += 10;
-                y = (float) Math.sin(x * .5) * 10 + Gdx.graphics.getHeight() / 2f;
+
+                y +=10;
 
             }
         }
