@@ -224,15 +224,20 @@ public class Player {
 
     public void changeSceneToggle(){
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            if(sceneHolder.getScene() == 0){
-                sceneHolder.switchScene(1);
-            } else if(platformHolder.getPlatformScene() == 1){
+            if(sceneHolder.getScene() == 1){
                 sceneHolder.switchScene(2);
-            } else if(platformHolder.getPlatformScene() == 2){
+                System.out.println("SCENE SWITCHED TO SCENE 2");
+            } else if(sceneHolder.getScene() == 2){
                 sceneHolder.switchScene(3);
-            } else{
-                sceneHolder.switchScene(0);
+                System.out.println("SCENE SWITCHED TO SCENE 3");
+            } else if(sceneHolder.getScene() == 3){
+                sceneHolder.switchScene(4);
+                System.out.println("SCENE SWITCHED TO SCENE 4");
+            } else if(sceneHolder.getScene() == 4){
+                sceneHolder.switchScene(1);
+                System.out.println("SCENE SWITCHED TO SCENE 1");
             }
+            System.out.println("CURRENT SCENE: " + sceneHolder.getScene());
 
         }
     }

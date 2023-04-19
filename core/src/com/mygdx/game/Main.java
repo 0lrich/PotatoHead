@@ -18,8 +18,6 @@ public class Main extends ApplicationAdapter {
 	public void create () { // All the objects in the game are created here
 		batch = new SpriteBatch();
 		sceneHolder.switchScene(0);
-
-
 	}
 	@Override
 	public void render () {
@@ -35,6 +33,8 @@ public class Main extends ApplicationAdapter {
 		platformHolder.render();
 		bulletHolder.render();
 		//endregion
+		batch.begin();
+		batch.end();
 	}
 	
 	@Override
