@@ -190,20 +190,30 @@ public class Player extends InGameObj{
     public void moveAndSlideWalls(float velX, float velY){
 
         // This makes a fake player that detects if the players final position collides with the platform
+        float tempMag = (float) Math.sqrt(Math.pow(velX, 2) + Math.pow(velY, 2));
+        float tempUnitVectorX = -velX / tempMag;
+        float tempUnitVectorY = -velY / tempMag;
         Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
         for(Platform p : Globals.platformHolder.getPlatforms()){
             Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
-            if(testRect.overlaps(platformRectangle)){
-                for(int i = 0; i < 1; i++){
+            if(testRect.overlaps(platformRectangle)) {
 
+                System.out.println("TestRect is overlapping with the platformRectangle");
+                while(testRect.overlaps(platformRectangle)) {
+                    testRect.x += tempUnitVectorX;
+                    testRect.y += tempUnitVectorY;
                 }
                 this.posX = testRect.getX();
                 this.posY = testRect.getY();
-                return;
+                //this.xVelocity = 0;
+                //this.yVelocity = 0;
             }
+            this.posX += velX;
+            this.posY += velY;
+            System.out.println("VELOCITY: (" + velX + ", " + velY + ")");
+            return;
 
         }
-        return;
     }
     public void shoot(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
