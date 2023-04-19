@@ -5,8 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import static com.mygdx.game.Globals.bulletHolder;
-import static com.mygdx.game.Globals.platformHolder;
+import static com.mygdx.game.Globals.*;
 
 public class SceneHolder {
     FirstBoss farmer;
@@ -28,6 +27,7 @@ public class SceneHolder {
                 System.out.println("THE CODE FOR THE MAIN MENU SCENE IS RUNNING");
                 potato.init(5000,200, 10, 50,50,new ShapeRenderer());
                 farmer.init(5000,500,20,450,450,new ShapeRenderer());
+                mainMenuScreen.show();
                 break;
             case 1:
                 potato.init(200,200, 10, 50,50,new ShapeRenderer());
