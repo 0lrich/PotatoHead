@@ -165,6 +165,14 @@ public class Player {
             return;
         }
 
+//        if(posY<=-50){
+//            this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
+//            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50,new ShapeRenderer());
+//            damage++;
+//            if(health<=0){damage = 1;}
+//            System.out.println(health);
+//        }
+
         // This makes a fake player that detects if the players final position collides with the platform
         Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
         for(Platform p : Globals.platformHolder.getPlatforms()){
