@@ -67,11 +67,11 @@ public class PlatformHolder {
                 addPlatform(1300,0,400,700,new ShapeRenderer(),true,false);
                 break;
             case 3:
-                piramid(20, 40, 100, 50);
+                pyramid(20, 40, 100, 50);
                 break;
         }
     }
-    public void piramid(int slices, float topWidth, float baseWidth, float height) {
+    public void pyramid(int slices, float topWidth, float baseWidth, float height) {
         for(int i = 0; i < slices; i++) {
             addPlatform(0, 11*i + 100, 10, 500, new ShapeRenderer(), true, true);
         }

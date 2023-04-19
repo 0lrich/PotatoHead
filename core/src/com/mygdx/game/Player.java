@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+
+import java.util.Vector;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.*;
@@ -31,6 +34,8 @@ public class Player {
     float maxCoyoteSeconds = 0.08f;
     float coyoteSeconds = 0;
     boolean isOnFloor = false;
+    Vector2 playerSpawn;
+    int damage = 1;
 
 
     public Player(float x, float y, float health, float height, float width, ShapeRenderer body) {
@@ -165,13 +170,13 @@ public class Player {
             return;
         }
 
-//        if(posY<=-50){
-//            this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
-//            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50,new ShapeRenderer());
-//            damage++;
-//            if(health<=0){damage = 1;}
-//            System.out.println(health);
-//        }
+        if(posY<=-50){
+            this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
+            init(playerSpawn.x, playerSpawn.y, 3-damage, 50,50,new ShapeRenderer());
+            damage++;
+            if(health<=0){damage = 1;}
+            System.out.println(health);
+        }
 
         // This makes a fake player that detects if the players final position collides with the platform
         Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
