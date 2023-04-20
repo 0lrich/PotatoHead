@@ -12,14 +12,16 @@ import static com.mygdx.game.Globals.platformHolder;
 public class SceneHolder {
     FirstBossHead farmerHead;
     FirstBossHand farmerHandRight;
+    FirstBossHand farmerHandLeft;
     Player potato;
     int scene;
     Vector2 playerSpawn;
     public SceneHolder(){
         
         potato = new Player(0,20, 10, 50,50,new ShapeRenderer());
-        farmerHandRight = new FirstBossHand(500,500,20,450,450,new ShapeRenderer());
-        farmerHead = new FirstBossHead(500,500,30,600,600,new ShapeRenderer());
+        farmerHandRight = new FirstBossHand(350,350,20,350,350,new ShapeRenderer());
+        farmerHandLeft = new FirstBossHand(0,350,20,350,350,new ShapeRenderer());
+        farmerHead = new FirstBossHead(350,350,30,350,350,new ShapeRenderer());
         playerSpawn = new Vector2();
     }
     public void setScene(int scene){}
@@ -32,28 +34,33 @@ public class SceneHolder {
                 playerSpawn.set(200, 200);
 
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50,new ShapeRenderer());
-                farmerHead.init(55000,400,30,600,600,new ShapeRenderer());
-
-                farmerHandRight.init(5000,500,20,450,450,new ShapeRenderer());
+                farmerHead.init(53500,400,30,350,350,new ShapeRenderer());
+                farmerHandLeft.init(-35000,350,20,350,350,new ShapeRenderer());
+                farmerHandRight.init(3500,350,20,350,350,new ShapeRenderer());
                 platformHolder.setPlatformScene(0);
                 break;
             case 1:
                 playerSpawn.set(600, 200);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50,new ShapeRenderer());
-                farmerHead.init(550,400,30,600,600,new ShapeRenderer());
-                farmerHandRight.init(Gdx.graphics.getWidth()- farmerHandRight.width,500,20,450,450,new ShapeRenderer());
+                farmerHead.init(550,400,30,350,350,new ShapeRenderer());
+                farmerHandLeft.init(0,350,20,350,350,new ShapeRenderer());
+                farmerHandRight.init(Gdx.graphics.getWidth()- farmerHandRight.width,350,20,350,350,new ShapeRenderer());
                 platformHolder.setPlatformScene(1);
                 break;
             case 2:
                 playerSpawn.set(400, 500);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50,new ShapeRenderer());
-                farmerHandRight.init(5000,500,20,450,450,new ShapeRenderer());
+                farmerHandLeft.init(-35000,350,20,350,350,new ShapeRenderer());
+                farmerHandRight.init(3500,350,20,350,350,new ShapeRenderer());
+                farmerHead.init(53500,400,30,350,350,new ShapeRenderer());
                 platformHolder.setPlatformScene(2);
                 break;
             case 3:
-                playerSpawn.set(400, 500);
+                playerSpawn.set(400, 350);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50,new ShapeRenderer());
-                farmerHandRight.init(5000,500,20,450,450,new ShapeRenderer());
+                farmerHandLeft.init(-35000,350,20,350,350,new ShapeRenderer());
+                farmerHandRight.init(3500,350,20,350,350,new ShapeRenderer());
+                farmerHead.init(53500,400,30,350,350,new ShapeRenderer());
                 platformHolder.setPlatformScene(3);
                 break;
         }
@@ -62,6 +69,7 @@ public class SceneHolder {
         potato.update(Gdx.graphics.getDeltaTime());
         if(scene == 1){
             farmerHandRight.update(potato);
+            farmerHandLeft.update(potato);
         }
     }
     public void render(SpriteBatch batch) {
@@ -77,6 +85,7 @@ public class SceneHolder {
         }
 
         farmerHandRight.render(batch);
+        farmerHandLeft.render(batch);
         farmerHead.render(batch);
         batch.end();
         potato.render();

@@ -27,12 +27,13 @@ public class FirstBossHand extends Boss {
     boolean bettername = false;
     boolean alreadyattacking = false;
     boolean disabledMovementpattern = false;
+    boolean rightHand = false;
 
     public FirstBossHand(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
         super(x, y, health, width, height, shapeRenderer);
         currentTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         defaultTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
-        hitTexture = new Texture(Gdx.files.internal("Hurt Hand.png"));
+        hitTexture = new Texture(Gdx.files.internal("FarmerHurtHand.png"));
         deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
         shooting1 = new Texture(Gdx.files.internal("Shoot Hand 1.png"));
         shooting2 = new Texture(Gdx.files.internal("Shoot Hand 2.png"));
@@ -49,7 +50,7 @@ public class FirstBossHand extends Boss {
         super.init(x, y, health, width, height, shapeRenderer);
         currentTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         defaultTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
-        hitTexture = new Texture(Gdx.files.internal("Hurt Hand.png"));
+        hitTexture = new Texture(Gdx.files.internal("FarmerHurtHand.png"));
         deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
 
         bossBody.begin(ShapeRenderer.ShapeType.Filled);
@@ -58,6 +59,9 @@ public class FirstBossHand extends Boss {
         //the rectangle shape is drawn from the bottom left corner just so u know
         bossBody.rect(x, y, width, height);
         bossBody.end();
+        if (x > (float) Gdx.graphics.getWidth() / 2) {
+            rightHand = true;
+        }
     }
 
     /**
@@ -89,6 +93,7 @@ public class FirstBossHand extends Boss {
 
                chosenattack = attackchoice.nextInt(5)+1;
                 //set currentAttack to appropriate Attack
+                 chosenattack = 1;
                 switch ((int) chosenattack) {
                     case 1:
                         currentAttack = new TestBossFingerBullet(player,this);
@@ -165,15 +170,19 @@ float opposite;
             }
             if (bettername) {
 
-                y -=10;
+                y -= 10;
             } else {
 
-                y +=10;
+                y += 10;
 
+            }
+            if (!rightHand) {
+                x = 0;
+            } else {
+                x = Gdx.graphics.getWidth() - width;
             }
         }
     }
-
 
 
     public boolean amIHit(Bullet bullet) {

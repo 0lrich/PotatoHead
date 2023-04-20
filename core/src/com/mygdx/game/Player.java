@@ -29,6 +29,8 @@ public class Player {
     private float bulletSpeed = 50;
     boolean canFallThrough = false;
     boolean isFacingRight = true;
+    boolean invulnerable = false;
+    float invlunerableTime = 0;
     float reload = 0;
     float fireRate = 3;
     float maxCoyoteSeconds = 0.08f;
@@ -68,12 +70,21 @@ public class Player {
      *  \ /
      *   V
      */
-    public void update(float deltaTime){
+    public void update(float deltaTime) {
+        invlunerableTime -= Gdx.graphics.getDeltaTime();
         shoot(deltaTime);
         movement();
+        amIDead();
         if (reload > 0) reload -= 60 * deltaTime;
-    }
+        for (int i = 0; i < Globals.bulletHolder.bullets.size(); i++) {
+            if (amIHit(Globals.bulletHolder.bullets.get(i))) {
+                health = health - Globals.bulletHolder.bullets.get(i).damage;
 
+                System.out.println("i got shot");
+                Globals.bulletHolder.bullets.get(i).alreadyHitSomething();
+            }
+        }
+    }
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
      *     | |
@@ -175,6 +186,8 @@ public class Player {
             init(playerSpawn.x, playerSpawn.y, health-damage, 50,50,new ShapeRenderer());
             damage++;
             if(health<=0){damage = 1;}
+            invulnerable = true;
+            invlunerableTime = Gdx.graphics.getDeltaTime() * 60;
             System.out.println(health);
         }
 
@@ -234,7 +247,26 @@ public class Player {
         }
 
     }
+    public boolean amIHit(Bullet bullet) {
+        if (invulnerable){
+          if (invlunerableTime <0){
+              invulnerable = false;
+          }
+        }
+            else if (!bullet.isFriendly) {
+            Rectangle bulletRectangle = new Rectangle(bullet.getX(), bullet.getY(), bullet.getSize(), bullet.getSize());
+            Rectangle playerRectangle = new Rectangle(posX, posY, width, height);
+            if (playerRectangle.overlaps(bulletRectangle)) {
+                invulnerable = true;
+                invlunerableTime = Gdx.graphics.getDeltaTime() * 60;
+                return playerRectangle.overlaps(bulletRectangle);
+            }
+        }
+        return false;
+    }
+    public void setInvulnerablity(){
 
+    }
     public void changeSceneToggle(){
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             if(sceneHolder.getScene() == 0){
@@ -268,7 +300,11 @@ public class Player {
         canJump = false;
         return false;
     }
-
+    public void amIDead(){
+        if (health <= 0){
+            sceneHolder.switchScene(0);
+        }
+    }
     public float getPosX() {
         return posX;
     }
