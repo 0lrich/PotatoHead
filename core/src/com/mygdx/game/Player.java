@@ -188,32 +188,80 @@ public class Player extends InGameObj{
         return;
     }
     public void moveAndSlideWalls(float velX, float velY){
-
+        isOnFloor = false;
         // This makes a fake player that detects if the players final position collides with the platform
         float tempMag = (float) Math.sqrt(Math.pow(velX, 2) + Math.pow(velY, 2));
         float tempUnitVectorX = -velX / tempMag;
         float tempUnitVectorY = -velY / tempMag;
+        if(Math.abs(tempUnitVectorY)<.0001f) tempUnitVectorY =0;
+        if(Math.abs(tempUnitVectorX)<.0001f) tempUnitVectorX =0;
+//        if(tempMag==0){
+//            tempUnitVectorX = 0;
+//            tempUnitVectorY = 0;
+//        }
+
+
         Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
-        for(Platform p : Globals.platformHolder.getPlatforms()){
-            Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
-            if(testRect.overlaps(platformRectangle)) {
+
+            if(isRectCollideWithPlatforms(testRect)) {
 
                 System.out.println("TestRect is overlapping with the platformRectangle");
-                while(testRect.overlaps(platformRectangle)) {
+                for(int i = 0; isRectCollideWithPlatforms(testRect); i++) {
+                    if(i>tempMag){
+                        System.out.println();
+                    }
                     testRect.x += tempUnitVectorX;
+                    if(!isRectCollideWithPlatforms(testRect)){
+                        float tempVelY = -tempUnitVectorY * i;
+                        this.posX = testRect.getX();
+                        this.posY = testRect.getY();
+                      //  this.yVelocity = tempVelY;
+                        this.xVelocity = 0;
+                        moveAndSlideWalls(0,tempVelY);
+                        return;
+                    }
                     testRect.y += tempUnitVectorY;
-                }
-                this.posX = testRect.getX();
-                this.posY = testRect.getY();
-                //this.xVelocity = 0;
-                //this.yVelocity = 0;
-            }
-            this.posX += velX;
-            this.posY += velY;
-            System.out.println("VELOCITY: (" + velX + ", " + velY + ")");
-            return;
+                    if(!isRectCollideWithPlatforms(testRect)){
+                        if(tempMag==0){
+                            System.out.println();
+                        }
+                        float tempVelX = -tempUnitVectorX * i;
+                        this.posY = testRect.getY();
+                        this.posX = testRect.getX();
+                        //this.xVelocity = tempVelX;
+                        this.yVelocity = 0;
 
+                        moveAndSlideWalls(tempVelX,0);
+                        if(-tempUnitVectorY<0) {
+                            isOnFloor = true;
+                        }
+                        return;
+                    }
+                }
+//                this.posX = testRect.getX();
+//                this.posY = testRect.getY();
+                //this.xVelocity = 0;
+            }
+//            this.posX += velX;
+//            this.posY += velY;
+
+            System.out.println("VELOCITY: (" + velX + ", " + velY + ")" + " POSITION: (" + posX + ", " + posY + ")");
+
+
+
+        this.posX = testRect.getX();
+        this.posY = testRect.getY();
+    }
+
+    public boolean isRectCollideWithPlatforms(Rectangle testRect){
+        for(int i = 0; i < platformHolder.getPlatforms().size(); i++){
+            Platform p = platformHolder.getPlatforms().get(i);
+            Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
+            if(testRect.overlaps(platformRectangle)){
+                return true;
+            }
         }
+        return false;
     }
     public void shoot(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
