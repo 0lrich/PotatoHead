@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.Vector;
-
 import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.*;
 import static java.lang.Math.min;
@@ -59,6 +57,7 @@ public class Player {
         this.width = width;
         this.body = body;
     }
+
 
     /**
      * this is where stuff that happens every frame is gonna go
@@ -293,5 +292,13 @@ public class Player {
 
     public boolean getCanFallThrough() {
         return canFallThrough;
+    }
+
+    public float getX() {
+        return this.posX;
+    }
+
+    public float getY() {
+        return this.posY;
     }
 }

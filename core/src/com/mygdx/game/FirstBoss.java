@@ -116,4 +116,13 @@ public class FirstBoss extends Boss {
         }
         return false;
     }
+    public boolean isPlayerHit(Player player){
+        Rectangle playerRectangle = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getHeight());
+        Rectangle bossRectangle = new Rectangle(x, y, width, height);
+        if (bossRectangle.overlaps(playerRectangle)){
+
+        return true;
+        }
+        return false;
+    }
 }
