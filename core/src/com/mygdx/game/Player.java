@@ -259,6 +259,7 @@ public class Player {
             if (playerRectangle.overlaps(bulletRectangle)) {
                 invulnerable = true;
                 invlunerableTime = Gdx.graphics.getDeltaTime() * 60;
+                posY+= 50;
                 return playerRectangle.overlaps(bulletRectangle);
             }
         }

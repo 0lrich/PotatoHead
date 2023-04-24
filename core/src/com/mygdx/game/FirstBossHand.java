@@ -35,10 +35,10 @@ public class FirstBossHand extends Boss {
         defaultTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         hitTexture = new Texture(Gdx.files.internal("FarmerHurtHand.png"));
         deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
-        shooting1 = new Texture(Gdx.files.internal("Shoot Hand 1.png"));
-        shooting2 = new Texture(Gdx.files.internal("Shoot Hand 2.png"));
-        shooting3 = new Texture(Gdx.files.internal("Shoot Hand 3.png"));
-        closedfist = new Texture(Gdx.files.internal("Test boss closed fist.png"));
+        shooting1 = new Texture(Gdx.files.internal("FarmerShootHand1.png"));
+        shooting2 = new Texture(Gdx.files.internal("FarmerShootHand2.png"));
+        shooting3 = new Texture(Gdx.files.internal("FarmerShootHand3.png"));
+        closedfist = new Texture(Gdx.files.internal("FarmerClosedFist.png"));
         bossBody.begin(ShapeRenderer.ShapeType.Filled);
 
 
