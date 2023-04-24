@@ -147,12 +147,12 @@ public class Player extends InGameObj{
     private void movement(){
     //fixme placeholder
         calculateVelocity();
-        //moveAndSlide(xVelocity, yVelocity, canFallThrough);
         moveAndSlideWalls(xVelocity, yVelocity);
+        moveAndSlidePlatforms(xVelocity, yVelocity, canFallThrough);
         changeSceneToggle();
     }
 
-    public void moveAndSlide(float velX, float velY, boolean canFallThrough){
+    public void moveAndSlidePlatforms(float velX, float velY, boolean canFallThrough){
 
         isOnFloor = false;
 
@@ -188,47 +188,67 @@ public class Player extends InGameObj{
         return;
     }
     public void moveAndSlideWalls(float velX, float velY){
+        // Resets floor function
         isOnFloor = false;
-        // This makes a fake player that detects if the players final position collides with the platform
-        float tempMag = (float) Math.sqrt(Math.pow(velX, 2) + Math.pow(velY, 2));
-        float tempUnitVectorX = -velX / tempMag;
-        float tempUnitVectorY = -velY / tempMag;
-        if(Math.abs(tempUnitVectorY)<.0001f) tempUnitVectorY =0;
-        if(Math.abs(tempUnitVectorX)<.0001f) tempUnitVectorX =0;
-//        if(tempMag==0){
-//            tempUnitVectorX = 0;
-//            tempUnitVectorY = 0;
-//        }
 
-
+        // This makes a fake player that detects if the players final position collides with the wall
         Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
 
-            if(isRectCollideWithPlatforms(testRect)) {
+            if(isRectCollideWithWalls(testRect)) {
 
-                System.out.println("TestRect is overlapping with the platformRectangle");
-                for(int i = 0; isRectCollideWithPlatforms(testRect); i++) {
+                // Gets magnitude of velocity and makes unit vectors going the opposite direction
+                float tempMag = (float) Math.sqrt(Math.pow(velX, 2) + Math.pow(velY, 2));
+                float tempUnitVectorX = -velX / tempMag;
+                float tempUnitVectorY = -velY / tempMag;
+
+                // Loops over every wall on screen, "i" should represent number of pixels the testRect has moved
+                for(int i = 0; isRectCollideWithWalls(testRect); i++) {
+
+                    // Magnitude has to be bigger than the number of pixels it takes to get out of the wall
                     if(i>tempMag){
-                        System.out.println();
+                        //System.out.println("Velocity that it's trying to go in: (" + tempUnitVectorX + ", " + tempUnitVectorY + ")");
                     }
+
+                    // Moves the testRect in the direction of the temp unit vectors until it's no longer in the wall
                     testRect.x += tempUnitVectorX;
-                    if(!isRectCollideWithPlatforms(testRect)){
+                    // Special case: if the unit vector pushes the rectangle past its position the other way, then it resets that direction
+                    if(tempUnitVectorX > 0 ){
+                        if(testRect.x > this.posX){
+                            testRect.x = this.posX;
+                        }
+                    }
+                    else if (tempUnitVectorX < 0){
+                        if(testRect.x < this.posX){
+                            testRect.x = this.posX;
+                        }
+                    }
+                    if(!isRectCollideWithWalls(testRect)){
                         float tempVelY = -tempUnitVectorY * i;
                         this.posX = testRect.getX();
                         this.posY = testRect.getY();
-                      //  this.yVelocity = tempVelY;
                         this.xVelocity = 0;
                         moveAndSlideWalls(0,tempVelY);
                         return;
                     }
+
                     testRect.y += tempUnitVectorY;
-                    if(!isRectCollideWithPlatforms(testRect)){
+                    if(tempUnitVectorY > 0 ){
+                        if(testRect.y > this.posY){
+                            testRect.y = this.posY;
+                        }
+                    }
+                    else if (tempUnitVectorY < 0){
+                        if(testRect.y < this.posY){
+                            testRect.y = this.posY;
+                        }
+                    }
+                    if(!isRectCollideWithWalls(testRect)){
                         if(tempMag==0){
                             System.out.println();
                         }
                         float tempVelX = -tempUnitVectorX * i;
                         this.posY = testRect.getY();
                         this.posX = testRect.getX();
-                        //this.xVelocity = tempVelX;
                         this.yVelocity = 0;
 
                         moveAndSlideWalls(tempVelX,0);
@@ -238,26 +258,17 @@ public class Player extends InGameObj{
                         return;
                     }
                 }
-//                this.posX = testRect.getX();
-//                this.posY = testRect.getY();
-                //this.xVelocity = 0;
             }
-//            this.posX += velX;
-//            this.posY += velY;
-
-            System.out.println("VELOCITY: (" + velX + ", " + velY + ")" + " POSITION: (" + posX + ", " + posY + ")");
-
-
 
         this.posX = testRect.getX();
         this.posY = testRect.getY();
     }
 
-    public boolean isRectCollideWithPlatforms(Rectangle testRect){
-        for(int i = 0; i < platformHolder.getPlatforms().size(); i++){
-            Platform p = platformHolder.getPlatforms().get(i);
-            Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
-            if(testRect.overlaps(platformRectangle)){
+    public boolean isRectCollideWithWalls(Rectangle testRect){
+        for(int i = 0; i < wallHolder.getWalls().size(); i++){
+            Wall w = wallHolder.getWalls().get(i);
+            Rectangle wallRectangle = new Rectangle(w.x, w.y, w.width, w.height);
+            if(testRect.overlaps(wallRectangle)){
                 return true;
             }
         }
@@ -300,9 +311,9 @@ public class Player extends InGameObj{
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             if(sceneHolder.getScene() == 0){
                 sceneHolder.switchScene(1);
-            } else if(platformHolder.getPlatformScene() == 1){
+            } else if(sceneHolder.getScene() == 1){
                 sceneHolder.switchScene(2);
-            } else if(platformHolder.getPlatformScene() == 2){
+            } else if(sceneHolder.getScene() == 2){
                 sceneHolder.switchScene(3);
             } else{
                 sceneHolder.switchScene(0);

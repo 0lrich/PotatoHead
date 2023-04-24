@@ -35,6 +35,7 @@ public class Wall {
      */
     public void render () {
         globalRender.begin(ShapeRenderer.ShapeType.Filled);
+        globalRender.setColor(0,0,0,1);
         globalRender.rect(x,y,width, height);
         globalRender.end();
     }

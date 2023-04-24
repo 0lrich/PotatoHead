@@ -25,21 +25,25 @@ public class SceneHolder {
                 potato.init(200,200, 10, 50,50);
                 farmer.init(5000,500,20,450,450);
                 platformHolder.setPlatformScene(0);
+                wallHolder.setWallScene(0);
                 break;
             case 1:
                 potato.init(600,200, 10, 50,50);
                 farmer.init(500,500,20,450,450);
                 platformHolder.setPlatformScene(1);
+                wallHolder.setWallScene(1);
                 break;
             case 2:
                 potato.init(400,500, 10, 50,50);
                 farmer.init(5000,500,20,450,450);
                 platformHolder.setPlatformScene(2);
+                wallHolder.setWallScene(2);
                 break;
             case 3:
                 potato.init(400,500, 10, 50,50);
                 farmer.init(5000,500,20,450,450);
                 platformHolder.setPlatformScene(3);
+                wallHolder.setWallScene(3);
                 break;
         }
     }

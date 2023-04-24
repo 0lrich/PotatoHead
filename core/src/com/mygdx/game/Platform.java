@@ -8,18 +8,16 @@ public class Platform extends InGameObj {
     float y;
     float height;
     float width;
-    ShapeRenderer floor;
 
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
     Boolean isFallingThrough;
     Boolean canFallThroughPlat;
 
-    public Platform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible, boolean isFallThrough) {
+    public Platform(float x, float y, float height, float width, Boolean tangible, boolean isFallThrough) {
         this.canFallThroughPlat = isFallThrough;
         this.height = height;
         this.width = width;
-        this.floor = floor;
         this.tangible = tangible;
         this.x = x;
         this.y = y;
@@ -42,15 +40,15 @@ public class Platform extends InGameObj {
      *      V
      */
     public void render () {
-        floor.begin(ShapeRenderer.ShapeType.Filled);
+        Globals.globalRender.begin(ShapeRenderer.ShapeType.Filled);
         if(canFallThroughPlat == true){
-            floor.setColor(0.5f,0.5f,0.5f,1);
+            Globals.globalRender.setColor(0.5f,0.5f,0.5f,1);
         }else{
-            floor.setColor(0,0,0,1);
+            Globals.globalRender.setColor(0.2f,0.2f,0.2f,1);
         }
 
-        floor.rect(x,y,width, height);
-        floor.end();
+        Globals.globalRender.rect(x,y,width, height);
+        Globals.globalRender.end();
     }
 
     /**
