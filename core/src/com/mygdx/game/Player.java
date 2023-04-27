@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.*;
 import static java.lang.Math.min;
+import static java.lang.Math.signum;
 
 public class Player extends InGameObj{
     private float posX;
@@ -147,8 +148,11 @@ public class Player extends InGameObj{
     private void movement(){
     //fixme placeholder
         calculateVelocity();
-        moveAndSlideWalls(xVelocity, yVelocity);
-        moveAndSlidePlatforms(xVelocity, yVelocity, canFallThrough);
+
+
+
+        moveAndSlidePlatformsV2(xVelocity, yVelocity, canFallThrough);
+
         changeSceneToggle();
     }
 
@@ -187,6 +191,56 @@ public class Player extends InGameObj{
         this.posY += velY;
         return;
     }
+
+    public void moveAndSlidePlatformsV2(float velX, float velY, boolean canFallThrough){
+
+        isOnFloor = false;
+
+        // This checks if you're going up so that there are no upwards collisions
+        if(velY >= 0){
+            this.posX += velX;
+            this.posY += velY;
+            //return;
+        }
+
+        // This makes a fake player that detects if the players final position collides with the platform
+        Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
+        for(Platform p : Globals.platformHolder.getPlatforms()){
+            if(this.posY < p.y + p.height -1){
+                continue;
+            }
+            if (p.canFallThroughPlat  && canFallThrough){
+                continue;
+            }
+            Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
+            if(testRect.overlaps(platformRectangle)){
+                this.posX += velX;
+                this.posY = p.y + p.height;
+
+                isOnFloor = true;
+                yVelocity = 0;
+                return;
+            }
+
+        }
+
+        for (Wall w : wallHolder.getWalls()){
+
+            Rectangle platformRectangle = new Rectangle(w.x, w.y, w.width, w.height);
+            if (testRect.overlaps(platformRectangle)){
+                System.out.println("gfdshughosdih");
+                posX = w.resolveX(testRect);
+                posY = w.resolveY(testRect);
+                return;
+            }
+
+        }
+
+        this.posX += velX;
+        this.posY += velY;
+        return;
+    }
+
     public void moveAndSlideWalls(float velX, float velY){
         // Resets floor function
         isOnFloor = false;
@@ -262,6 +316,57 @@ public class Player extends InGameObj{
 
         this.posX = testRect.getX();
         this.posY = testRect.getY();
+    }
+
+    public void moveAndSlideWallsV2(float velX, float velY){
+        // Resets floor function
+        //isOnFloor = false;
+
+        if (velX == 0 && velY == 0) return;
+
+        // This makes a fake player that detects if the players final position collides with the wall
+        Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
+
+        int i = 0;
+
+        if(isRectCollideWithWalls(testRect)) {
+
+            // Gets magnitude of velocity and makes unit vectors going the opposite direction
+            float tempMag = (float) Math.sqrt(Math.pow(velX, 2) + Math.pow(velY, 2));
+            float tempUnitVectorX = -velX / tempMag;
+            float tempUnitVectorY = -velY / tempMag;
+
+            // Loops over every wall on screen, "i" should represent number of pixels the testRect has moved
+            for(i = 0; isRectCollideWithWalls(testRect); i++) {
+
+
+                if (signum(testRect.x - posX) != signum(velX) && velX != 0) break;
+                if (signum(testRect.y - posY) != signum(velY) && velY != 0) break;
+
+                testRect.x += tempUnitVectorX;
+                testRect.y += tempUnitVectorY;
+
+
+
+            }
+
+            xVelocity = testRect.x - posX;
+            yVelocity = testRect.y - posY;
+
+
+        }
+
+
+        this.posX = testRect.getX();
+        this.posY = testRect.getY();
+
+        if (isRectCollideWithWalls(testRect)){
+            System.out.println("feck");
+        }
+
+        //if (posX != tempPosX) System.out.println("gfohskgsrehyiogebgrsbhuyra " + posX + " " + tempPosX);
+
+
     }
 
     public boolean isRectCollideWithWalls(Rectangle testRect){

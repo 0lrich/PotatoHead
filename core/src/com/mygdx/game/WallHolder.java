@@ -45,6 +45,7 @@ public class WallHolder {
         switch(wallScene){
             case 0:
                 addWall(300, 300, 400, 30);
+                addWall(100, 100, 40, 900);
                 break;
             case 1:
 

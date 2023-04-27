@@ -49,11 +49,11 @@ public class PlatformHolder {
                 float baseWidth =  800;
                 float topWidth = 20;
                 float pyramidHeight = 1000;
-                float slices = 24;
-                for(int i = 0; i < slices; i++) {
-                    float width = lerp(baseWidth, topWidth, i/slices);
+                int slices = 24;
+                for(int i = slices; i >= 0; i--) {
+                    float width = lerp(topWidth, baseWidth, (float)i/(float)(slices));
                     float shift = ((baseWidth - width)/2);
-                    addPlatform(200 + shift,0 + (i * 30),20, width,true,false);
+                    addPlatform(200 + shift,(slices * 30)-i*30,20, width,true,false);
                 }
                 break;
             case 1:

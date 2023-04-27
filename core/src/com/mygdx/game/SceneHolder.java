@@ -22,7 +22,7 @@ public class SceneHolder {
         scene = sceneNumber;
         switch(scene){
             case 0:
-                potato.init(200,200, 10, 50,50);
+                potato.init(400,400, 10, 50,50);
                 farmer.init(5000,500,20,450,450);
                 platformHolder.setPlatformScene(0);
                 wallHolder.setWallScene(0);
