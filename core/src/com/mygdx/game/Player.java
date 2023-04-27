@@ -121,7 +121,15 @@ public class Player {
             xVelocity += speed;
             isFacingRight = true;
         }
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)){
+            if(isFacingRight == true){
+                xVelocity+=100;
+            }
+            else{
+                xVelocity-=100;
+            }
+            gravity = 1;
+        }
         if (isOnFloor){
             canJump = true;
             coyoteSeconds = maxCoyoteSeconds;

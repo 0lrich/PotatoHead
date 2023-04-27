@@ -16,8 +16,6 @@ public class TestBossFingerBullet implements FirstBossAttacks {
         update(player, boss);
 
         //do change sprites and set initial variables
-
-
     }
     @Override
     public void update(Player player, FirstBossHand boss){
