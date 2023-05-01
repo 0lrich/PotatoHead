@@ -16,8 +16,6 @@ public class TestBossFingerBullet implements FirstBossAttacks {
         update(player, boss);
 
         //do change sprites and set initial variables
-
-
     }
     @Override
     public void update(Player player, FirstBossHand boss){
@@ -31,10 +29,11 @@ public class TestBossFingerBullet implements FirstBossAttacks {
         if ( 10 <= timer && timer <=10.5f ){
 
             bulletHolder.addBullet(bossCenter.x, bossCenter.y,90,-target.x*10,-target.y*10,new Texture(Gdx.files.internal("Blurry potato.png")),0,false);
-
             isdone(boss);
-        }else if (timer >5 ){
+        }else if (timer >7 ){
             boss.currentTexture = boss.shooting2;
+        } else if (timer >5 ){
+            boss.currentTexture = boss.shooting3;
         }
         isdone(boss);
     }

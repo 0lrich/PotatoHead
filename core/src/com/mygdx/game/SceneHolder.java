@@ -21,7 +21,7 @@ public class SceneHolder {
         potato = new Player(0,20, 10, 50,50,new ShapeRenderer());
         farmerHandRight = new FirstBossHand(350,350,20,350,350,new ShapeRenderer());
         farmerHandLeft = new FirstBossHand(0,350,20,350,350,new ShapeRenderer());
-        farmerHead = new FirstBossHead(350,350,30,350,350,new ShapeRenderer());
+        farmerHead = new FirstBossHead(350,350,30,450,450,new ShapeRenderer());
         playerSpawn = new Vector2();
     }
     public void setScene(int scene){}
@@ -42,7 +42,7 @@ public class SceneHolder {
             case 1:
                 playerSpawn.set(600, 200);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50,new ShapeRenderer());
-                farmerHead.init(550,400,30,350,350,new ShapeRenderer());
+                farmerHead.init(Gdx.graphics.getWidth()/2 - farmerHead.width/2,400,30,350,350,new ShapeRenderer());
                 farmerHandLeft.init(0,350,20,350,350,new ShapeRenderer());
                 farmerHandRight.init(Gdx.graphics.getWidth()- farmerHandRight.width,350,20,350,350,new ShapeRenderer());
                 platformHolder.setPlatformScene(1);
@@ -70,6 +70,7 @@ public class SceneHolder {
         if(scene == 1){
             farmerHandRight.update(potato);
             farmerHandLeft.update(potato);
+            farmerHead.update(potato);
         }
     }
     public void render(SpriteBatch batch) {
