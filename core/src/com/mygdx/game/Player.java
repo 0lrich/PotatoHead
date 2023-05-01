@@ -31,6 +31,8 @@ public class Player {
     boolean isFacingRight = true;
     boolean invulnerable = false;
     float invlunerableTime = 0;
+    float dodgecooldown;
+    boolean currentlyDodging = false;
     float reload = 0;
     float fireRate = 3;
     float maxCoyoteSeconds = 0.08f;
@@ -38,6 +40,7 @@ public class Player {
     boolean isOnFloor = false;
     Vector2 playerSpawn;
     int damage = 1;
+
 
 
     public Player(float x, float y, float health, float height, float width, ShapeRenderer body) {
@@ -72,6 +75,7 @@ public class Player {
      */
     public void update(float deltaTime) {
         invlunerableTime -= Gdx.graphics.getDeltaTime();
+
         shoot(deltaTime);
         movement();
         amIDead();
@@ -95,8 +99,10 @@ public class Player {
     public void render () {
 
         body.begin(ShapeRenderer.ShapeType.Filled);
-        body.setColor(1,0,0,1);
-        //the rectangle shape is drawn from the bottom left corner just so u know
+        if (!currentlyDodging) {
+            body.setColor(1, 0, 0, 1);
+        }else{body.setColor(1, 1, 1, 1);}
+            //the rectangle shape is drawn from the bottom left corner just so u know
         body.rect(posX, posY,width, height);
         body.end();
     }
@@ -110,18 +116,37 @@ public class Player {
      */
     private void calculateVelocity() {
         //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
-
-        yVelocity -= gravity;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            xVelocity -= speed;
-            isFacingRight = false;
+        dodgecooldown -= Gdx.graphics.getDeltaTime();
+        if (xVelocity < 4 ){
+            currentlyDodging = false;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            xVelocity += speed;
-            isFacingRight = true;
-        }
+        if (!currentlyDodging) {
+            yVelocity -= gravity;
 
+        }
+        if (!currentlyDodging) {
+            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                xVelocity -= speed;
+                isFacingRight = false;
+            }
+
+            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                xVelocity += speed;
+                isFacingRight = true;
+            }
+            if (dodgecooldown < 0 ) {
+                if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
+                    dodgecooldown = 5;
+                    if(isFacingRight == true){
+                        xVelocity += speed * 25;
+                    }else {
+                        xVelocity -= speed * 25;
+                    }
+                    currentlyDodging = true;
+                    System.out.println("hey u dodged!");
+                }
+            }
+        }
         if (isOnFloor){
             canJump = true;
             coyoteSeconds = maxCoyoteSeconds;
@@ -132,29 +157,29 @@ public class Player {
                 canJump = false;
             }
         }
+        if (!currentlyDodging) {
 
-        if (canJump == true ) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-                yVelocity = jumpForce;
-                canJump = false;
+            if (canJump == true) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                    yVelocity = jumpForce;
+                    canJump = false;
+                }
+            }
+
+            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                jumpPressed = true;
+            } else {
+                if (jumpPressed) {
+                    yVelocity = min(yVelocity, 2);
+                }
+                jumpPressed = false;
+            }
+            canFallThrough = false;
+
+            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                canFallThrough = true;
             }
         }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.W)){
-            jumpPressed = true;
-        }
-        else{
-            if (jumpPressed){
-                yVelocity = min(yVelocity,2);
-            }
-            jumpPressed = false;
-        }
-        canFallThrough = false;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
-            canFallThrough = true;
-        }
-
         xVelocity = lerp(xVelocity, 0, 0.25f);
     }
 
@@ -248,10 +273,14 @@ public class Player {
 
     }
     public boolean amIHit(Bullet bullet) {
+
         if (invulnerable){
           if (invlunerableTime <0){
               invulnerable = false;
           }
+        }
+        if (currentlyDodging){
+            invulnerable = true;
         }
             else if (!bullet.isFriendly) {
             Rectangle bulletRectangle = new Rectangle(bullet.getX(), bullet.getY(), bullet.getSize(), bullet.getSize());
