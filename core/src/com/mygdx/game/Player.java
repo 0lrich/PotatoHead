@@ -13,6 +13,8 @@ import static com.mygdx.game.Globals.*;
 import static java.lang.Math.min;
 
 public class Player {
+    private float dashTime = 0.25f;
+    private boolean dashPressed = false;
     private float posX;
     private float posY;
     private float health;
@@ -123,13 +125,28 @@ public class Player {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)){
             if(isFacingRight == true){
+                jumpForce = 0;
+                gravity = 0;
                 xVelocity+=100;
+                dashPressed = true;
+                yVelocity = 0;
             }
             else{
+                jumpForce = 0;
+                gravity = 0;
                 xVelocity-=100;
-            }
+                dashPressed = true;
+                yVelocity = 0;
+            }}
+        if(dashPressed == true){
+        dashTime -=Gdx.graphics.getDeltaTime();
+        if(dashTime<0) {
             gravity = 1;
-        }
+            dashTime = 0.25f;
+            dashPressed = false;
+            jumpForce = 23;
+        }}
+
         if (isOnFloor){
             canJump = true;
             coyoteSeconds = maxCoyoteSeconds;
