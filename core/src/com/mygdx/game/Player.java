@@ -272,6 +272,25 @@ public class Player extends InGameObj{
 
                 isOnFloor = true;
                 yVelocity = 0;
+
+                for (Wall w : wallHolder.getWalls()){
+
+                    Rectangle rec = new Rectangle(w.x, w.y, w.width, w.height);
+                    if (testRect.overlaps(rec)){
+                        System.out.println("gfdshughosdih");
+
+
+
+                        posX = w.resolveX(testRect);
+
+                        xVelocity = 0;
+
+                        // posY = w.resolveY(testRect);
+                        return;
+                    }
+
+                }
+
                 return;
             }
 
