@@ -43,7 +43,6 @@ public class Player extends InGameObj{
     Vector2 playerSpawn;
     int damage = 1;
 
-
     public Player(float x, float y, float health, float height, float width) {
         this.posX = x;
         this.posY = y;
@@ -63,6 +62,17 @@ public class Player extends InGameObj{
         this.height = height;
         this.width = width;
     }
+    public void death(){
+        if(posY<=-50){
+            this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
+            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50);
+            damage++;
+            if(health<=0){damage = 1;}
+            invulnerable = true;
+            invlunerableTime = Gdx.graphics.getDeltaTime() * 60;
+            System.out.println(health);
+        }
+    }
 
     /**
      * this is where stuff that happens every frame is gonna go
@@ -73,6 +83,7 @@ public class Player extends InGameObj{
      *   V
      */
     public void update(float deltaTime) {
+        death();
         invlunerableTime -= Gdx.graphics.getDeltaTime();
         shoot(deltaTime);
         movement();
@@ -210,15 +221,7 @@ public class Player extends InGameObj{
             return;
         }
 
-        if(posY<=-50){
-            this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
-            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50);
-            damage++;
-            if(health<=0){damage = 1;}
-            invulnerable = true;
-            invlunerableTime = Gdx.graphics.getDeltaTime() * 60;
-            System.out.println(health);
-        }
+
 
         // This makes a fake player that detects if the players final position collides with the platform
         Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
