@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
-public class Bullet {
+public class Bullet extends InGameObj {
     private float x;
     private float y;
     private float size = 30;
@@ -20,10 +20,12 @@ public class Bullet {
     boolean isActive = true;
 
     boolean isFriendly = true;
-    public Bullet(float x, float y, ShapeRenderer shapeRenderer, float xSpeed, float ySpeed, Boolean isFriendly) {
+
+    public Bullet(float x, float y, float xSpeed, float ySpeed) {
+
         this.x = x + size/2;
         this.y = y + size/2;
-        this.shapeRenderer = shapeRenderer;
+        this.shapeRenderer = Globals.globalRender;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
         this.isFriendly = isFriendly;
@@ -61,7 +63,8 @@ public class Bullet {
         x += xSpeed;
         y += ySpeed;
         if(x>Gdx.graphics.getWidth() || y>Gdx.graphics.getHeight() || x<0 || y<0){
-            isActive= false;
+            free = true;
+            isActive = false;
         }
     }
     public float getX(){
@@ -81,8 +84,7 @@ public class Bullet {
      *      V
      */
     public void render (SpriteBatch batch) {
-
-       batch.begin();
+        batch.begin();
         batch.draw(defaultTexture, x, y, size, size);
         batch.end();
     }

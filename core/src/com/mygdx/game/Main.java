@@ -37,6 +37,7 @@ public class Main extends ApplicationAdapter {
 
 		sceneHolder.render(batch);
 		platformHolder.render();
+		wallHolder.render();
 		bulletHolder.render();
 		//endregion
 	}

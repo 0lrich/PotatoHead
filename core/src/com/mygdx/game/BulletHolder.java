@@ -12,16 +12,14 @@ public class BulletHolder {
     public BulletHolder(){
 
     }
-    public void addBullet(float x, float y, float speedX, float speedY, boolean isFriendly){
-        bullets.add(new Bullet(x, y, new ShapeRenderer(), speedX, speedY, isFriendly));
-    }
-    public void addBullet(float x, float y,float size, float speedX, float speedY, Texture texture,float damage, boolean isFriendly){
-        bullets.add(new Bullet(x, y,size,  speedX, speedY, texture, damage, isFriendly));
+
+    public void addBullet(float x, float y, float speedX, float speedY){
+        bullets.add(new Bullet(x, y,  speedX, speedY));
+
     }
     public void update() {
         if (bullets != null) {
             for (int i = 0; i < bullets.size(); i++) {
-
                 bullets.get(i).update();
                 if(bullets.get(i).isActive==false){
                     bullets.remove(i);
