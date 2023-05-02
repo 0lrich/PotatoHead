@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.Random;
@@ -24,7 +25,6 @@ public class Boss extends InGameObj{
         this.health = health;
         this.width = width;
         this.height = height;
-        this.shapeRenderer = shapeRenderer;
         this.currentTexture = currentTexture;
     }
 
@@ -56,12 +56,11 @@ public class Boss extends InGameObj{
 
     }
 
-    protected void init(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
+    protected void init(float x, float y, float health, float width, float height) {
         this.x = x;
         this.y = y;
         this.health = health;
         this.width = width;
         this.height = height;
-        this.shapeRenderer = shapeRenderer;
     }
 }

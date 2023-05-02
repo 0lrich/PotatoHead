@@ -33,7 +33,7 @@ public class FirstBoss extends Boss {
         globalRender.end();
     }
     public void init(float x, float y, float health, float width, float height) {
-        super.init(x, y, health, width, height, shapeRenderer);
+        super.init(x, y, health, width, height);
         currentTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
         defaultTexture = new Texture(Gdx.files.internal("Idle masterhand 1.png"));
         hitTexture = new Texture(Gdx.files.internal("Hurt Hand.png"));

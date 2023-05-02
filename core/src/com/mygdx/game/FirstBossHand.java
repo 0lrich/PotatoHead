@@ -29,8 +29,8 @@ public class FirstBossHand extends Boss {
     boolean disabledMovementpattern = false;
     boolean rightHand = false;
 
-    public FirstBossHand(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
-        super(x, y, health, width, height, shapeRenderer);
+    public FirstBossHand(float x, float y, float health, float width, float height) {
+        super(x, y, health, width, height);
         currentTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         defaultTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         hitTexture = new Texture(Gdx.files.internal("FarmerHurtHand.png"));
@@ -46,8 +46,8 @@ public class FirstBossHand extends Boss {
         bossBody.rect(x, y, width, height);
         bossBody.end();
     }
-    public void init(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
-        super.init(x, y, health, width, height, shapeRenderer);
+    public void init(float x, float y, float health, float width, float height) {
+        super.init(x, y, health, width, height);
         currentTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         defaultTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         hitTexture = new Texture(Gdx.files.internal("FarmerHurtHand.png"));

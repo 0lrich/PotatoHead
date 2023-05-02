@@ -212,7 +212,7 @@ public class Player extends InGameObj{
 
         if(posY<=-50){
             this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
-            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50,new ShapeRenderer());
+            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50);
             damage++;
             if(health<=0){damage = 1;}
             invulnerable = true;
@@ -464,9 +464,9 @@ public class Player extends InGameObj{
             if (isAim) {
                 bulletHolder.addBullet(posX,posY,tempSpeedx,tempSpeedy);
             } else if (isFacingRight) {
-                bulletHolder.addBullet(posX, posY, bulletSpeed, 0, true);
+                bulletHolder.addBullet(posX, posY, bulletSpeed, 0);
             } else {
-                bulletHolder.addBullet(posX, posY, -bulletSpeed, 0, true);
+                bulletHolder.addBullet(posX, posY, -bulletSpeed, 0);
             }
             reload = 60/fireRate;
         }
