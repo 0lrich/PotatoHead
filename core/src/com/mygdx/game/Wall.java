@@ -1,5 +1,8 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -11,6 +14,7 @@ public class Wall {
     float y;
     float height;
     float width;
+    Texture currentTexture = new Texture(Gdx.files.internal("playerDefault.png"));
 
     public Wall(float x, float y, float height, float width) {
         this.height = height;
@@ -35,11 +39,15 @@ public class Wall {
      *     \ /
      *      V
      */
-    public void render () {
+    public void render (SpriteBatch batch) {
+        /*
         globalRender.begin(ShapeRenderer.ShapeType.Filled);
         globalRender.setColor(0,0,0,1);
         globalRender.rect(x,y,width, height);
         globalRender.end();
+         */
+
+        batch.draw(currentTexture, x, y, width,height);
     }
 
     public float resolveX(Rectangle testRect) {

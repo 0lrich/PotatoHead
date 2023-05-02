@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
@@ -28,9 +30,9 @@ public class WallHolder {
     public Wall getWall(int Wall){
         return walls.get(Wall);
     }
-    public void render(){
+    public void render(SpriteBatch batch){
         for(int i = 0; i < walls.size(); i++){
-            walls.get(i).render();
+            walls.get(i).render(batch);
         }
     }
     public void setWallScene(int wallScene){

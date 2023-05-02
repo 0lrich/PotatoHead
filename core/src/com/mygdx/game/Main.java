@@ -34,10 +34,12 @@ public class Main extends ApplicationAdapter {
 		//endregion
 
 		//region RENDERS
-
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();
 		sceneHolder.render(batch);
-		platformHolder.render();
-		wallHolder.render();
+		platformHolder.render(batch);
+		wallHolder.render(batch);
+		batch.end();
 		bulletHolder.render();
 		//endregion
 	}
