@@ -54,22 +54,22 @@ public class Wall {
         }
         if (abs(x - testRect.width/2 - width/2 - testRect.x) < minDistanceMoved){
             minDistanceMoved = abs(x - testRect.width/2 - width/2 - testRect.x);
-            intent = 1; //go right
+            intent = 1; //go left
         }
-        if (abs(y + testRect.height/2 + height/2 - testRect.y) < minDistanceMoved){
-            minDistanceMoved = abs(y + testRect.height/2 + height/2 - testRect.y);
-            intent = 3; //go right
-        }
-        if (abs(y - testRect.height/2 - height/2 - testRect.y) < minDistanceMoved){
-            minDistanceMoved = abs(y - testRect.height/2 - height/2 - testRect.y);
-            intent = 4; //go right
-        }
+//        if (abs(y + testRect.height/2 + height/2 - testRect.y) < minDistanceMoved){
+//            minDistanceMoved = abs(y + testRect.height/2 + height/2 - testRect.y);
+//            intent = 3; //go right
+//        }
+//        if (abs(y - testRect.height/2 - height/2 - testRect.y) < minDistanceMoved){
+//            minDistanceMoved = abs(y - testRect.height/2 - height/2 - testRect.y);
+//            intent = 4; //go right
+//        }
 
         if (intent == 0){
-            return x + testRect.width/2 + width/2;
+            return x + width;
         }
         if (intent == 1){
-            return x - testRect.width/2 - width/2;
+            return x - testRect.width;
         }
 
         return testRect.x;

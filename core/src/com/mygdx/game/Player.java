@@ -150,8 +150,8 @@ public class Player extends InGameObj{
         calculateVelocity();
 
 
-
-        moveAndSlidePlatformsV2(xVelocity, yVelocity, canFallThrough);
+        System.out.println(canFallThrough);
+        moveAndSlideV2(xVelocity, yVelocity, canFallThrough);
 
         changeSceneToggle();
     }
@@ -192,16 +192,16 @@ public class Player extends InGameObj{
         return;
     }
 
-    public void moveAndSlidePlatformsV2(float velX, float velY, boolean canFallThrough){
+    public void moveAndSlideV2(float velX, float velY, boolean canFallThrough){
 
         isOnFloor = false;
 
         // This checks if you're going up so that there are no upwards collisions
-        if(velY >= 0){
-            this.posX += velX;
-            this.posY += velY;
-            //return;
-        }
+//        if(velY >= 0){
+//            this.posX += velX;
+//            this.posY += velY;
+//            //return;
+//        }
 
         // This makes a fake player that detects if the players final position collides with the platform
         Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
@@ -229,8 +229,16 @@ public class Player extends InGameObj{
             Rectangle platformRectangle = new Rectangle(w.x, w.y, w.width, w.height);
             if (testRect.overlaps(platformRectangle)){
                 System.out.println("gfdshughosdih");
+
+                float pastPos = posX;
+
                 posX = w.resolveX(testRect);
-                posY = w.resolveY(testRect);
+
+                xVelocity = 0;
+
+                posY += velY;
+
+               // posY = w.resolveY(testRect);
                 return;
             }
 
