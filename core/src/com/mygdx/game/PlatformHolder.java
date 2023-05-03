@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Platform;
 
@@ -30,9 +31,9 @@ public class PlatformHolder {
     public Platform getPlatform(int platform){
         return platforms.get(platform);
     }
-    public void render(){
+    public void render(SpriteBatch batch){
         for(int i = 0; i < platforms.size(); i++){
-            platforms.get(i).render();
+            platforms.get(i).render(batch);
         }
     }
     public void setPlatformScene(int platformScene){

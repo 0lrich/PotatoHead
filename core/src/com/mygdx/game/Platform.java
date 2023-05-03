@@ -1,5 +1,8 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -8,6 +11,7 @@ public class Platform extends InGameObj {
     float y;
     float height;
     float width;
+    Texture currentTexture = new Texture(Gdx.files.internal("playerDefault.png"));
 
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
@@ -39,16 +43,20 @@ public class Platform extends InGameObj {
      *     \ /
      *      V
      */
-    public void render () {
+    public void render (SpriteBatch batch) {
+
+        /*
         Globals.globalRender.begin(ShapeRenderer.ShapeType.Filled);
         if(canFallThroughPlat == true){
             Globals.globalRender.setColor(0.5f,0.5f,0.5f,1);
         }else{
             Globals.globalRender.setColor(0.2f,0.2f,0.2f,1);
         }
-
         Globals.globalRender.rect(x,y,width, height);
         Globals.globalRender.end();
+        */
+
+        batch.draw(currentTexture, x, y, width,height);
     }
 
     /**

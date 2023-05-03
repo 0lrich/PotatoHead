@@ -11,7 +11,6 @@ import com.mygdx.game.Player;
 import static com.mygdx.game.Globals.*;
 
 public class SceneHolder {
-
     FirstBossHead farmerHead;
     FirstBossHand farmerHandRight;
     FirstBossHand farmerHandLeft;
@@ -20,7 +19,7 @@ public class SceneHolder {
     int scene;
     Vector2 playerSpawn;
     public SceneHolder(){
-        
+
         potato = new Player(0,20, 10, 50,50);
         farmerHandRight = new FirstBossHand(350,350,20,350,350 );
         farmerHandLeft = new FirstBossHand(0,350,20,350,350 );
@@ -88,7 +87,6 @@ public class SceneHolder {
         }
     }
     public void render(SpriteBatch batch) {
-        batch.begin();
         if(scene == 0){
             ScreenUtils.clear(.5f, .5f, .5f, 1);
         } else if (scene == 1){
@@ -102,8 +100,7 @@ public class SceneHolder {
         farmerHandRight.render(batch);
         farmerHandLeft.render(batch);
         farmerHead.render(batch);
-        batch.end();
-        potato.render();
+        potato.render(batch);
     }
     public void resetScene(){
         bulletHolder.removeBullets();

@@ -2,9 +2,12 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import java.util.Vector;
 
@@ -15,7 +18,7 @@ import static java.lang.Math.signum;
 
 
 public class Player extends InGameObj{
-
+    private Texture currentTexture = new Texture(Gdx.files.internal("playerDefault.png"));
     private float dashTime = 0.25f;
     private boolean dashPressed = false;
     private float posX;
@@ -50,6 +53,8 @@ public class Player extends InGameObj{
         this.health = health;
         this.height = height;
         this.width = width;
+
+        potato = this;
     }
     public void init(float x, float y, float health, float height, float width){
         this.posX = x;
@@ -61,6 +66,8 @@ public class Player extends InGameObj{
         this.health = health;
         this.height = height;
         this.width = width;
+
+        potato = this;
     }
     public void death(){
         if(posY<=-50){
@@ -84,6 +91,7 @@ public class Player extends InGameObj{
      */
     public void update(float deltaTime) {
         death();
+
         invlunerableTime -= Gdx.graphics.getDeltaTime();
         shoot(deltaTime);
         movement();
@@ -97,6 +105,9 @@ public class Player extends InGameObj{
                 Globals.bulletHolder.bullets.get(i).alreadyHitSomething();
             }
         }
+
+
+
     }
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
@@ -105,13 +116,15 @@ public class Player extends InGameObj{
      *     \ /
      *      V
      */
-    public void render () {
-
+    public void render(SpriteBatch batch) {
+        /*
         globalRender.begin(ShapeRenderer.ShapeType.Filled);
         globalRender.setColor(1,0,0,1);
         //the rectangle shape is drawn from the bottom left corner just so u know
         globalRender.rect(posX, posY,width, height);
         globalRender.end();
+        */
+        batch.draw(currentTexture, posX, posY, width,height);
     }
     public void dispose () {}
 
