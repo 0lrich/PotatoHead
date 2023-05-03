@@ -14,4 +14,5 @@ public class Globals { // This global class holds objects that should be accessi
     public static Player potato;
     public static FirstBoss farmer;
     public static OrthographicCamera camera = new OrthographicCamera();
+
 }

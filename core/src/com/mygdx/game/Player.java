@@ -54,7 +54,8 @@ public class Player extends InGameObj{
         this.health = health;
         this.height = height;
         this.width = width;
-        camera.setToOrtho(false, 800, 480);
+
+        potato = this;
     }
     public void init(float x, float y, float health, float height, float width){
         this.posX = x;
@@ -66,6 +67,8 @@ public class Player extends InGameObj{
         this.health = health;
         this.height = height;
         this.width = width;
+
+        potato = this;
     }
 
     /**
@@ -77,6 +80,8 @@ public class Player extends InGameObj{
      *   V
      */
     public void update(float deltaTime) {
+
+
         invlunerableTime -= Gdx.graphics.getDeltaTime();
         shoot(deltaTime);
         movement();
@@ -90,7 +95,9 @@ public class Player extends InGameObj{
                 Globals.bulletHolder.bullets.get(i).alreadyHitSomething();
             }
         }
-        camera.position.set(posX,posY,camera.position.z);
+
+
+
     }
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
