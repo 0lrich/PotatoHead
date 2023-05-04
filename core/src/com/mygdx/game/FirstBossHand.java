@@ -29,16 +29,16 @@ public class FirstBossHand extends Boss {
     boolean disabledMovementpattern = false;
     boolean rightHand = false;
 
-    public FirstBossHand(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
-        super(x, y, health, width, height, shapeRenderer);
+    public FirstBossHand(float x, float y, float health, float width, float height) {
+        super(x, y, health, width, height);
         currentTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         defaultTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         hitTexture = new Texture(Gdx.files.internal("FarmerHurtHand.png"));
         deathTexture = new Texture(Gdx.files.internal("Dying hand.png"));
-        shooting1 = new Texture(Gdx.files.internal("Shoot Hand 1.png"));
-        shooting2 = new Texture(Gdx.files.internal("Shoot Hand 2.png"));
-        shooting3 = new Texture(Gdx.files.internal("Shoot Hand 3.png"));
-        closedfist = new Texture(Gdx.files.internal("Test boss closed fist.png"));
+        shooting1 = new Texture(Gdx.files.internal("FarmerShootHand1.png"));
+        shooting2 = new Texture(Gdx.files.internal("FarmerShootHand2.png"));
+        shooting3 = new Texture(Gdx.files.internal("FarmerShootHand3.png"));
+        closedfist = new Texture(Gdx.files.internal("FarmerClosedFist.png"));
         bossBody.begin(ShapeRenderer.ShapeType.Filled);
 
 
@@ -46,8 +46,8 @@ public class FirstBossHand extends Boss {
         bossBody.rect(x, y, width, height);
         bossBody.end();
     }
-    public void init(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
-        super.init(x, y, health, width, height, shapeRenderer);
+    public void init(float x, float y, float health, float width, float height) {
+        super.init(x, y, health, width, height);
         currentTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         defaultTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         hitTexture = new Texture(Gdx.files.internal("FarmerHurtHand.png"));

@@ -1,15 +1,14 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ModelInfluencer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.Random;
 
 import static com.mygdx.game.Globals.bulletHolder;
 
-public  class Boss {
+public class Boss extends InGameObj{
+    
     float x;
     float y;
     float health;
@@ -20,13 +19,12 @@ public  class Boss {
 
 
 
-    public Boss(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
+    public Boss(float x, float y, float health, float width, float height) {
         this.x = x;
         this.y = y;
         this.health = health;
         this.width = width;
         this.height = height;
-        this.shapeRenderer = shapeRenderer;
         this.currentTexture = currentTexture;
     }
 
@@ -58,12 +56,11 @@ public  class Boss {
 
     }
 
-    protected void init(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
+    protected void init(float x, float y, float health, float width, float height) {
         this.x = x;
         this.y = y;
         this.health = health;
         this.width = width;
         this.height = height;
-        this.shapeRenderer = shapeRenderer;
     }
 }

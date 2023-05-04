@@ -1,29 +1,33 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Platform {
+public class Platform extends InGameObj {
     float x;
     float y;
     float height;
     float width;
-    ShapeRenderer floor;
+    Texture currentTexture = new Texture(Gdx.files.internal("platNoFallDefault.png"));
+    Texture platNoFallTexture = new Texture(Gdx.files.internal("platNoFallDefault.png"));
+    Texture platFallTexture = new Texture(Gdx.files.internal("platFallDefault.png"));
 
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
     Boolean isFallingThrough;
     Boolean canFallThroughPlat;
 
-    public Platform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible, boolean isFallThrough) {
+
+    public Platform(float x, float y, float height, float width, Boolean tangible, boolean isFallThrough) {
         this.canFallThroughPlat = isFallThrough;
         this.height = height;
         this.width = width;
-        this.floor = floor;
         this.tangible = tangible;
         this.x = x;
         this.y = y;
-        //Globals.platformHolder.addPlatform(this);
     }
     /**
      * this is where stuff that happens every frame is gonna go
@@ -33,7 +37,7 @@ public class Platform {
      *  \ /
      *   V
      */
-    public void update(Player player){
+    public void update(){
     }
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
@@ -42,16 +46,26 @@ public class Platform {
      *     \ /
      *      V
      */
-    public void render () {
-        floor.begin(ShapeRenderer.ShapeType.Filled);
+    public void render (SpriteBatch batch) {
+
+        /*
+        Globals.globalRender.begin(ShapeRenderer.ShapeType.Filled);
         if(canFallThroughPlat == true){
-            floor.setColor(0.5f,0.5f,0.5f,1);
+            Globals.globalRender.setColor(0.5f,0.5f,0.5f,1);
         }else{
-            floor.setColor(0,0,0,1);
+            Globals.globalRender.setColor(0.2f,0.2f,0.2f,1);
+        }
+        Globals.globalRender.rect(x,y,width, height);
+        Globals.globalRender.end();
+        */
+
+        if(canFallThroughPlat == true){
+            currentTexture = platFallTexture;
+        }else{
+            currentTexture = platNoFallTexture;
         }
 
-        floor.rect(x,y,width, height);
-        floor.end();
+        batch.draw(currentTexture, x, y, width,height);
     }
 
     /**
@@ -59,7 +73,7 @@ public class Platform {
      * @param player the player to check for collision
      * @return returns true if the platform is considered colliding with the player
      */
-    public boolean platformStanding(Player player) {//gonna be really messy way to figure out how to do floor physics
+    public boolean platformStanding(Player player) {
         Rectangle playerRectangle = new Rectangle(player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
         Rectangle platformRectangle = new Rectangle(x, y, width, height);
         if (platformRectangle.overlaps(playerRectangle)){

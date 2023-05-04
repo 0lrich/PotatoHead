@@ -20,8 +20,8 @@ public class FirstBossHead extends Boss {
     Texture deathTexture;
     float opposite;
 
-    public FirstBossHead(float x, float y, float health, float width, float height, ShapeRenderer shapeRenderer) {
-        super(x, y, health, width, height, shapeRenderer);
+    public FirstBossHead(float x, float y, float health, float width, float height) {
+        super(x, y, health, width, height);
         currentTexture = new Texture(Gdx.files.internal("FarmerIdleHead.png"));
         defaultTexture = new Texture(Gdx.files.internal("FarmerIdleHead.png"));
         hitTexture = new Texture(Gdx.files.internal("FarmerHurtHead.png"));

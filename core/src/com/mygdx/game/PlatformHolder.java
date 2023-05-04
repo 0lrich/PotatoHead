@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.Platform;
 
 import java.util.ArrayList;
 
@@ -12,8 +14,8 @@ public class PlatformHolder {
     public PlatformHolder(){
         setPlatformScene(0);
     }
-    public void addPlatform(float x, float y, float height, float width, ShapeRenderer floor, Boolean tangible, Boolean isFallThrough){
-        platforms.add(new Platform(x, y, height, width, floor, tangible, isFallThrough));
+    public void addPlatform(float x, float y, float height, float width, Boolean tangible, Boolean isFallThrough){
+        platforms.add(new Platform(x, y, height, width, tangible, isFallThrough));
     }
     public void removePlatform(int platform){
         platforms.remove(platform);
@@ -29,9 +31,9 @@ public class PlatformHolder {
     public Platform getPlatform(int platform){
         return platforms.get(platform);
     }
-    public void render(){
+    public void render(SpriteBatch batch){
         for(int i = 0; i < platforms.size(); i++){
-            platforms.get(i).render();
+            platforms.get(i).render(batch);
         }
     }
     public void setPlatformScene(int platformScene){
@@ -45,35 +47,43 @@ public class PlatformHolder {
         removeAllPlatforms();
         switch(platformScene){
             case 0:
-                float baseWidth =  800;
-                float topWidth = 20;
-                float piramidHeight = 1000;
-                float slices = 24;
-                for(int i = 0; i < slices; i++) {
-                    float width = lerp(baseWidth, topWidth, i/slices);
-                    float shift = ((baseWidth - width)/2);
-                    addPlatform(200 + shift,0 + (i * 30),20, width, new ShapeRenderer(),true,false);
-                }
+                addPlatform(0,0,400,2000,true,false); // Spawn platform
+                addPlatform(2400,510,40,200, true, false); //
+                addPlatform(2800,510,40,200, true, false); //
+                addPlatform(3400,510,40,200, true, false); //
                 break;
             case 1:
-                addPlatform(200,200,20,200,new ShapeRenderer(),true, true);
-                addPlatform(550,100,20,200,new ShapeRenderer(),true, true);
-                addPlatform(1150,100,20,200,new ShapeRenderer(),true, true);
-                addPlatform(1500,200,20,200,new ShapeRenderer(),true, true);
+                addPlatform(200,200,20,200,true, true);
+                addPlatform(550,100,20,200,true, true);
+                addPlatform(1150,100,20,200,true, true);
+                addPlatform(1500,200,20,200,true, true);
                 break;
             case 2:
-                addPlatform(0,0,400,700,new ShapeRenderer(),true,false);
-                addPlatform(900,0,400,200,new ShapeRenderer(),true,false);
-                addPlatform(1300,0,400,700,new ShapeRenderer(),true,false);
+                addPlatform(0,0,400,700,true,false);
+                addPlatform(900,0,400,200,true,false);
+                addPlatform(1300,0,400,700,true,false);
                 break;
             case 3:
+
                 pyramid(20, 40, 100, 50);
+
+                break;
+            case 4:
+                float baseWidth =  800;
+                float topWidth = 20;
+                float pyramidHeight = 1000;
+                int slices = 24;
+                for(int i = slices; i >= 0; i--) {
+                    float width = lerp(topWidth, baseWidth, (float)i/(float)(slices));
+                    float shift = ((baseWidth - width)/2);
+                    addPlatform(200 + shift,(slices * 30)-i*30,20, width,true,false);
+                }
                 break;
         }
     }
     public void pyramid(int slices, float topWidth, float baseWidth, float height) {
         for(int i = 0; i < slices; i++) {
-            addPlatform(0, 11*i + 100, 10, 500, new ShapeRenderer(), true, true);
+            addPlatform(0, 11*i + 100, 10, 500, true, true);
         }
     }
 }

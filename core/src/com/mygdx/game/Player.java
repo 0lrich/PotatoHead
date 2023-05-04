@@ -2,17 +2,25 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import java.util.Vector;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.*;
 import static java.lang.Math.min;
+import static java.lang.Math.signum;
 
-public class Player {
+
+public class Player extends InGameObj{
+    private Texture currentTexture = new Texture(Gdx.files.internal("playerDefault.png"));
+    private float dashTime = 0.25f;
+    private boolean dashPressed = false;
     private float posX;
     private float posY;
     private float health;
@@ -24,7 +32,6 @@ public class Player {
     private float speed = 4;
     private float jumpForce = 23;
     private boolean jumpPressed = false;
-    private ShapeRenderer body;
     private boolean canJump = true;
     private float bulletSpeed = 50;
     boolean canFallThrough = false;
@@ -42,17 +49,18 @@ public class Player {
     int damage = 1;
 
 
+    public Player(float x, float y, float health, float height, float width) {
 
-    public Player(float x, float y, float health, float height, float width, ShapeRenderer body) {
         this.posX = x;
         this.posY = y;
 
         this.health = health;
         this.height = height;
         this.width = width;
-        this.body = body;
+
+        potato = this;
     }
-    public void init(float x, float y, float health, float height, float width, ShapeRenderer body){
+    public void init(float x, float y, float health, float height, float width){
         this.posX = x;
         this.posY = y;
 
@@ -62,7 +70,19 @@ public class Player {
         this.health = health;
         this.height = height;
         this.width = width;
-        this.body = body;
+
+        potato = this;
+    }
+    public void death(){
+        if(posY<=-6000){
+            this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
+            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50);
+            damage++;
+            if(health<=0){damage = 1;}
+            invulnerable = true;
+            invlunerableTime = Gdx.graphics.getDeltaTime() * 60;
+            System.out.println(health);
+        }
     }
 
     /**
@@ -74,6 +94,8 @@ public class Player {
      *   V
      */
     public void update(float deltaTime) {
+        death();
+
         invlunerableTime -= Gdx.graphics.getDeltaTime();
 
         shoot(deltaTime);
@@ -83,11 +105,12 @@ public class Player {
         for (int i = 0; i < Globals.bulletHolder.bullets.size(); i++) {
             if (amIHit(Globals.bulletHolder.bullets.get(i))) {
                 health = health - Globals.bulletHolder.bullets.get(i).damage;
-
-                System.out.println("i got shot");
                 Globals.bulletHolder.bullets.get(i).alreadyHitSomething();
             }
         }
+
+
+
     }
     /**
      * this is where stuff that's drawn to the screen is gonna go (as in you put it in there it'll be drawn always)
@@ -96,15 +119,17 @@ public class Player {
      *     \ /
      *      V
      */
-    public void render () {
 
-        body.begin(ShapeRenderer.ShapeType.Filled);
-        if (!currentlyDodging) {
-            body.setColor(1, 0, 0, 1);
-        }else{body.setColor(1, 1, 1, 1);}
-            //the rectangle shape is drawn from the bottom left corner just so u know
-        body.rect(posX, posY,width, height);
-        body.end();
+    public void render(SpriteBatch batch) {
+        /*
+        globalRender.begin(ShapeRenderer.ShapeType.Filled);
+        globalRender.setColor(1,0,0,1);
+        //the rectangle shape is drawn from the bottom left corner just so u know
+        globalRender.rect(posX, posY,width, height);
+        globalRender.end();
+        */
+        batch.draw(currentTexture, posX, posY, width,height);
+
     }
     public void dispose () {}
 
@@ -120,9 +145,30 @@ public class Player {
         if (xVelocity < 4 ){
             currentlyDodging = false;
         }
-        if (!currentlyDodging) {
-            yVelocity -= gravity;
-
+		
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)){
+            if(isFacingRight == true){
+                jumpForce = 0;
+                gravity = 0;
+                xVelocity+=100;
+                dashPressed = true;
+                yVelocity = 0;
+            }
+            else{
+                jumpForce = 0;
+                gravity = 0;
+                xVelocity-=100;
+                dashPressed = true;
+                yVelocity = 0;
+            }}
+        if(dashPressed == true){
+        dashTime -=Gdx.graphics.getDeltaTime();
+        if(dashTime<0) {
+            gravity = 1;
+            dashTime = 0.25f;
+            dashPressed = false;
+            jumpForce = 23;
+        }}
         }
         if (!currentlyDodging) {
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
@@ -191,11 +237,15 @@ public class Player {
     private void movement(){
     //fixme placeholder
         calculateVelocity();
-        moveAndSlide(xVelocity, yVelocity, canFallThrough);
+
+
+        //System.out.println(canFallThrough);
+        moveAndSlideV2(xVelocity, yVelocity, canFallThrough);
+
         changeSceneToggle();
     }
 
-    public void moveAndSlide(float velX, float velY, boolean canFallThrough){
+    public void moveAndSlidePlatforms(float velX, float velY, boolean canFallThrough){
 
         isOnFloor = false;
 
@@ -206,15 +256,7 @@ public class Player {
             return;
         }
 
-        if(posY<=-50){
-            this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
-            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50,new ShapeRenderer());
-            damage++;
-            if(health<=0){damage = 1;}
-            invulnerable = true;
-            invlunerableTime = Gdx.graphics.getDeltaTime() * 60;
-            System.out.println(health);
-        }
+
 
         // This makes a fake player that detects if the players final position collides with the platform
         Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
@@ -240,6 +282,223 @@ public class Player {
         this.posY += velY;
         return;
     }
+
+    public void moveAndSlideV2(float velX, float velY, boolean canFallThrough){
+
+        isOnFloor = false;
+
+        // This checks if you're going up so that there are no upwards collisions
+//        if(velY >= 0){
+//            this.posX += velX;
+//            this.posY += velY;
+//            //return;
+//        }
+
+        // This makes a fake player that detects if the players final position collides with the platform
+        Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
+        for(Platform p : Globals.platformHolder.getPlatforms()){
+            if(this.posY < p.y + p.height -1){
+                continue;
+            }
+            if (p.canFallThroughPlat  && canFallThrough){
+                continue;
+            }
+            Rectangle platformRectangle = new Rectangle(p.x, p.y, p.width, p.height);
+            if(testRect.overlaps(platformRectangle)){
+                this.posX += velX;
+                this.posY = p.y + p.height;
+
+                isOnFloor = true;
+                yVelocity = 0;
+
+                testRect.y = this.posY;
+
+                for (Wall w : wallHolder.getWalls()){
+
+                    Rectangle rec = new Rectangle(w.x, w.y, w.width, w.height);
+                    if (testRect.overlaps(rec)){
+                        System.out.println("gfdshughosdih");
+
+
+
+                        posX = w.resolveX(testRect);
+
+                        xVelocity = 0;
+
+                        // posY = w.resolveY(testRect);
+                        return;
+                    }
+
+                }
+
+                return;
+            }
+
+        }
+
+        for (Wall w : wallHolder.getWalls()){
+
+            Rectangle platformRectangle = new Rectangle(w.x, w.y, w.width, w.height);
+            if (testRect.overlaps(platformRectangle)){
+                System.out.println("gfdshughosdih");
+
+                float pastPos = posX;
+
+                posX = w.resolveX(testRect);
+
+                xVelocity = 0;
+
+                posY += velY;
+
+               // posY = w.resolveY(testRect);
+                return;
+            }
+
+        }
+
+        this.posX += velX;
+        this.posY += velY;
+        return;
+    }
+
+    public void moveAndSlideWalls(float velX, float velY){
+        // Resets floor function
+        isOnFloor = false;
+
+        // This makes a fake player that detects if the players final position collides with the wall
+        Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
+
+            if(isRectCollideWithWalls(testRect)) {
+
+                // Gets magnitude of velocity and makes unit vectors going the opposite direction
+                float tempMag = (float) Math.sqrt(Math.pow(velX, 2) + Math.pow(velY, 2));
+                float tempUnitVectorX = -velX / tempMag;
+                float tempUnitVectorY = -velY / tempMag;
+
+                // Loops over every wall on screen, "i" should represent number of pixels the testRect has moved
+                for(int i = 0; isRectCollideWithWalls(testRect); i++) {
+
+                    // Magnitude has to be bigger than the number of pixels it takes to get out of the wall
+                    if(i>tempMag){
+                        //System.out.println("Velocity that it's trying to go in: (" + tempUnitVectorX + ", " + tempUnitVectorY + ")");
+                    }
+
+                    // Moves the testRect in the direction of the temp unit vectors until it's no longer in the wall
+                    testRect.x += tempUnitVectorX;
+                    // Special case: if the unit vector pushes the rectangle past its position the other way, then it resets that direction
+                    if(tempUnitVectorX > 0 ){
+                        if(testRect.x > this.posX){
+                            testRect.x = this.posX;
+                        }
+                    }
+                    else if (tempUnitVectorX < 0){
+                        if(testRect.x < this.posX){
+                            testRect.x = this.posX;
+                        }
+                    }
+                    if(!isRectCollideWithWalls(testRect)){
+                        float tempVelY = -tempUnitVectorY * i;
+                        this.posX = testRect.getX();
+                        this.posY = testRect.getY();
+                        this.xVelocity = 0;
+                        moveAndSlideWalls(0,tempVelY);
+                        return;
+                    }
+
+                    testRect.y += tempUnitVectorY;
+                    if(tempUnitVectorY > 0 ){
+                        if(testRect.y > this.posY){
+                            testRect.y = this.posY;
+                        }
+                    }
+                    else if (tempUnitVectorY < 0){
+                        if(testRect.y < this.posY){
+                            testRect.y = this.posY;
+                        }
+                    }
+                    if(!isRectCollideWithWalls(testRect)){
+                        if(tempMag==0){
+                            System.out.println();
+                        }
+                        float tempVelX = -tempUnitVectorX * i;
+                        this.posY = testRect.getY();
+                        this.posX = testRect.getX();
+                        this.yVelocity = 0;
+
+                        moveAndSlideWalls(tempVelX,0);
+                        if(-tempUnitVectorY<0) {
+                            isOnFloor = true;
+                        }
+                        return;
+                    }
+                }
+            }
+
+        this.posX = testRect.getX();
+        this.posY = testRect.getY();
+    }
+
+    public void moveAndSlideWallsV2(float velX, float velY){
+        // Resets floor function
+        //isOnFloor = false;
+
+        if (velX == 0 && velY == 0) return;
+
+        // This makes a fake player that detects if the players final position collides with the wall
+        Rectangle testRect = new Rectangle(getPosX() + velX, getPosY() + velY, getWidth(), getHeight());
+
+        int i = 0;
+
+        if(isRectCollideWithWalls(testRect)) {
+
+            // Gets magnitude of velocity and makes unit vectors going the opposite direction
+            float tempMag = (float) Math.sqrt(Math.pow(velX, 2) + Math.pow(velY, 2));
+            float tempUnitVectorX = -velX / tempMag;
+            float tempUnitVectorY = -velY / tempMag;
+
+            // Loops over every wall on screen, "i" should represent number of pixels the testRect has moved
+            for(i = 0; isRectCollideWithWalls(testRect); i++) {
+
+
+                if (signum(testRect.x - posX) != signum(velX) && velX != 0) break;
+                if (signum(testRect.y - posY) != signum(velY) && velY != 0) break;
+
+                testRect.x += tempUnitVectorX;
+                testRect.y += tempUnitVectorY;
+
+
+
+            }
+
+            xVelocity = testRect.x - posX;
+            yVelocity = testRect.y - posY;
+
+
+        }
+
+
+        this.posX = testRect.getX();
+        this.posY = testRect.getY();
+
+        if (isRectCollideWithWalls(testRect)){
+            System.out.println("feck");
+        }
+
+        //if (posX != tempPosX) System.out.println("gfohskgsrehyiogebgrsbhuyra " + posX + " " + tempPosX);
+
+
+    }
+
+    public boolean isRectCollideWithWalls(Rectangle testRect){
+        for(int i = 0; i < wallHolder.getWalls().size(); i++){
+            Wall w = wallHolder.getWalls().get(i);
+            Rectangle wallRectangle = new Rectangle(w.x, w.y, w.width, w.height);
+            if(testRect.overlaps(wallRectangle)){
+                return true;
+            }
+        }
+        return false;
+    }
     public void shoot(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
 
@@ -262,15 +521,14 @@ public class Player {
                 isAim = true;
             }
             if (isAim) {
-                bulletHolder.addBullet(posX, posY, tempSpeedx, tempSpeedy, true);
+                bulletHolder.addBullet(posX,posY,tempSpeedx,tempSpeedy);
             } else if (isFacingRight) {
-                bulletHolder.addBullet(posX, posY, bulletSpeed, 0, true);
+                bulletHolder.addBullet(posX, posY, bulletSpeed, 0);
             } else {
-                bulletHolder.addBullet(posX, posY, -bulletSpeed, 0, true);
+                bulletHolder.addBullet(posX, posY, -bulletSpeed, 0);
             }
             reload = 60/fireRate;
         }
-
     }
     public boolean amIHit(Bullet bullet) {
 
@@ -288,6 +546,7 @@ public class Player {
             if (playerRectangle.overlaps(bulletRectangle)) {
                 invulnerable = true;
                 invlunerableTime = Gdx.graphics.getDeltaTime() * 60;
+                posY+= 50;
                 return playerRectangle.overlaps(bulletRectangle);
             }
         }
@@ -300,9 +559,9 @@ public class Player {
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             if(sceneHolder.getScene() == 0){
                 sceneHolder.switchScene(1);
-            } else if(platformHolder.getPlatformScene() == 1){
+            } else if(sceneHolder.getScene() == 1){
                 sceneHolder.switchScene(2);
-            } else if(platformHolder.getPlatformScene() == 2){
+            } else if(sceneHolder.getScene() == 2){
                 sceneHolder.switchScene(3);
             } else{
                 sceneHolder.switchScene(0);
@@ -333,6 +592,9 @@ public class Player {
         if (health <= 0){
             sceneHolder.switchScene(0);
         }
+    }
+    public void printLocation(){
+        System.out.println("Player location: (" + posX + ", " + posY + ")");
     }
     public float getPosX() {
         return posX;
