@@ -70,7 +70,7 @@ public class Player extends InGameObj{
         potato = this;
     }
     public void death(){
-        if(posY<=-50){
+        if(posY<=-6000){
             this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
             init(playerSpawn.x, playerSpawn.y, health-damage, 50,50);
             damage++;
@@ -100,8 +100,6 @@ public class Player extends InGameObj{
         for (int i = 0; i < Globals.bulletHolder.bullets.size(); i++) {
             if (amIHit(Globals.bulletHolder.bullets.get(i))) {
                 health = health - Globals.bulletHolder.bullets.get(i).damage;
-
-                System.out.println("i got shot");
                 Globals.bulletHolder.bullets.get(i).alreadyHitSomething();
             }
         }
@@ -217,7 +215,7 @@ public class Player extends InGameObj{
         calculateVelocity();
 
 
-        System.out.println(canFallThrough);
+        //System.out.println(canFallThrough);
         moveAndSlideV2(xVelocity, yVelocity, canFallThrough);
 
         changeSceneToggle();
@@ -505,7 +503,6 @@ public class Player extends InGameObj{
             }
             reload = 60/fireRate;
         }
-
     }
     public boolean amIHit(Bullet bullet) {
         if (invulnerable){
@@ -565,6 +562,9 @@ public class Player extends InGameObj{
         if (health <= 0){
             sceneHolder.switchScene(0);
         }
+    }
+    public void printLocation(){
+        System.out.println("Player location: (" + posX + ", " + posY + ")");
     }
     public float getPosX() {
         return posX;

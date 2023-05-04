@@ -45,8 +45,8 @@ public class Main extends ApplicationAdapter {
 		sceneHolder.render(batch);
 		platformHolder.render(batch);
 		wallHolder.render(batch);
+		bulletHolder.render(batch);
 		batch.end();
-		bulletHolder.render();
 
 		playerCameraPos.lerp(new Vector2(potato.getPosX(), potato.getPosY()), 0.1F);
 		//endregion

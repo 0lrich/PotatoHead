@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -36,14 +37,15 @@ public class BulletHolder {
             }
         }
     }
-    public void render(){
+    public void render(SpriteBatch batch){
         if(bullets != null) {
             for (int i = 0; i < bullets.size(); i++) {
-                bullets.get(i).render(new SpriteBatch());
+                bullets.get(i).render(batch);
             }
         }
         //SET A TEMPORORY IF STATEMENT BREAK POINT THAT CHECKS IF BULLETS FRIENDLY
 
     }
+
 
 }

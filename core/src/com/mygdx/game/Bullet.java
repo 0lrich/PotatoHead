@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import static com.mygdx.game.Globals.potato;
+
 
 public class Bullet extends InGameObj {
     private float x;
@@ -38,6 +40,8 @@ public class Bullet extends InGameObj {
         //the rectangle shape is drawn from the bottom left corner just so u know
         shapeRenderer.rect(x,y,size,size);
         shapeRenderer.end();
+        System.out.println("Bullet location: (" + x + ", " + y + ")");
+        potato.printLocation();
     }
 
     public Bullet(float x, float y, float size, float xSpeed, float ySpeed, Texture defaultTexture, float damage, boolean isFriendly) {
@@ -84,9 +88,7 @@ public class Bullet extends InGameObj {
      *      V
      */
     public void render (SpriteBatch batch) {
-        batch.begin();
         batch.draw(defaultTexture, x, y, size, size);
-        batch.end();
     }
     public void alreadyHitSomething(){
 
