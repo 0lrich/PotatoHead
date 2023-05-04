@@ -14,7 +14,7 @@ public class Wall {
     float y;
     float height;
     float width;
-    Texture currentTexture = new Texture(Gdx.files.internal("playerDefault.png"));
+    Texture currentTexture = new Texture(Gdx.files.internal("wallDefault.png"));
 
     public Wall(float x, float y, float height, float width) {
         this.height = height;
@@ -57,11 +57,11 @@ public class Wall {
         int intent = 1000;
 
         if (abs(x + testRect.width/2 + width/2 - testRect.x) < minDistanceMoved){
-            minDistanceMoved = abs(x + testRect.width/2 + width/2 - testRect.x);
+            minDistanceMoved = abs((x + width) - testRect.x);
             intent = 0; //go right
         }
         if (abs(x - testRect.width/2 - width/2 - testRect.x) < minDistanceMoved){
-            minDistanceMoved = abs(x - testRect.width/2 - width/2 - testRect.x);
+            minDistanceMoved = abs(( x - testRect.width) - testRect.x);
             intent = 1; //go left
         }
 //        if (abs(y + testRect.height/2 + height/2 - testRect.y) < minDistanceMoved){

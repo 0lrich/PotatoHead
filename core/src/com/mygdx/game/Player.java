@@ -287,6 +287,8 @@ public class Player extends InGameObj{
                 isOnFloor = true;
                 yVelocity = 0;
 
+                testRect.y = this.posY;
+
                 for (Wall w : wallHolder.getWalls()){
 
                     Rectangle rec = new Rectangle(w.x, w.y, w.width, w.height);

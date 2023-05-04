@@ -38,8 +38,8 @@ public class SceneHolder {
                 playerSpawn.set(400, 400);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50);
                 farmerHead.init(53500,400,30,350,350);
-                farmerHandLeft.init(-35000,350,20,350,350);
-                farmerHandRight.init(3500,350,20,350,350);
+                farmerHandLeft.init(-3500000,350,20,350,350);
+                farmerHandRight.init(350000,350,20,350,350);
 
                 platformHolder.setPlatformScene(0);
                 wallHolder.setWallScene(0);

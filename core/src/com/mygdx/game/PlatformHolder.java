@@ -47,15 +47,10 @@ public class PlatformHolder {
         removeAllPlatforms();
         switch(platformScene){
             case 0:
-                float baseWidth =  800;
-                float topWidth = 20;
-                float pyramidHeight = 1000;
-                int slices = 24;
-                for(int i = slices; i >= 0; i--) {
-                    float width = lerp(topWidth, baseWidth, (float)i/(float)(slices));
-                    float shift = ((baseWidth - width)/2);
-                    addPlatform(200 + shift,(slices * 30)-i*30,20, width,true,false);
-                }
+                addPlatform(0,0,400,2000,true,false); // Spawn platform
+                addPlatform(2400,510,40,200, true, false); //
+                addPlatform(2800,510,40,200, true, false); //
+                addPlatform(3400,510,40,200, true, false); //
                 break;
             case 1:
                 addPlatform(200,200,20,200,true, true);
@@ -72,6 +67,17 @@ public class PlatformHolder {
 
                 pyramid(20, 40, 100, 50);
 
+                break;
+            case 4:
+                float baseWidth =  800;
+                float topWidth = 20;
+                float pyramidHeight = 1000;
+                int slices = 24;
+                for(int i = slices; i >= 0; i--) {
+                    float width = lerp(topWidth, baseWidth, (float)i/(float)(slices));
+                    float shift = ((baseWidth - width)/2);
+                    addPlatform(200 + shift,(slices * 30)-i*30,20, width,true,false);
+                }
                 break;
         }
     }

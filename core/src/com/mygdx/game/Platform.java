@@ -11,12 +11,15 @@ public class Platform extends InGameObj {
     float y;
     float height;
     float width;
-    Texture currentTexture = new Texture(Gdx.files.internal("playerDefault.png"));
+    Texture currentTexture = new Texture(Gdx.files.internal("platNoFallDefault.png"));
+    Texture platNoFallTexture = new Texture(Gdx.files.internal("platNoFallDefault.png"));
+    Texture platFallTexture = new Texture(Gdx.files.internal("platFallDefault.png"));
 
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
     Boolean isFallingThrough;
     Boolean canFallThroughPlat;
+
 
     public Platform(float x, float y, float height, float width, Boolean tangible, boolean isFallThrough) {
         this.canFallThroughPlat = isFallThrough;
@@ -55,6 +58,12 @@ public class Platform extends InGameObj {
         Globals.globalRender.rect(x,y,width, height);
         Globals.globalRender.end();
         */
+
+        if(canFallThroughPlat == true){
+            currentTexture = platFallTexture;
+        }else{
+            currentTexture = platNoFallTexture;
+        }
 
         batch.draw(currentTexture, x, y, width,height);
     }

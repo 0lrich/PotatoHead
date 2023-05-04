@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
+import static com.mygdx.game.Globals.platformHolder;
 
 public class WallHolder {
 
@@ -15,6 +16,7 @@ public class WallHolder {
     }
     public void addWall(float x, float y, float height, float width){
         walls.add(new Wall(x, y, height, width));
+        platformHolder.addPlatform(x, y + 1, height, width, true, false);
     }
     public void removeWall(int Wall){
         walls.remove(Wall);
@@ -46,8 +48,8 @@ public class WallHolder {
         removeAllWalls();
         switch(wallScene){
             case 0:
-                addWall(300, 300, 400, 30);
-                addWall(100, 100, 40, 900);
+                addWall(-20,0,2000,20); // Wall on left
+                addWall(2000,0,500,200);
                 break;
             case 1:
 
