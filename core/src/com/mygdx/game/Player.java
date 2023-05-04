@@ -21,13 +21,13 @@ public class Player extends InGameObj{
     private Texture currentTexture = new Texture(Gdx.files.internal("playerDefault.png"));
     private float dashTime = 0.25f;
     private boolean dashPressed = false;
-    private float posX;
-    private float posY;
+    public float posX;
+    public float posY;
     private float health;
     private float height;
     private float width;
-    private float xVelocity = 0;
-    private float yVelocity = 0;
+    public float xVelocity = 0;
+    public float yVelocity = 0;
     private float gravity = 1;
     private float speed = 4;
     private float jumpForce = 23;
@@ -45,7 +45,7 @@ public class Player extends InGameObj{
     boolean isOnFloor = false;
     Vector2 playerSpawn;
     int damage = 1;
-
+    boolean dontRender = false;
     public Player(float x, float y, float health, float height, float width) {
         this.posX = x;
         this.posY = y;
@@ -122,7 +122,9 @@ public class Player extends InGameObj{
         globalRender.rect(posX, posY,width, height);
         globalRender.end();
         */
-        batch.draw(currentTexture, posX, posY, width,height);
+        if (dontRender == false) {
+            batch.draw(currentTexture, posX, posY, width, height);
+        }
     }
     public void dispose () {}
 

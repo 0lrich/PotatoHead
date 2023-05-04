@@ -21,7 +21,9 @@ public class FirstBossHand extends Boss {
     Texture shooting1;
     Texture shooting2;
     Texture shooting3;
-    Texture closedfist;
+    Texture openHandGrab;
+    Texture closedFist;
+
     Boolean canGetHurt = true;
     ShapeRenderer bossBody = new ShapeRenderer();
     boolean bettername = false;
@@ -38,7 +40,8 @@ public class FirstBossHand extends Boss {
         shooting1 = new Texture(Gdx.files.internal("FarmerShootHand1.png"));
         shooting2 = new Texture(Gdx.files.internal("FarmerShootHand2.png"));
         shooting3 = new Texture(Gdx.files.internal("FarmerShootHand3.png"));
-        closedfist = new Texture(Gdx.files.internal("FarmerClosedFist.png"));
+        openHandGrab = new Texture(Gdx.files.internal("masterHandStartGrab.png"));
+        closedFist = new Texture(Gdx.files.internal("Test boss closed fist.png"));
         bossBody.begin(ShapeRenderer.ShapeType.Filled);
 
 
@@ -93,7 +96,7 @@ public class FirstBossHand extends Boss {
 
                chosenattack = attackchoice.nextInt(5)+1;
                 //set currentAttack to appropriate Attack
-                 chosenattack = 1;
+                 chosenattack = 2;
                 switch ((int) chosenattack) {
                     case 1:
                         currentAttack = new TestBossFingerBullet(player,this);
