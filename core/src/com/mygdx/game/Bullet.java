@@ -66,7 +66,7 @@ public class Bullet extends InGameObj {
     public void update(){
         x += xSpeed;
         y += ySpeed;
-        if(x>Gdx.graphics.getWidth() || y>Gdx.graphics.getHeight() || x<0 || y<0){
+        if(x>Gdx.graphics.getWidth() * 200 || y>Gdx.graphics.getHeight() * 200|| x < -100 * 200 || y < - 100 * 200){
             free = true;
             isActive = false;
         }

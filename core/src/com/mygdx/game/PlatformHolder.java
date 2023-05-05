@@ -47,7 +47,6 @@ public class PlatformHolder {
         removeAllPlatforms();
         switch(platformScene){
             case 0:
-                addPlatform(0,0,400,2000,true,false); // Spawn platform
                 addPlatform(2400,510,40,200, true, false); //
                 addPlatform(2800,510,40,200, true, false); //
                 addPlatform(3400,510,40,200, true, false); //
