@@ -145,29 +145,6 @@ public class Player extends InGameObj{
             xVelocity += speed;
             isFacingRight = true;
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)){
-            if(isFacingRight == true){
-                jumpForce = 0;
-                gravity = 0;
-                xVelocity+=100;
-                dashPressed = true;
-                yVelocity = 0;
-            }
-            else{
-                jumpForce = 0;
-                gravity = 0;
-                xVelocity-=100;
-                dashPressed = true;
-                yVelocity = 0;
-            }}
-        if(dashPressed == true){
-        dashTime -=Gdx.graphics.getDeltaTime();
-        if(dashTime<0) {
-            gravity = 1;
-            dashTime = 0.25f;
-            dashPressed = false;
-            jumpForce = 23;
-        }}
 
         if (isOnFloor){
             canJump = true;
