@@ -24,7 +24,7 @@ public class SceneHolder {
         scene = sceneNumber;
         switch(scene){
             case 0:
-                System.out.println("THE CODE FOR THE MAIN MENU SCENE IS RUNNING");
+                //Player and potato are being initialized offscreen
                 potato.init(5000,200, 10, 50,50,new ShapeRenderer());
                 farmer.init(5000,500,20,450,450,new ShapeRenderer());
                 mainMenuScreen.show();

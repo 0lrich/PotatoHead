@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import javax.swing.*;
+
 import static com.mygdx.game.Globals.*;
 
 public class Main extends ApplicationAdapter {
@@ -19,6 +21,7 @@ public class Main extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		sceneHolder.switchScene(0);
 	}
+
 	@Override
 	public void render () {
 		//ScreenUtils.clear(.5f, .5f, .5f, 1);
@@ -33,10 +36,12 @@ public class Main extends ApplicationAdapter {
 		platformHolder.render();
 		bulletHolder.render();
 		//endregion
-		batch.begin();
-		batch.end();
+		if(sceneHolder.getScene() == 0){
+			mainMenuScreen.render(1);
+		}
+
 	}
-	
+
 	@Override
 	public void dispose () {
 	}

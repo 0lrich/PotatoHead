@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
@@ -64,6 +65,7 @@ public class Player {
      *   V
      */
     public void update(float deltaTime){
+        System.out.println("UPDATE IS WORKING. BIATCH");
         shoot(deltaTime);
         movement();
         if (reload > 0) reload -= 60 * deltaTime;
@@ -149,6 +151,7 @@ public class Player {
      */
     private void movement(){
     //fixme placeholder
+        System.out.println("MOVEMENT IS WORKING, DAWG");
         calculateVelocity();
         moveAndSlide(xVelocity, yVelocity, canFallThrough);
         changeSceneToggle();
