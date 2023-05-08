@@ -54,7 +54,7 @@ public class MainMenuScreen extends ScreenAdapter {
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.font = Globals.font;
         button = new TextButton(name, textButtonStyle);
-        mainTable.add(button).width(700).height(60).padBottom(10);
+        mainTable.add(button).width(20).height(2).padBottom(60);
         mainTable.row();
         return button;
     }
