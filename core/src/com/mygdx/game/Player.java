@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -72,7 +73,7 @@ public class Player extends InGameObj{
     public void death(){
         if(posY<=-6000){
             this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
-            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50);
+            init(playerSpawn.x, playerSpawn.y, health-damage, 50,24);
             damage++;
             if(health<=0){damage = 1;}
             invulnerable = true;
@@ -89,20 +90,20 @@ public class Player extends InGameObj{
      *  \ /
      *   V
      */
-    public void update(float deltaTime) {
-        death();
 
-        invlunerableTime -= Gdx.graphics.getDeltaTime();
-        shoot(deltaTime);
-        movement();
-        amIDead();
-        if (reload > 0) reload -= 60 * deltaTime;
-        for (int i = 0; i < Globals.bulletHolder.bullets.size(); i++) {
-            if (amIHit(Globals.bulletHolder.bullets.get(i))) {
-                health = health - Globals.bulletHolder.bullets.get(i).damage;
-                Globals.bulletHolder.bullets.get(i).alreadyHitSomething();
+    public void update(float deltaTime){
+            invlunerableTime -= Gdx.graphics.getDeltaTime();
+            shoot(deltaTime);
+            movement();
+            amIDead();
+            if (reload > 0) reload -= 60 * deltaTime;
+            for (int i = 0; i < Globals.bulletHolder.bullets.size(); i++) {
+                if (amIHit(Globals.bulletHolder.bullets.get(i))) {
+                    health = health - Globals.bulletHolder.bullets.get(i).damage;
+                    Globals.bulletHolder.bullets.get(i).alreadyHitSomething();
+                }
             }
-        }
+
 
 
 
@@ -189,6 +190,7 @@ public class Player extends InGameObj{
      */
     private void movement(){
     //fixme placeholder
+        System.out.println("MOVEMENT IS WORKING, DAWG");
         calculateVelocity();
 
 
@@ -508,13 +510,17 @@ public class Player extends InGameObj{
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             if(sceneHolder.getScene() == 1){
                 sceneHolder.switchScene(2);
+                System.out.println("SCENE SWITCHED TO SCENE 2");
             } else if(sceneHolder.getScene() == 2){
                 sceneHolder.switchScene(3);
+
             } else if(sceneHolder.getScene() == 3){
                 sceneHolder.switchScene(4);
             } else{
                 sceneHolder.switchScene(1);
+
             }
+            System.out.println("CURRENT SCENE: " + sceneHolder.getScene());
 
         }
     }

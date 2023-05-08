@@ -23,6 +23,9 @@ public class MainMenuScreen extends ScreenAdapter {
     boolean isQuitDisabled;
     @Override
     public void show() {
+
+        System.out.println("hey");
+
         viewport = new ExtendViewport(1280, 720);
         stage = new Stage(viewport);
         mainTable = new Table();
