@@ -50,6 +50,12 @@ public class PlatformHolder {
                 addPlatform(2400,510,40,200, true, false); //
                 addPlatform(2800,510,40,200, true, false); //
                 addPlatform(3400,510,40,200, true, false); //
+                addPlatform(4250, 1000, 40, 200, true, false);//
+                addPlatform(3800,1250,40,210,true,false);//
+                addPlatform(4300,1480,40,200,true,false);//
+                addPlatform(0,1920,80,4000,true,false);//
+                addPlatform(4500,1900,40,200,true,false);//
+                addPlatform(5000,1750,40,100,true,false);//
                 break;
             case 1:
                 addPlatform(200,200,20,200,true, true);
