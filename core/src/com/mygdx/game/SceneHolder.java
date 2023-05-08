@@ -100,13 +100,13 @@ public class SceneHolder {
         if(scene == 0){
             ScreenUtils.clear(1, 1, 1, 1);
         } else if (scene == 1){
-            ScreenUtils.clear(.5f, 1, .5f, 1);
+            ScreenUtils.clear(.9f, .9f, 1, 1);
         } else if (scene == 2){
-            ScreenUtils.clear(.5f, 1, .5f, 1);
+            ScreenUtils.clear(.6f, .2f, .2f, 1);
         } else if (scene == 3){
-            ScreenUtils.clear(1f, .5f, .5f, 1);
-        } else if (scene == 4){
             ScreenUtils.clear(.5f, .5f, 1, 1);
+        } else if (scene == 4){
+            ScreenUtils.clear(1, 1, 1, 1);
         }
 
         farmerHandRight.render(batch);
