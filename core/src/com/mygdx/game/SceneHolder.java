@@ -42,7 +42,6 @@ public class SceneHolder {
                 farmerHandRight.init(350000,350,20,350,350);
                 break;
             case 1:
-
                 playerSpawn.set(500, 500);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHead.init(53500,400,30,350,350);
@@ -53,7 +52,7 @@ public class SceneHolder {
                 break;
             case 2:
 
-                playerSpawn.set(600, 200);
+                playerSpawn.set(600, 2000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHead.init(Gdx.graphics.getWidth()/2 - farmerHead.width/2,400,30,350,350);
                 farmerHandLeft.init(0,350,20,350,350 );
@@ -86,6 +85,11 @@ public class SceneHolder {
 
         }
     }
+    public void tempLevel1Portal(){
+        if(potato.getPosX() < 0 && potato.getPosY() < -2000){
+            switchScene(2);
+        }
+    }
     public void update(){
         if(scene != 0) {
             potato.update(Gdx.graphics.getDeltaTime());
@@ -101,6 +105,7 @@ public class SceneHolder {
             ScreenUtils.clear(1, 1, 1, 1);
         } else if (scene == 1){
             ScreenUtils.clear(.9f, .9f, 1, 1);
+            tempLevel1Portal();
         } else if (scene == 2){
             ScreenUtils.clear(.6f, .2f, .2f, 1);
         } else if (scene == 3){

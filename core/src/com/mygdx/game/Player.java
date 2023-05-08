@@ -271,9 +271,6 @@ public class Player extends InGameObj{
 
                     Rectangle rec = new Rectangle(w.x, w.y, w.width, w.height);
                     if (testRect.overlaps(rec)){
-                        System.out.println("gfdshughosdih");
-
-
 
                         posX = w.resolveX(testRect);
 
