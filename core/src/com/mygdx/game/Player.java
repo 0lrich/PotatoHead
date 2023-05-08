@@ -73,7 +73,7 @@ public class Player extends InGameObj{
     public void death(){
         if(posY<=-6000){
             this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
-            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50);
+            init(playerSpawn.x, playerSpawn.y, health-damage, 50,24);
             damage++;
             if(health<=0){damage = 1;}
             invulnerable = true;
