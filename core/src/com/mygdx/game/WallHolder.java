@@ -48,6 +48,8 @@ public class WallHolder {
         removeAllWalls();
         switch(wallScene){
             case 0:
+                break;
+            case 1:
                 addWall(-20,0,2000,20); // Wall on left
                 addWall(0,0,400,2000); // Spawn wall
                 addWall(2000,0,500,200); // Force-to-jump wall
@@ -56,13 +58,12 @@ public class WallHolder {
                 addWall(5100,1480,500,100);//
                 addWall(5000,1480,50,100);//
                 break;
-            case 1:
-
-                break;
             case 2:
 
                 break;
             case 3:
+                break;
+            case 4:
                 break;
         }
     }

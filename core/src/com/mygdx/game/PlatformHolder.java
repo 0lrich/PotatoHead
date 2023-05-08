@@ -47,6 +47,8 @@ public class PlatformHolder {
         removeAllPlatforms();
         switch(platformScene){
             case 0:
+                break;
+            case 1:
                 addPlatform(2400,510,40,200, true, false); //
                 addPlatform(2800,510,40,200, true, false); //
                 addPlatform(3400,510,40,200, true, false); //
@@ -57,23 +59,23 @@ public class PlatformHolder {
                 addPlatform(4500,1900,40,200,true,false);//
                 addPlatform(5000,1750,40,100,true,false);//
                 break;
-            case 1:
+            case 2:
                 addPlatform(200,200,20,200,true, true);
                 addPlatform(550,100,20,200,true, true);
                 addPlatform(1150,100,20,200,true, true);
                 addPlatform(1500,200,20,200,true, true);
                 break;
-            case 2:
+            case 3:
                 addPlatform(0,0,400,700,true,false);
                 addPlatform(900,0,400,200,true,false);
                 addPlatform(1300,0,400,700,true,false);
                 break;
-            case 3:
+            case 4:
 
                 pyramid(20, 40, 100, 50);
 
                 break;
-            case 4:
+            case 5:
                 float baseWidth =  800;
                 float topWidth = 20;
                 float pyramidHeight = 1000;

@@ -35,9 +35,11 @@ public class Main extends ApplicationAdapter {
 
 
 		//region RENDERS
-		camera.position.set(playerCameraPos,camera.position.z);
-		camera.update();
-		batch.setProjectionMatrix(camera.combined);
+		if(sceneHolder.getScene() != 0) {
+			camera.position.set(playerCameraPos, camera.position.z);
+			camera.update();
+			batch.setProjectionMatrix(camera.combined);
+		}
 
 		//camera.unproject(playerCameraPos);
 
@@ -49,6 +51,9 @@ public class Main extends ApplicationAdapter {
 		batch.end();
 
 		playerCameraPos.lerp(new Vector2(potato.getPosX(), potato.getPosY()), 0.1F);
+		if(sceneHolder.getScene() == 0){
+			mainMenuScreen.render(1);
+		}
 		//endregion
 	}
 	

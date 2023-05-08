@@ -506,14 +506,14 @@ public class Player extends InGameObj{
     }
     public void changeSceneToggle(){
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            if(sceneHolder.getScene() == 0){
-                sceneHolder.switchScene(1);
-            } else if(sceneHolder.getScene() == 1){
+            if(sceneHolder.getScene() == 1){
                 sceneHolder.switchScene(2);
             } else if(sceneHolder.getScene() == 2){
                 sceneHolder.switchScene(3);
+            } else if(sceneHolder.getScene() == 3){
+                sceneHolder.switchScene(4);
             } else{
-                sceneHolder.switchScene(0);
+                sceneHolder.switchScene(1);
             }
 
         }
