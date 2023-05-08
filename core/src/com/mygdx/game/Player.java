@@ -4,12 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-
-import java.util.Vector;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.*;
@@ -123,7 +119,7 @@ public class Player extends InGameObj{
         globalRender.end();
         */
         batch.draw(currentTexture, posX, posY, width,height);
-        printLocationOnscreen(batch);
+        playerDebug(batch);
     }
     public void dispose () {}
 
@@ -543,8 +539,9 @@ public class Player extends InGameObj{
     public void printLocation(){
         System.out.println("Player location: (" + posX + ", " + posY + ")");
     }
-    public void printLocationOnscreen(SpriteBatch batch){
+    public void playerDebug(SpriteBatch batch){
         Globals.font.draw(batch, "Player location: (" + posX + ", " + posY + ")",  posX, posY + 100);
+        Globals.font.draw(batch, "MOVEMENT: WASD\nSHOOT: SPACE\nAIM: IJKL\nSWITCH SCENE: R",  posX, posY + 250);
     }
     public float getPosX() {
         return posX;

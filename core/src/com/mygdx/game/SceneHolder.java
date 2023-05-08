@@ -33,7 +33,7 @@ public class SceneHolder {
         resetScene();
         scene = sceneNumber;
         switch(scene){
-            case 0:
+            case 0: // Main menu
                 mainMenuScreen.show();
                 playerSpawn.set(5000, 5000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
@@ -41,7 +41,7 @@ public class SceneHolder {
                 farmerHandLeft.init(-3500000,350,20,350,350);
                 farmerHandRight.init(350000,350,20,350,350);
                 break;
-            case 1:
+            case 1: // Tutorial level
                 playerSpawn.set(500, 500);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHead.init(53500,400,30,350,350);
@@ -50,9 +50,8 @@ public class SceneHolder {
                 platformHolder.setPlatformScene(1);
                 wallHolder.setWallScene(1);
                 break;
-            case 2:
-
-                playerSpawn.set(600, 2000);
+            case 2: // Boss level
+                playerSpawn.set(600, 3000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHead.init(Gdx.graphics.getWidth()/2 - farmerHead.width/2,400,30,350,350);
                 farmerHandLeft.init(0,350,20,350,350 );
@@ -61,8 +60,7 @@ public class SceneHolder {
                 platformHolder.setPlatformScene(2);
                 wallHolder.setWallScene(2);
                 break;
-            case 3:
-
+            case 3: // Test level
                 playerSpawn.set(400, 500);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHandLeft.init(-35000,350,20,350,350 );
@@ -72,7 +70,7 @@ public class SceneHolder {
                 platformHolder.setPlatformScene(3);
                 wallHolder.setWallScene(3);
                 break;
-            case 4:
+            case 4: // Test level 2
                 playerSpawn.set(400, 350);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHandLeft.init(-35000,350,20,350,350 );
