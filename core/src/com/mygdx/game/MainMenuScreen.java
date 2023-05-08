@@ -4,7 +4,6 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -20,30 +19,29 @@ public class MainMenuScreen extends ScreenAdapter {
     private Viewport viewport;
     private Table mainTable;
     TextButton button;
-    boolean isQuitDisabled;
+    boolean areButtonsEnabled;
     @Override
     public void show() {
+        areButtonsEnabled = true;
         viewport = new ExtendViewport(1280, 720);
         stage = new Stage(viewport);
         mainTable = new Table();
         mainTable.setFillParent(true);
         stage.addActor(mainTable);
         addButton("Play").addListener(new ClickListener() {
-            boolean isClicked = false;
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(!isClicked) {
+                if(areButtonsEnabled) {
                     sceneHolder.switchScene(1);
                     button.setDisabled(true);
-                    isClicked = !isClicked;
-                    isQuitDisabled = true;
+                    areButtonsEnabled = false;
                 }
             }
         });
         addButton("Quit").addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(!isQuitDisabled){
+                if(areButtonsEnabled){
                     Gdx.app.exit();
                 }
 
@@ -66,6 +64,12 @@ public class MainMenuScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
+    }
+    public void enableMainMenuButtons(boolean enabled){
+        areButtonsEnabled = enabled;
+    }
+    public boolean getAreButtonsEnabled(){
+        return areButtonsEnabled;
     }
     @Override
     public void resize(int width, int height) {

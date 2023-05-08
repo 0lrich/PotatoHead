@@ -123,6 +123,7 @@ public class Player extends InGameObj{
         globalRender.end();
         */
         batch.draw(currentTexture, posX, posY, width,height);
+        printLocationOnscreen(batch);
     }
     public void dispose () {}
 
@@ -544,6 +545,9 @@ public class Player extends InGameObj{
     }
     public void printLocation(){
         System.out.println("Player location: (" + posX + ", " + posY + ")");
+    }
+    public void printLocationOnscreen(SpriteBatch batch){
+        Globals.font.draw(batch, "Player location: (" + posX + ", " + posY + ")",  posX, posY + 100);
     }
     public float getPosX() {
         return posX;
