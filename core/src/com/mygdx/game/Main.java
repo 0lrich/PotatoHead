@@ -19,7 +19,7 @@ public class Main extends ApplicationAdapter {
 	public void create () { // All the objects in the game are created here
 
 		batch = new SpriteBatch();
-		camera.setToOrtho(false, 1024*3, 600*3);
+		camera.setToOrtho(false, 1024*2, 600*2);
 		sceneHolder.switchScene(0);
 	}
 	@Override
