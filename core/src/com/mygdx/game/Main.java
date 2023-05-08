@@ -10,8 +10,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import javax.swing.*;
-
 import static com.mygdx.game.Globals.*;
 
 public class Main extends ApplicationAdapter {
@@ -24,7 +22,6 @@ public class Main extends ApplicationAdapter {
 		camera.setToOrtho(false, 1024*3, 600*3);
 		sceneHolder.switchScene(0);
 	}
-
 	@Override
 	public void render () {
 		//ScreenUtils.clear(.5f, .5f, .5f, 1);
@@ -58,12 +55,8 @@ public class Main extends ApplicationAdapter {
 			mainMenuScreen.render(1);
 		}
 		//endregion
-		if(sceneHolder.getScene() == 0){
-			mainMenuScreen.render(1);
-		}
-
 	}
-
+	
 	@Override
 	public void dispose () {
 	}
