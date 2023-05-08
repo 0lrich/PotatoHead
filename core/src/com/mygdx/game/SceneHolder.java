@@ -18,6 +18,7 @@ public class SceneHolder {
 
     int scene;
     Vector2 playerSpawn;
+    MainMenuScreen mainMenu;
     public SceneHolder(){
 
         potato = new Player(0,20, 10, 50,50);
@@ -33,67 +34,48 @@ public class SceneHolder {
         resetScene();
         scene = sceneNumber;
         switch(scene){
-            case 0:
-
+            case 0: // Main Menu
+                potato.init(5000,200, 10, 50,50);
+                farmer.init(5000,500,20,450,450);
+                mainMenuScreen.show();
+                break;
+            case 1: // Tutorial
                 playerSpawn.set(400, 400);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50);
                 farmerHead.init(53500,400,30,350,350);
                 farmerHandLeft.init(-3500000,350,20,350,350);
                 farmerHandRight.init(350000,350,20,350,350);
-
-                platformHolder.setPlatformScene(0);
-                wallHolder.setWallScene(0);
-                break;
-            case 1:
-
+            case 2: // Boss
                 playerSpawn.set(600, 200);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50);
                 farmerHead.init(Gdx.graphics.getWidth()/2 - farmerHead.width/2,400,30,350,350);
                 farmerHandLeft.init(0,350,20,350,350 );
                 farmerHandRight.init(Gdx.graphics.getWidth()- farmerHandRight.width,350,20,350,350);
 
-                platformHolder.setPlatformScene(1);
-                wallHolder.setWallScene(1);
-                break;
-            case 2:
 
-                playerSpawn.set(400, 500);
-                potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50 );
-                farmerHandLeft.init(-35000,350,20,350,350 );
-                farmerHandRight.init(3500,350,20,350,350 );
-                farmerHead.init(53500,400,30,350,350 );
-
-                platformHolder.setPlatformScene(2);
-                wallHolder.setWallScene(2);
-                break;
-            case 3:
-                playerSpawn.set(400, 350);
-                potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50);
-                farmerHandLeft.init(-35000,350,20,350,350 );
-                farmerHandRight.init(3500,350,20,350,350 );
-                farmerHead.init(53500,400,30,350,350 );
-
-                platformHolder.setPlatformScene(3);
-                wallHolder.setWallScene(3);
-                break;
         }
     }
     public void update(){
         potato.update(Gdx.graphics.getDeltaTime());
-        if(scene == 1){
+        if(scene == 2) {
             farmerHandRight.update(potato);
             farmerHandLeft.update(potato);
             farmerHead.update(potato);
         }
+        if(scene != 0){
+            potato.update(Gdx.graphics.getDeltaTime());
+        }
     }
     public void render(SpriteBatch batch) {
         if(scene == 0){
+            ScreenUtils.clear(0, 0, 0, 1);
+        } else if(scene == 1){
             ScreenUtils.clear(.5f, .5f, .5f, 1);
-        } else if (scene == 1){
-            ScreenUtils.clear(.5f, 1, .5f, 1);
         } else if (scene == 2){
+            ScreenUtils.clear(.5f, 1, .5f, 1);
+        } else if (scene == 3){
             ScreenUtils.clear(1f, .5f, .5f, 1);
-        } else{
+        } else if (scene == 4){
             ScreenUtils.clear(.5f, .5f, 1, 1);
         }
 
