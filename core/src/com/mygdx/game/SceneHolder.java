@@ -36,7 +36,7 @@ public class SceneHolder {
             case 0:
 
                 playerSpawn.set(400, 400);
-                potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50);
+                potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHead.init(53500,400,30,350,350);
                 farmerHandLeft.init(-3500000,350,20,350,350);
                 farmerHandRight.init(350000,350,20,350,350);
@@ -47,7 +47,7 @@ public class SceneHolder {
             case 1:
 
                 playerSpawn.set(600, 200);
-                potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50);
+                potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHead.init(Gdx.graphics.getWidth()/2 - farmerHead.width/2,400,30,350,350);
                 farmerHandLeft.init(0,350,20,350,350 );
                 farmerHandRight.init(Gdx.graphics.getWidth()- farmerHandRight.width,350,20,350,350);
@@ -58,7 +58,7 @@ public class SceneHolder {
             case 2:
 
                 playerSpawn.set(400, 500);
-                potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50 );
+                potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24 );
                 farmerHandLeft.init(-35000,350,20,350,350 );
                 farmerHandRight.init(3500,350,20,350,350 );
                 farmerHead.init(53500,400,30,350,350 );
@@ -68,7 +68,7 @@ public class SceneHolder {
                 break;
             case 3:
                 playerSpawn.set(400, 350);
-                potato.init(playerSpawn.x, playerSpawn.y, 3, 50,50);
+                potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHandLeft.init(-35000,350,20,350,350 );
                 farmerHandRight.init(3500,350,20,350,350 );
                 farmerHead.init(53500,400,30,350,350 );
