@@ -67,11 +67,11 @@ public class Player extends InGameObj{
         potato = this;
     }
     public void death(){
-        if(posY<=-6000){
+        if(posY<=-2000){
             this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
-            init(playerSpawn.x, playerSpawn.y, health-damage, 50,24);
-            damage++;
-            if(health<=0){damage = 1;}
+            init(playerSpawn.x, playerSpawn.y, health-damage, 50,36);
+            //damage++;
+            if(health <= 0){damage = 1;}
             invulnerable = true;
             invlunerableTime = Gdx.graphics.getDeltaTime() * 60;
             System.out.println(health);
@@ -533,7 +533,7 @@ public class Player extends InGameObj{
         return false;
     }
     public void amIDead(){
-        if (health < 0){
+        if (health <= 0){
             this.inTutorial = Globals.sceneHolder.getInTutorial();
             if(this.inTutorial == false){
             sceneHolder.switchScene(2);
@@ -547,7 +547,7 @@ public class Player extends InGameObj{
     }
     public void playerDebug(SpriteBatch batch){
         Globals.font.draw(batch, "Player location: (" + posX + ", " + posY + ")",  posX, posY + 100);
-        Globals.font.draw(batch, "MOVEMENT: WASD\nSHOOT: SPACE\nAIM: IJKL\nSWITCH SCENE: R",  posX, posY + 250);
+        Globals.font.draw(batch, "MOVEMENT: WASD\nSHOOT: SPACE\nAIM: IJKL\nSWITCH SCENE: R\nLIVES:" + health,  posX, posY + 350);
     }
     public float getPosX() {
         return posX;
