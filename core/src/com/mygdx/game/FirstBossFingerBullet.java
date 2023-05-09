@@ -1,17 +1,16 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import static com.mygdx.game.Globals.bulletHolder;
 
-public class TestBossFingerBullet implements FirstBossAttacks {
+public class FirstBossFingerBullet implements FirstBossAttacks {
     float timer= 0f;
 
-    public TestBossFingerBullet(Player player, FirstBossHand boss){
+    public FirstBossFingerBullet(Player player, FirstBossHand boss){
         boss.currentTexture = boss.shooting1;
-        update(player, boss);
+//        update(player, boss);
         //do change sprites and set initial variables
     }
     @Override

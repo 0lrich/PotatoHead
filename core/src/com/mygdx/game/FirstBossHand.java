@@ -40,7 +40,7 @@ public class FirstBossHand extends Boss {
         shooting1 = new Texture(Gdx.files.internal("FarmerShootHand1.png"));
         shooting2 = new Texture(Gdx.files.internal("FarmerShootHand2.png"));
         shooting3 = new Texture(Gdx.files.internal("FarmerShootHand3.png"));
-        openHandGrab = new Texture(Gdx.files.internal("masterHandStartGrab.png"));
+        openHandGrab = new Texture(Gdx.files.internal("FarmerOpenHandGrab.png"));
         closedFist = new Texture(Gdx.files.internal("Test boss closed fist.png"));
         bossBody.begin(ShapeRenderer.ShapeType.Filled);
 
@@ -99,26 +99,26 @@ public class FirstBossHand extends Boss {
                  chosenattack = 2;
                 switch ((int) chosenattack) {
                     case 1:
-                        currentAttack = new TestBossFingerBullet(player,this);
+                        currentAttack = new FirstBossFingerBullet(player,this);
                         System.out.println("UNO");
                         alreadyattacking = true;
                         break;
                     case 2:
-                        currentAttack = new TestBossTargetedPunch(player,this);
+                        currentAttack = new FirstBossTargetedGrab(player,this);
                         System.out.println("dos");
                         alreadyattacking = true;
                         break;
                     case 3:
-                        currentAttack = new TestBossTargetedPunch(player,this);
+                        currentAttack = new FirstBossTargetedGrab(player,this);
                         System.out.println("tres");
                         alreadyattacking = true;
                         break;
                     case 4:
-                        currentAttack = new TestBossFingerBullet(player,this);
+                        currentAttack = new FirstBossFingerBullet(player,this);
                         System.out.println("quatro");
                         break;
                     case 5:
-                        currentAttack = new TestBossFingerBullet(player,this);
+                        currentAttack = new FirstBossFingerBullet(player,this);
                         System.out.println("Sinco");
                         break;
                 }

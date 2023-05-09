@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class TestBossTargetedPunch implements FirstBossAttacks{
+public class FirstBossTargetedGrab implements FirstBossAttacks{
         float damage = 1;
         float timer= 0;
+        boolean targetSet = false;
+    Vector2 target = new Vector2(0,0);
 
-    public TestBossTargetedPunch(Player player, FirstBossHand boss) {
+    public FirstBossTargetedGrab(Player player, FirstBossHand boss) {
         boss.currentTexture = boss.openHandGrab;
         update(player,boss);
 
@@ -19,16 +21,19 @@ public class TestBossTargetedPunch implements FirstBossAttacks{
         Rectangle playerRectangle = new Rectangle(player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
         Rectangle bossRectangle = new Rectangle(boss.x, boss.y, boss.width, boss.height);
 
-        Vector2 bossCenter = new Vector2(boss.x +boss.width/2, boss.y +boss.height/2);
 
-        Vector2 playerCenter = new Vector2(player.getPosX()+ player.getWidth()/2, player.getPosY() +player.getHeight()/2);
 
-        float opposite = bossCenter.x -playerCenter.x;
-        float adjacent = bossCenter.y -playerCenter.y;
+
         timer += Gdx.graphics.getDeltaTime();
-        Vector2 target = new Vector2(bossCenter.x-playerCenter.x,bossCenter.y-playerCenter.y);
+
     if (!bossRectangle.overlaps(playerRectangle)){
         if ( 7 <= timer && timer <=20 ) {
+            if(!targetSet) {
+                Vector2 bossCenter = new Vector2(boss.x +boss.width/2, boss.y +boss.height/2);
+                Vector2 playerCenter = new Vector2(player.getPosX()+ player.getWidth()/2, player.getPosY() +player.getHeight()/2);
+               target= new Vector2(bossCenter.x - playerCenter.x, bossCenter.y - playerCenter.y);
+                targetSet = true;
+            }
             if (target.x > boss.x) {
                 target.nor();
                 boss.x += target.x * 20;
@@ -54,8 +59,8 @@ public class TestBossTargetedPunch implements FirstBossAttacks{
         boss.currentTexture = boss.closedFist;
         if ( 7 <= timer && timer <=20 ) {
             boss.y += 10;
-            player.posY = boss.y;
-            player.posX = boss.x;
+            player.posY = boss.y+boss.height/2;
+            player.posX = boss.x+boss.width/2;
         }if (timer > 25){
             player.yVelocity -= 100;
             if(boss.rightHand == true){
@@ -74,6 +79,7 @@ public class TestBossTargetedPunch implements FirstBossAttacks{
     public boolean isdone(FirstBossHand boss) {
         if (timer>=10) {
             boss.disabledMovementpattern = false;
+            targetSet = false;
             return true;
         }
         return false;
