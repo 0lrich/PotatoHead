@@ -17,6 +17,7 @@ public class Player extends InGameObj{
     private Texture currentTexture = new Texture(Gdx.files.internal("playerDefault.png"));
     private float dashTime = 0.25f;
     private boolean dashPressed = false;
+    private boolean inTutorial;
     private float posX;
     private float posY;
     private float health;
@@ -532,8 +533,13 @@ public class Player extends InGameObj{
         return false;
     }
     public void amIDead(){
-        if (health <= 0){
-            sceneHolder.switchScene(0);
+        if (health < 0){
+            this.inTutorial = Globals.sceneHolder.getInTutorial();
+            if(this.inTutorial == false){
+            sceneHolder.switchScene(2);
+        }else{
+                sceneHolder.switchScene(1);
+            }
         }
     }
     public void printLocation(){

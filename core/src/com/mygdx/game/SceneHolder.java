@@ -2,11 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.FirstBoss;
-import com.mygdx.game.Player;
 
 import static com.mygdx.game.Globals.*;
 
@@ -15,6 +12,7 @@ public class SceneHolder {
     FirstBossHand farmerHandRight;
     FirstBossHand farmerHandLeft;
     Player potato;
+    public boolean inTutorial;
 
     int scene;
     Vector2 playerSpawn;
@@ -42,6 +40,7 @@ public class SceneHolder {
                 farmerHandRight.init(350000,350,20,350,350);
                 break;
             case 1: // Tutorial level
+                inTutorial = true;
                 playerSpawn.set(500, 500);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHead.init(53500,400,30,350,350);
@@ -51,6 +50,7 @@ public class SceneHolder {
                 wallHolder.setWallScene(1);
                 break;
             case 2: // Boss level
+                inTutorial = false;
                 playerSpawn.set(600, 3000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHead.init(Gdx.graphics.getWidth()/2 - farmerHead.width/2,400,30,350,350);
@@ -121,4 +121,5 @@ public class SceneHolder {
         bulletHolder.removeBullets();
     }
     public Vector2 getPlayerSpawn(){return playerSpawn;}
+    public boolean getInTutorial(){return inTutorial;}
 }
