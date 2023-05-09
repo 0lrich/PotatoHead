@@ -19,13 +19,14 @@ public class SceneHolder {
     int scene;
     Vector2 playerSpawn;
     public SceneHolder(){
-
         potato = new Player(0,20, 10, 50,24);
         farmerHandRight = new FirstBossHand(350,350,20,350,350 );
         farmerHandLeft = new FirstBossHand(0,350,20,350,350 );
         farmerHead = new FirstBossHead(350,350,30,450,450 );
         playerSpawn = new Vector2();
-
+        music = Gdx.audio.newMusic(Gdx.files.internal("boss.mp3"));
+        music.setVolume(10);
+        music.setLooping(true);
     }
     public void setScene(int scene){}
     public int getScene() {return scene;}
@@ -42,6 +43,9 @@ public class SceneHolder {
                 farmerHandRight.init(350000,350,20,350,350);
                 break;
             case 1: // Tutorial level
+                music = Gdx.audio.newMusic(Gdx.files.internal("tutorial.mp3"));
+                music.setVolume(0.5f);
+                music.play();
                 playerSpawn.set(500, 500);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHead.init(53500,400,30,350,350);
@@ -51,6 +55,9 @@ public class SceneHolder {
                 wallHolder.setWallScene(1);
                 break;
             case 2: // Boss level
+                music = Gdx.audio.newMusic(Gdx.files.internal("boss.mp3"));
+                music.setVolume(0.1f);
+                music.play();
                 playerSpawn.set(600, 3000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,24);
                 farmerHead.init(Gdx.graphics.getWidth()/2 - farmerHead.width/2,400,30,350,350);
@@ -118,6 +125,7 @@ public class SceneHolder {
         potato.render(batch);
     }
     public void resetScene(){
+        music.stop();
         bulletHolder.removeBullets();
     }
     public Vector2 getPlayerSpawn(){return playerSpawn;}

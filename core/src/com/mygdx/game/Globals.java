@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -18,7 +20,8 @@ public class Globals { // This global class holds objects that should be accessi
     public static OrthographicCamera camera = new OrthographicCamera();
     public static BitmapFont font = new BitmapFont(Gdx.files.internal("Font/font.fnt"), Gdx.files.internal("Font/font.png"), false);
     public static MainMenuScreen mainMenuScreen = new MainMenuScreen();
-
+    public static Music music;
+    public static Sound sound;
 
 
 }
