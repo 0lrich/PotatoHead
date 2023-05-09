@@ -52,6 +52,7 @@ public class Player extends InGameObj{
         this.width = width;
 
         potato = this;
+
     }
     public void init(float x, float y, float health, float height, float width){
         this.posX = x;
@@ -119,7 +120,8 @@ public class Player extends InGameObj{
         globalRender.rect(posX, posY,width, height);
         globalRender.end();
         */
-        batch.draw(currentTexture, posX, posY, width,height);
+      //  batch.draw(currentTexture, posX, posY, width, height, 0, 0, (int) width,(int) height, isFacingRight, false);
+        batch.draw(currentTexture, isFacingRight?posX+width:posX, posY, isFacingRight?-width:width,height);
         playerDebug(batch);
     }
     public void dispose () {}
@@ -157,6 +159,8 @@ public class Player extends InGameObj{
 
         if (canJump == true ) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                sound = Gdx.audio.newSound(Gdx.files.internal("jump.mp3"));
+                sound.play(1);
                 yVelocity = jumpForce;
                 canJump = false;
             }
@@ -288,7 +292,6 @@ public class Player extends InGameObj{
 
             Rectangle platformRectangle = new Rectangle(w.x, w.y, w.width, w.height);
             if (testRect.overlaps(platformRectangle)){
-                System.out.println("gfdshughosdih");
 
                 float pastPos = posX;
 
@@ -449,7 +452,8 @@ public class Player extends InGameObj{
     }
     public void shoot(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
-
+            sound = Gdx.audio.newSound(Gdx.files.internal("shoot.mp3"));
+            sound.play(1);
             float tempSpeedx = 0;
             float tempSpeedy = 0;
             boolean isAim = false;
