@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -40,6 +41,9 @@ public class SceneHolder {
                 farmerHandRight.init(350000,350,20,350,350);
                 break;
             case 1: // Tutorial level
+                wallTexture = cloudTexture;
+                platNoFallTexture = cloudTexture;
+                platFallTexture = cloudTexture;
                 inTutorial = true;
                 playerSpawn.set(500, 500);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);
@@ -50,6 +54,9 @@ public class SceneHolder {
                 wallHolder.setWallScene(1);
                 break;
             case 2: // Boss level
+                wallTexture = roadTexture;
+                platNoFallTexture = roadStripeTexture;
+                platFallTexture = woodBlockTexture;
                 inTutorial = false;
                 playerSpawn.set(600, 3000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);

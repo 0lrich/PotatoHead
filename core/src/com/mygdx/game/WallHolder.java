@@ -59,7 +59,7 @@ public class WallHolder {
                 addWall(5000,1480,50,100);//
                 break;
             case 2:
-
+                addWall(-2000,-300, 300, 999999);
                 break;
             case 3:
                 break;

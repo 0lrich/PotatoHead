@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
-import static com.mygdx.game.Globals.globalRender;
+import static com.mygdx.game.Globals.*;
+import static com.mygdx.game.Globals.wallTexture;
 import static java.lang.Math.abs;
 
 public class Wall {
@@ -14,7 +15,7 @@ public class Wall {
     float y;
     float height;
     float width;
-    Texture currentTexture = new Texture(Gdx.files.internal("wallDefault.png"));
+    Texture currentTexture = new Texture(Gdx.files.internal("cloudBlock.png"));
 
     public Wall(float x, float y, float height, float width) {
         this.height = height;
@@ -47,9 +48,8 @@ public class Wall {
         globalRender.end();
          */
 
-        batch.draw(currentTexture, x, y, width,height);
+        batch.draw(currentTexture, x, y, width, height);
     }
-
     public float resolveX(Rectangle testRect) {
 
         float minDistanceMoved = 100000;
