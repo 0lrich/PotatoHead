@@ -66,7 +66,11 @@ public class PlatformHolder {
                 addPlatform(1500,200,20,200,true, true);
                 break;
             case 3:
-                addPlatform(0,0,400,700,true,false);
+                addPlatform(0,0,400,5000,true,false);
+                addPlatform(3600, 500, 150, 1500, true, false); //TRUCK BED
+                addPlatform(3700, 800, 50, 100, true, false); //left platform above truck
+                addPlatform(4100, 750, 50, 100, true, false); //middle platform above truck
+                addPlatform(4500,800, 50, 100, true, false); //right platform above truck
                 addPlatform(900,0,400,200,true,false);
                 addPlatform(1300,0,400,700,true,false);
                 break;
