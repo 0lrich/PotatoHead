@@ -1,9 +1,6 @@
 package com.mygdx.game;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import java.util.ArrayList;
-
 import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.platformHolder;
 
@@ -62,6 +59,19 @@ public class WallHolder {
 
                 break;
             case 3:
+                addWall(5100, 500, 300, 300); //Truck body
+                addWall(300, 400, 1000, 50); //Wall to prevent wandering off
+                int numSteps = 10;
+                float stepWidth = 50;
+                float stepHeight = 50;
+                float x = -stepWidth;
+                float y = stepHeight * numSteps;
+
+                for (int i = 0; i < numSteps; i++) {
+                    addWall(x, y, stepHeight, stepWidth);
+                    x -= stepWidth;
+                    y -= stepHeight;
+                }
                 break;
             case 4:
                 break;
