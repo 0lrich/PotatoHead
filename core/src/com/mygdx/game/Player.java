@@ -647,7 +647,7 @@ public class Player extends InGameObj{
                 "MOVEMENT - W,A,D | SHOOT - SPACE | AIM - I,J,K,L\n\n" +
                 "Debug Controls:\n" +
                 "SWITCH SCENE - R | GOD-KILLER - O\n\n" +
-                "DEBUG INFO:\n" +
+                "Debug info:\n" +
                 "LIVES: " + health + "\n" +
                 "LEFT HAND ALIVE? " + farmerHandLeft.getIsAlive() + "\n" +
                 "RIGHT HAND ALIVE? " + farmerHandRight.getIsAlive() + "\n" +
