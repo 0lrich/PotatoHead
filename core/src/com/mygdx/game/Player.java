@@ -31,8 +31,11 @@ public class Player extends InGameObj{
     Animation currentAnimation;
     private float dashTime = 0.25f;
     private boolean dashPressed = false;
-    public float posX;
-    public float posY;
+
+    private boolean inTutorial;
+    private float posX;
+    private float posY;
+
     private float health;
     private float height;
     private float width;
@@ -55,7 +58,12 @@ public class Player extends InGameObj{
     boolean isOnFloor = false;
     Vector2 playerSpawn;
     int damage = 1;
+
     boolean dontRender = false;
+
+    boolean debugToggle = false;
+
+
     public Player(float x, float y, float health, float height, float width) {
         this.posX = x;
         this.posY = y;
@@ -66,6 +74,7 @@ public class Player extends InGameObj{
         currentAnimation = idleAnimation;
 
         potato = this;
+
     }
     public void init(float x, float y, float health, float height, float width){
         this.posX = x;
@@ -86,11 +95,11 @@ public class Player extends InGameObj{
         currentAnimation = animation;
     }
     public void death(){
-        if(posY<=-6000){
+        if(posY<=-2000){
             this.playerSpawn = Globals.sceneHolder.getPlayerSpawn();
-            init(playerSpawn.x, playerSpawn.y, health-damage, 50,50);
-            damage++;
-            if(health<=0){damage = 1;}
+            init(playerSpawn.x, playerSpawn.y, health-damage, 50,36);
+            //damage++;
+            if(health <= 0){damage = 1;}
             invulnerable = true;
             invlunerableTime = Gdx.graphics.getDeltaTime() * 60;
             System.out.println(health);
@@ -138,13 +147,16 @@ public class Player extends InGameObj{
         globalRender.rect(posX, posY,width, height);
         globalRender.end();
         */
+
+      //  batch.draw(currentAnimation, posX, posY, width, height, 0, 0, (int) width,(int) height, isFacingRight, false);
+        batch.draw(currentAnimation.getCurrentFrame(), isFacingRight?posX+width:posX, posY, isFacingRight?-width:width,height);
+        //playerDebug(batch);
+        playerHUD(batch);
         if (dontRender == false) {
-            if (invulnerable == true){
-
-            }
-            batch.draw(currentAnimation.getCurrentFrame(), posX, posY, width, height);
+		if(debugToggle){
+            playerDebug(batch);
         }
-
+		}
     }
     public void dispose () {}
 
@@ -169,6 +181,7 @@ public class Player extends InGameObj{
             xVelocity += speed;
             isFacingRight = true;
         }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)){
             if(isFacingRight == true){
                 jumpForce = 0;
@@ -195,6 +208,7 @@ public class Player extends InGameObj{
             invulnerable = false;
         }}
 
+
         if (isOnFloor){
             canJump = true;
             coyoteSeconds = maxCoyoteSeconds;
@@ -208,6 +222,8 @@ public class Player extends InGameObj{
 
         if (canJump == true ) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                sound = Gdx.audio.newSound(Gdx.files.internal("jump.mp3"));
+                sound.play(1);
                 yVelocity = jumpForce;
                 canJump = false;
             }
@@ -226,6 +242,9 @@ public class Player extends InGameObj{
 
         if (Gdx.input.isKeyPressed(Input.Keys.S)){
             canFallThrough = true;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
+            debugToggle = !debugToggle;
         }
 
         xVelocity = lerp(xVelocity, 0, 0.25f);
@@ -319,9 +338,6 @@ public class Player extends InGameObj{
 
                     Rectangle rec = new Rectangle(w.x, w.y, w.width, w.height);
                     if (testRect.overlaps(rec)){
-                        System.out.println("gfdshughosdih");
-
-
 
                         posX = w.resolveX(testRect);
 
@@ -342,7 +358,6 @@ public class Player extends InGameObj{
 
             Rectangle platformRectangle = new Rectangle(w.x, w.y, w.width, w.height);
             if (testRect.overlaps(platformRectangle)){
-                System.out.println("gfdshughosdih");
 
                 float pastPos = posX;
 
@@ -503,7 +518,8 @@ public class Player extends InGameObj{
     }
     public void shoot(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
-
+            sound = Gdx.audio.newSound(Gdx.files.internal("shoot.mp3"));
+            sound.play(1);
             float tempSpeedx = 0;
             float tempSpeedy = 0;
             boolean isAim = false;
@@ -554,15 +570,15 @@ public class Player extends InGameObj{
 
     }
     public void changeSceneToggle(){
-        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            if(sceneHolder.getScene() == 0){
-                sceneHolder.switchScene(1);
-            } else if(sceneHolder.getScene() == 1){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R) && debugToggle) {
+            if(sceneHolder.getScene() == 1){
                 sceneHolder.switchScene(2);
             } else if(sceneHolder.getScene() == 2){
                 sceneHolder.switchScene(3);
+            } else if(sceneHolder.getScene() == 3){
+                sceneHolder.switchScene(4);
             } else{
-                sceneHolder.switchScene(0);
+                sceneHolder.switchScene(1);
             }
 
         }
@@ -588,11 +604,33 @@ public class Player extends InGameObj{
     }
     public void amIDead(){
         if (health <= 0){
-            sceneHolder.switchScene(0);
+            this.inTutorial = Globals.sceneHolder.getInTutorial();
+            if(this.inTutorial == false){
+            sceneHolder.switchScene(2);
+        }else{
+                sceneHolder.switchScene(1);
+            }
         }
     }
     public void printLocation(){
         System.out.println("Player location: (" + posX + ", " + posY + ")");
+    }
+    public void playerDebug(SpriteBatch batch){
+
+        Globals.font.draw(batch, "(" + posX + ", " + posY + ")",  posX, posY+100);
+        Globals.font.draw(batch, "" +
+                "MOVEMENT: WASD\n" +
+                "SHOOT: SPACE\n" +
+                "AIM: IJKL\n" +
+                "SWITCH SCENE: R\n" +
+                "LIVES: " + health + "\n" +
+                "LEFT HAND ALIVE? " + farmerHandLeft.getIsAlive() + "\n" +
+                "RIGHT HAND ALIVE? " + farmerHandRight.getIsAlive() + "\n" +
+                "HEAD ALIVE? " + farmerHead.getIsAlive(),  camera.position.x - 900, camera.position.y + 400);
+    }
+    public void playerHUD(SpriteBatch batch){
+        Globals.font.draw(batch, "LIVES : " + (int) health, camera.position.x - 900, camera.position.y + 550);
+        Globals.font.draw(batch, "Press 'p' to toggle debug mode", camera.position.x - 900, camera.position.y + 450);
     }
     public float getPosX() {
         return posX;

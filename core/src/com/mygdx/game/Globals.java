@@ -1,7 +1,11 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Globals { // This global class holds objects that should be accessible from every class
@@ -14,5 +18,14 @@ public class Globals { // This global class holds objects that should be accessi
     public static Player potato;
     public static FirstBoss farmer;
     public static OrthographicCamera camera = new OrthographicCamera();
+    public static BitmapFont font = new BitmapFont(Gdx.files.internal("Font/font.fnt"), Gdx.files.internal("Font/font.png"), false);
+    public static MainMenuScreen mainMenuScreen = new MainMenuScreen();
+    public static Music music;
+    public static Sound sound;
+    public static boolean isWin = false;
+    public static FirstBossHead farmerHead;
+    public static FirstBossHand farmerHandRight;
+    public static FirstBossHand farmerHandLeft;
+
 
 }
