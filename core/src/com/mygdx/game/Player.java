@@ -21,22 +21,25 @@ public class Player extends InGameObj{
             "PotatoIdle1.png",
             "PotatoIdle2.png",
             "PotatoIdle2.png",
-            "PotatoIdle3.png"},true);
+            "PotatoIdle3.png"},true,.1f);
 
     Animation runAnimation = new Animation(new String[]{
             "PotatoRun1.png",
             "PotatoRun2.png",
             "PotatoRun3.png",
-            "PotatoRun4.png"},true);
+            "PotatoRun4.png"},true,.1f);
+    Animation dashAnimation = new Animation(new String[]{
+        //cant even see other animations cause dash is quick so only one png
+            "PotatoDash4.png"},false, .5f);
     Animation currentAnimation;
     private float dashTime = 0.25f;
     private boolean dashPressed = false;
 
     private boolean inTutorial;
-    private float posX;
-    private float posY;
+    public float posX;
+    public float posY;
 
-    private float health;
+    public float health;
     private float height;
     private float width;
     public float xVelocity = 0;
@@ -149,7 +152,7 @@ public class Player extends InGameObj{
         */
 
       //  batch.draw(currentAnimation, posX, posY, width, height, 0, 0, (int) width,(int) height, isFacingRight, false);
-        batch.draw(currentAnimation.getCurrentFrame(), isFacingRight?posX+width:posX, posY, isFacingRight?-width:width,height);
+        batch.draw(currentAnimation.getCurrentFrame(), !isFacingRight?posX+width:posX, posY, !isFacingRight?-width:width,height);
         //playerDebug(batch);
         playerHUD(batch);
         if (dontRender == false) {
@@ -168,8 +171,14 @@ public class Player extends InGameObj{
      */
     private void calculateVelocity() {
         //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
-        if (xVelocity < 0 ){
-            changeAnimation(runAnimation);
+        if (dashPressed){
+            changeAnimation(dashAnimation);
+        }else {
+            if (Math.abs(xVelocity) > 2) {
+                changeAnimation(runAnimation);
+            } else {
+                changeAnimation(idleAnimation);
+            }
         }
         yVelocity -= gravity;
 

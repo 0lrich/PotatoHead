@@ -94,9 +94,9 @@ public class FirstBossHand extends Boss {
                 //get random number
                 float chosenattack;
 
-               chosenattack = attackchoice.nextInt(5)+1;
+               chosenattack = attackchoice.nextInt(2)+1;
                 //set currentAttack to appropriate Attack
-                 chosenattack = 2;
+                // chosenattack = 2;
                 switch ((int) chosenattack) {
                     case 1:
                         currentAttack = new FirstBossFingerBullet(player,this);
@@ -140,7 +140,8 @@ public class FirstBossHand extends Boss {
             } else if (health <= 0) {
             currentTexture = deathTexture;
             isAlive = false;
-
+            y-=5;
+            x += (float) Math.sin(y)*5;
         }
 
 

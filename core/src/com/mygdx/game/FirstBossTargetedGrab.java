@@ -56,6 +56,9 @@ public class FirstBossTargetedGrab implements FirstBossAttacks{
 
         }
         }else {
+        if (player.invulnerable){
+
+        }
         boss.currentTexture = boss.closedFist;
         if ( 7 <= timer && timer <=20 ) {
             boss.y += 10;
@@ -65,6 +68,7 @@ public class FirstBossTargetedGrab implements FirstBossAttacks{
             player.yVelocity -= 100;
             if(boss.rightHand == true){
                 player.xVelocity += 50;
+                player.health -=1;
             }else{
                 player.xVelocity -= 50;
             }
