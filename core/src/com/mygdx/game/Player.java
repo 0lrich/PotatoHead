@@ -15,16 +15,35 @@ import static java.lang.Math.signum;
 
 public class Player extends InGameObj{
     private Texture currentTexture = new Texture(Gdx.files.internal("playerDefault.png"));
+
+
+    Animation idleAnimation = new Animation(new String[]{
+            "PotatoIdle1.png",
+            "PotatoIdle2.png",
+            "PotatoIdle2.png",
+            "PotatoIdle3.png"},true,.1f);
+
+    Animation runAnimation = new Animation(new String[]{
+            "PotatoRun1.png",
+            "PotatoRun2.png",
+            "PotatoRun3.png",
+            "PotatoRun4.png"},true,.1f);
+    Animation dashAnimation = new Animation(new String[]{
+        //cant even see other animations cause dash is quick so only one png
+            "PotatoDash4.png"},false, .5f);
+    Animation currentAnimation;
     private float dashTime = 0.25f;
     private boolean dashPressed = false;
+
     private boolean inTutorial;
-    private float posX;
-    private float posY;
-    private float health;
+    public float posX;
+    public float posY;
+
+    public float health;
     private float height;
     private float width;
-    private float xVelocity = 0;
-    private float yVelocity = 0;
+    public float xVelocity = 0;
+    public float yVelocity = 0;
     private float gravity = 1;
     private float speed = 4;
     private float jumpForce = 23;
@@ -42,8 +61,12 @@ public class Player extends InGameObj{
     boolean isOnFloor = false;
     Vector2 playerSpawn;
     int damage = 1;
+
+    boolean dontRender = false;
+
     boolean debugToggle = false;
     boolean godKillerToggle = false;
+
 
     public Player(float x, float y, float health, float height, float width) {
         this.posX = x;
@@ -52,6 +75,7 @@ public class Player extends InGameObj{
         this.health = health;
         this.height = height;
         this.width = width;
+        currentAnimation = idleAnimation;
 
         potato = this;
 
@@ -66,8 +90,13 @@ public class Player extends InGameObj{
         this.health = health;
         this.height = height;
         this.width = width;
+        changeAnimation(idleAnimation);
 
         potato = this;
+    }
+
+    private void changeAnimation(Animation animation){
+        currentAnimation = animation;
     }
     public void death(){
         if(posY<=-2000){
@@ -103,7 +132,7 @@ public class Player extends InGameObj{
                 Globals.bulletHolder.bullets.get(i).alreadyHitSomething();
             }
         }
-
+        currentAnimation.update();
 
 
     }
@@ -122,13 +151,16 @@ public class Player extends InGameObj{
         globalRender.rect(posX, posY,width, height);
         globalRender.end();
         */
-      //  batch.draw(currentTexture, posX, posY, width, height, 0, 0, (int) width,(int) height, isFacingRight, false);
-        batch.draw(currentTexture, isFacingRight?posX+width:posX, posY, isFacingRight?-width:width,height);
+
+      //  batch.draw(currentAnimation, posX, posY, width, height, 0, 0, (int) width,(int) height, isFacingRight, false);
+        batch.draw(currentAnimation.getCurrentFrame(), !isFacingRight?posX+width:posX, posY, !isFacingRight?-width:width,height);
         //playerDebug(batch);
         playerHUD(batch);
-        if(debugToggle){
+        if (dontRender == false) {
+		if(debugToggle){
             playerDebug(batch);
         }
+
         if(godKillerToggle){
             health = 999999;
             damage = 99;
@@ -137,6 +169,9 @@ public class Player extends InGameObj{
             damage = 1;
             fireRate = 3;
         }
+
+		}
+
     }
     public void dispose () {}
 
@@ -148,7 +183,15 @@ public class Player extends InGameObj{
      */
     private void calculateVelocity() {
         //fixme this is a template for getting keyboard input (this should actually be changing x and y velocity)
-
+        if (dashPressed){
+            changeAnimation(dashAnimation);
+        }else {
+            if (Math.abs(xVelocity) > 2) {
+                changeAnimation(runAnimation);
+            } else {
+                changeAnimation(idleAnimation);
+            }
+        }
         yVelocity -= gravity;
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
@@ -159,6 +202,33 @@ public class Player extends InGameObj{
             xVelocity += speed;
             isFacingRight = true;
         }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)){
+            if(isFacingRight == true){
+                jumpForce = 0;
+                gravity = 0;
+                xVelocity+=100;
+                dashPressed = true;
+                yVelocity = 0;
+            }
+            else{
+                jumpForce = 0;
+                gravity = 0;
+                xVelocity-=100;
+                dashPressed = true;
+                yVelocity = 0;
+            }}
+        if(dashPressed == true){
+        dashTime -=Gdx.graphics.getDeltaTime();
+        invulnerable = true;
+        if(dashTime<0) {
+            gravity = 1;
+            dashTime = 0.25f;
+            dashPressed = false;
+            jumpForce = 23;
+            invulnerable = false;
+        }}
+
 
         if (isOnFloor){
             canJump = true;

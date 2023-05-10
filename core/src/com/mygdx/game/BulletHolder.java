@@ -18,6 +18,10 @@ public class BulletHolder {
         bullets.add(new Bullet(x, y,  speedX, speedY));
 
     }
+    public void addBullet(float x, float y, float size, float xSpeed, float ySpeed, Texture defaultTexture, float damage, boolean isFriendly){
+        bullets.add(new Bullet(x, y,size,xSpeed,ySpeed,defaultTexture,damage,isFriendly));
+
+    }
     public void update() {
         if (bullets != null) {
             for (int i = 0; i < bullets.size(); i++) {
