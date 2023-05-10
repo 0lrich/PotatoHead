@@ -561,10 +561,11 @@ public class Player extends InGameObj{
 
         Globals.font.draw(batch, "(" + posX + ", " + posY + ")",  posX, posY+100);
         Globals.font.draw(batch, "" +
-                "MOVEMENT: WASD\n" +
-                "SHOOT: SPACE\n" +
-                "AIM: IJKL\n" +
-                "SWITCH SCENE: R\n" +
+                "Controls:\n" +
+                "MOVEMENT - W,A,D | SHOOT - SPACE | AIM - I,J,K,L\n\n" +
+                "Debug Controls:\n" +
+                "SWITCH SCENE - R | GOD-KILLER - O\n\n" +
+                "DEBUG INFO:\n" +
                 "LIVES: " + health + "\n" +
                 "LEFT HAND ALIVE? " + farmerHandLeft.getIsAlive() + "\n" +
                 "RIGHT HAND ALIVE? " + farmerHandRight.getIsAlive() + "\n" +
