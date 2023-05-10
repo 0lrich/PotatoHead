@@ -89,6 +89,8 @@ public class Bullet extends InGameObj {
      */
     public void render (SpriteBatch batch) {
         batch.draw(defaultTexture, x, y, size, size);
+        //batch.draw(defaultTexture, x, y, 0, 0, size, size, 1, 1, 0, defaultTexture, defaultTexture, size, size, false, false);
+
     }
     public void alreadyHitSomething(){
 
