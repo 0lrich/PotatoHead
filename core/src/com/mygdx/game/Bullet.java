@@ -12,7 +12,7 @@ import static com.mygdx.game.Globals.potato;
 public class Bullet extends InGameObj {
     private float x;
     private float y;
-    private float size = 30;
+    private float size = 300;
     private ShapeRenderer shapeRenderer;
     private float xSpeed;
     private float ySpeed;
@@ -90,9 +90,9 @@ public class Bullet extends InGameObj {
      *      V
      */
     public void render (SpriteBatch batch) {
-        //batch.draw(defaultTexture, x, y, size, size);
-        batch.draw(defaultTexture, x, y, 10, 10, size, size, 1, 1, rotation, 1, 1, (int) size, (int) size, false, false);
-        rotation += 5;
+        batch.draw(defaultTexture, x, y, size, size);
+        //batch.draw(defaultTexture, x, y, 16, 16, size, size, 1, 1, rotation, 1, 1, (int) size, (int) size, false, false);
+        rotation += 200;
     }
     public void alreadyHitSomething(){
 
