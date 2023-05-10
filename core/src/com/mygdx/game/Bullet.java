@@ -40,8 +40,8 @@ public class Bullet extends InGameObj {
         //the rectangle shape is drawn from the bottom left corner just so u know
         shapeRenderer.rect(x,y,size,size);
         shapeRenderer.end();
-        System.out.println("Bullet location: (" + x + ", " + y + ")");
-        potato.printLocation();
+        //System.out.println("Bullet location: (" + x + ", " + y + ")");
+        //potato.printLocation();
     }
 
     public Bullet(float x, float y, float size, float xSpeed, float ySpeed, Texture defaultTexture, float damage, boolean isFriendly) {

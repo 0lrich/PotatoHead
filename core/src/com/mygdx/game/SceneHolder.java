@@ -120,6 +120,7 @@ public class SceneHolder {
             }
         } else if (scene == 3){
             ScreenUtils.clear(.5f, .5f, 1, 1);
+            Globals.font.draw(batch, "YOU WIN!", 100, 100);
         } else if (scene == 4){
             ScreenUtils.clear(1, 1, 1, 1);
         }

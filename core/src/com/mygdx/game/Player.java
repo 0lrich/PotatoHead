@@ -42,6 +42,7 @@ public class Player extends InGameObj{
     boolean isOnFloor = false;
     Vector2 playerSpawn;
     int damage = 1;
+    boolean debugToggle = false;
 
     public Player(float x, float y, float health, float height, float width) {
         this.posX = x;
@@ -122,7 +123,11 @@ public class Player extends InGameObj{
         */
       //  batch.draw(currentTexture, posX, posY, width, height, 0, 0, (int) width,(int) height, isFacingRight, false);
         batch.draw(currentTexture, isFacingRight?posX+width:posX, posY, isFacingRight?-width:width,height);
-        playerDebug(batch);
+        //playerDebug(batch);
+        playerHUD(batch);
+        if(debugToggle){
+            playerDebug(batch);
+        }
     }
     public void dispose () {}
 
@@ -179,6 +184,9 @@ public class Player extends InGameObj{
 
         if (Gdx.input.isKeyPressed(Input.Keys.S)){
             canFallThrough = true;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
+            debugToggle = !debugToggle;
         }
 
         xVelocity = lerp(xVelocity, 0, 0.25f);
@@ -504,7 +512,7 @@ public class Player extends InGameObj{
 
     }
     public void changeSceneToggle(){
-        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R) && debugToggle) {
             if(sceneHolder.getScene() == 1){
                 sceneHolder.switchScene(2);
             } else if(sceneHolder.getScene() == 2){
@@ -560,7 +568,11 @@ public class Player extends InGameObj{
                 "LIVES: " + health + "\n" +
                 "LEFT HAND ALIVE? " + farmerHandLeft.getIsAlive() + "\n" +
                 "RIGHT HAND ALIVE? " + farmerHandRight.getIsAlive() + "\n" +
-                "HEAD ALIVE? " + farmerHead.getIsAlive(),  camera.position.x - 900, camera.position.y + 550);
+                "HEAD ALIVE? " + farmerHead.getIsAlive(),  camera.position.x - 900, camera.position.y + 400);
+    }
+    public void playerHUD(SpriteBatch batch){
+        Globals.font.draw(batch, "LIVES : " + (int) health, camera.position.x - 900, camera.position.y + 550);
+        Globals.font.draw(batch, "Press 'p' to toggle debug mode", camera.position.x - 900, camera.position.y + 450);
     }
     public float getPosX() {
         return posX;
