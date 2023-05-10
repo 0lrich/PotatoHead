@@ -19,6 +19,7 @@ public class FirstBossHead extends Boss {
 
     Texture deathTexture;
     float opposite;
+    boolean isAlive = true;
 
     public FirstBossHead(float x, float y, float health, float width, float height) {
         super(x, y, health, width, height);
@@ -50,6 +51,7 @@ public class FirstBossHead extends Boss {
 
         } else if (health <= 0) {
         currentTexture = deathTexture;
+        isAlive = false;
 
     }
     }
@@ -80,6 +82,10 @@ public class FirstBossHead extends Boss {
                 }
             }
 
+        }
+
+        public boolean getIsAlive(){
+            return isAlive;
         }
 
     public void render(SpriteBatch batch) {

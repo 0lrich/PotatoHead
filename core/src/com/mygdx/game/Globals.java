@@ -22,6 +22,10 @@ public class Globals { // This global class holds objects that should be accessi
     public static MainMenuScreen mainMenuScreen = new MainMenuScreen();
     public static Music music;
     public static Sound sound;
+    public static boolean isWin = false;
+    public static FirstBossHead farmerHead;
+    public static FirstBossHand farmerHandRight;
+    public static FirstBossHand farmerHandLeft;
 
 
 }

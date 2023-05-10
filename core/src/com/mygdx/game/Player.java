@@ -550,8 +550,17 @@ public class Player extends InGameObj{
         System.out.println("Player location: (" + posX + ", " + posY + ")");
     }
     public void playerDebug(SpriteBatch batch){
-        Globals.font.draw(batch, "Player location: (" + posX + ", " + posY + ")",  posX, posY + 100);
-        Globals.font.draw(batch, "MOVEMENT: WASD\nSHOOT: SPACE\nAIM: IJKL\nSWITCH SCENE: R\nLIVES:" + health,  posX, posY + 350);
+
+        Globals.font.draw(batch, "(" + posX + ", " + posY + ")",  posX, posY+100);
+        Globals.font.draw(batch, "" +
+                "MOVEMENT: WASD\n" +
+                "SHOOT: SPACE\n" +
+                "AIM: IJKL\n" +
+                "SWITCH SCENE: R\n" +
+                "LIVES: " + health + "\n" +
+                "LEFT HAND ALIVE? " + farmerHandLeft.getIsAlive() + "\n" +
+                "RIGHT HAND ALIVE? " + farmerHandRight.getIsAlive() + "\n" +
+                "HEAD ALIVE? " + farmerHead.getIsAlive(),  camera.position.x - 900, camera.position.y + 550);
     }
     public float getPosX() {
         return posX;

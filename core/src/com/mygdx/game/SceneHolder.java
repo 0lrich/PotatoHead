@@ -8,9 +8,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import static com.mygdx.game.Globals.*;
 
 public class SceneHolder {
-    FirstBossHead farmerHead;
-    FirstBossHand farmerHandRight;
-    FirstBossHand farmerHandLeft;
     Player potato;
     public boolean inTutorial;
 
@@ -118,6 +115,9 @@ public class SceneHolder {
             tempLevel1Portal();
         } else if (scene == 2){
             ScreenUtils.clear(.6f, .2f, .2f, 1);
+            if(!farmerHandLeft.getIsAlive() && !farmerHandRight.getIsAlive() && !farmerHead.getIsAlive()){
+                switchScene(3);
+            }
         } else if (scene == 3){
             ScreenUtils.clear(.5f, .5f, 1, 1);
         } else if (scene == 4){

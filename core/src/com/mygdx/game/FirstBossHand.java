@@ -13,11 +13,9 @@ public class FirstBossHand extends Boss {
     float rotation;
     Texture defaultTexture;
     Texture hitTexture;
-
     Texture deathTexture;
     FirstBossAttacks currentAttack;
-
-    Random attackchoice= new Random();
+    Random attackchoice = new Random();
     Texture shooting1;
     Texture shooting2;
     Texture shooting3;
@@ -28,6 +26,7 @@ public class FirstBossHand extends Boss {
     boolean alreadyattacking = false;
     boolean disabledMovementpattern = false;
     boolean rightHand = false;
+    boolean isAlive = true;
 
     public FirstBossHand(float x, float y, float health, float width, float height) {
         super(x, y, health, width, height);
@@ -47,6 +46,7 @@ public class FirstBossHand extends Boss {
         bossBody.end();
     }
     public void init(float x, float y, float health, float width, float height) {
+        isAlive = true;
         super.init(x, y, health, width, height);
         currentTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
         defaultTexture = new Texture(Gdx.files.internal("RightHandFarmer.png"));
@@ -136,6 +136,7 @@ public class FirstBossHand extends Boss {
             }
             } else if (health <= 0) {
             currentTexture = deathTexture;
+            isAlive = false;
 
         }
 
@@ -192,5 +193,8 @@ float opposite;
             return bossRectangle.overlaps(bulletRectangle);
         }
         return false;
+    }
+    public boolean getIsAlive(){
+        return isAlive;
     }
 }
