@@ -23,6 +23,8 @@ public class Bullet extends InGameObj {
 
     boolean isFriendly = true;
 
+    float rotation = 0;
+
     public Bullet(float x, float y, float xSpeed, float ySpeed) {
 
         this.x = x + size/2;
@@ -88,9 +90,9 @@ public class Bullet extends InGameObj {
      *      V
      */
     public void render (SpriteBatch batch) {
-        batch.draw(defaultTexture, x, y, size, size);
-        //batch.draw(defaultTexture, x, y, 0, 0, size, size, 1, 1, 0, defaultTexture, defaultTexture, size, size, false, false);
-
+        //batch.draw(defaultTexture, x, y, size, size);
+        batch.draw(defaultTexture, x, y, 10, 10, size, size, 1, 1, rotation, 1, 1, (int) size, (int) size, false, false);
+        rotation += 5;
     }
     public void alreadyHitSomething(){
 

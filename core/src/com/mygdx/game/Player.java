@@ -30,7 +30,7 @@ public class Player extends InGameObj{
     private float jumpForce = 23;
     private boolean jumpPressed = false;
     private boolean canJump = true;
-    private float bulletSpeed = 50;
+    private float bulletSpeed = 50 / 10;
     boolean canFallThrough = false;
     boolean isFacingRight = true;
     boolean invulnerable = false;
