@@ -43,6 +43,7 @@ public class Player extends InGameObj{
     Vector2 playerSpawn;
     int damage = 1;
     boolean debugToggle = false;
+    boolean godKillerToggle = false;
 
     public Player(float x, float y, float health, float height, float width) {
         this.posX = x;
@@ -128,6 +129,14 @@ public class Player extends InGameObj{
         if(debugToggle){
             playerDebug(batch);
         }
+        if(godKillerToggle){
+            health = 999999;
+            damage = 99;
+            fireRate = 20;
+        } else{
+            damage = 1;
+            fireRate = 3;
+        }
     }
     public void dispose () {}
 
@@ -187,6 +196,9 @@ public class Player extends InGameObj{
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
             debugToggle = !debugToggle;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O) && debugToggle){
+            godKillerToggle = !godKillerToggle;
         }
 
         xVelocity = lerp(xVelocity, 0, 0.25f);
