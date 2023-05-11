@@ -15,7 +15,6 @@ public class Wall {
     float y;
     float height;
     float width;
-    Texture currentTexture = new Texture(Gdx.files.internal("cloudBlock.png"));
 
     public Wall(float x, float y, float height, float width) {
         this.height = height;
@@ -48,7 +47,7 @@ public class Wall {
         globalRender.end();
          */
 
-        batch.draw(currentTexture, x, y, width, height);
+        batch.draw(wallTexture, x, y, width, height);
     }
     public float resolveX(Rectangle testRect) {
 
