@@ -546,6 +546,8 @@ public class Player extends InGameObj{
         Rectangle rect = new Rectangle(pitchforks.x, pitchforks.y, pitchforks.width, pitchforks.height);
         if(testRect.overlaps(rect)){
             health--;
+            posX = sceneHolder.getPlayerSpawn().x;
+            posY = sceneHolder.getPlayerSpawn().y;
         }
     }
     public void shoot(float deltaTime) {
