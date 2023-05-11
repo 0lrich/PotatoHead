@@ -11,6 +11,7 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("PotatoHead");
 		config.setMaximized(true);
+		//config.addIcon("data/ic_launcher.png", Files.FileType.Internal);
 		new Lwjgl3Application(new Main(), config);
 	}
 }

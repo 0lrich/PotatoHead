@@ -648,12 +648,15 @@ public class Player extends InGameObj{
         if (health <= 0) {
             this.inTutorial = Globals.sceneHolder.getInTutorial();
             int tempScene = sceneHolder.getScene();
+            /*
             if (tempScene == 2){
                 tempScene = 3; //if u die while in boss you go back to walking to him again
             }
             if (tempScene == 4){
                 tempScene = 0;
             }
+            */
+
 
             sceneHolder.switchScene(tempScene);
         }
