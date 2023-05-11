@@ -119,6 +119,7 @@ public class Player extends InGameObj{
      *   V
      */
     public void update(float deltaTime) {
+        pitchforkCollide();
         death();
 
         invlunerableTime -= Gdx.graphics.getDeltaTime();
@@ -133,7 +134,6 @@ public class Player extends InGameObj{
             }
         }
         currentAnimation.update();
-
 
     }
     /**
@@ -530,6 +530,7 @@ public class Player extends InGameObj{
 
     }
 
+
     public boolean isRectCollideWithWalls(Rectangle testRect){
         for(int i = 0; i < wallHolder.getWalls().size(); i++){
             Wall w = wallHolder.getWalls().get(i);
@@ -539,6 +540,13 @@ public class Player extends InGameObj{
             }
         }
         return false;
+    }
+    public void pitchforkCollide(){
+        Rectangle testRect = new Rectangle(getPosX(), getPosY(), getWidth(), getHeight());
+        Rectangle rect = new Rectangle(pitchforks.x, pitchforks.y, pitchforks.width, pitchforks.height);
+        if(testRect.overlaps(rect)){
+            health--;
+        }
     }
     public void shoot(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
@@ -627,13 +635,10 @@ public class Player extends InGameObj{
         return false;
     }
     public void amIDead(){
-        if (health <= 0){
+        if (health <= 0) {
             this.inTutorial = Globals.sceneHolder.getInTutorial();
-            if(this.inTutorial == false){
-            sceneHolder.switchScene(2);
-        }else{
-                sceneHolder.switchScene(1);
-            }
+            int tempScene = sceneHolder.getScene();
+            sceneHolder.switchScene(tempScene);
         }
     }
     public void printLocation(){
