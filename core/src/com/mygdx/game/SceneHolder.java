@@ -76,7 +76,7 @@ public class SceneHolder {
                 platFallTexture = woodBlockTexture;
                 inTutorial = false;
 
-                playerSpawn.set(618, 120);
+                playerSpawn.set(1240, 120);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50, 36);
                 pitchforks.init(3800 + sceneShiftX, 190 + sceneShiftY);
                 farmerHead.init(Gdx.graphics.getWidth() / 2 - farmerHead.width / 2, 400, 30, 350, 350);

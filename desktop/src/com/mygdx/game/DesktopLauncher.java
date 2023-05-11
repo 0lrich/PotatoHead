@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.mygdx.game.Main;
@@ -9,9 +11,9 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("PotatoHead");
+		config.setTitle("Tateroscoe");
 		config.setMaximized(true);
-		//config.addIcon("data/ic_launcher.png", Files.FileType.Internal);
+		//config.setWindowIcon(Filetype.Internal, "playerDefault.png");
 		new Lwjgl3Application(new Main(), config);
 	}
 }
