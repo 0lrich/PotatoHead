@@ -4,10 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Random;
+
 public class FirstBossTargetedGrab implements FirstBossAttacks{
         float damage = 1;
         float timer= 0;
         boolean targetSet = false;
+        Random gettingtossed;
     Vector2 target = new Vector2(0,0);
 
     public FirstBossTargetedGrab(Player player, FirstBossHand boss) {
@@ -55,25 +58,24 @@ public class FirstBossTargetedGrab implements FirstBossAttacks{
         }else {
 
         }
-        }else {
-        if (player.invulnerable){
+        }else{
+        if (player.invulnerable) {
 
-        }
-        boss.currentTexture = boss.closedFist;
-        if ( 7 <= timer && timer <=20 ) {
-            boss.y += 10;
-            player.posY = boss.y+boss.height/2;
-            player.posX = boss.x+boss.width/2;
-        }if (timer > 25){
-            player.yVelocity -= 100;
-            if(boss.rightHand == true){
-                player.xVelocity += 50;
-                player.health -=1;
-            }else{
-                player.xVelocity -= 50;
+        } else {
+
+            boss.currentTexture = boss.closedFist;
+            if (7 <= timer && timer <= 20) {
+                boss.y += 10;
+                player.posY = boss.y + boss.height / 2;
+                player.posX = boss.x + boss.width / 2;
+            }
+            if (timer > 21) {
+                player.yVelocity -= 50;
+                player.health -= 1;
+
             }
         }
-        }
+    }
 
 
         isdone(boss);
@@ -81,7 +83,7 @@ public class FirstBossTargetedGrab implements FirstBossAttacks{
 
     @Override
     public boolean isdone(FirstBossHand boss) {
-        if (timer>=10) {
+        if (timer>=25) {
             boss.disabledMovementpattern = false;
             targetSet = false;
             return true;
