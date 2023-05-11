@@ -64,13 +64,14 @@ public class SceneHolder {
                 platFallTexture = woodBlockTexture;
                 inTutorial = false;
 
-                playerSpawn.set(600, 3000);
+                playerSpawn.set(618, 120);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);
                 farmerHead.init(Gdx.graphics.getWidth()/2 - farmerHead.width/2,400,30,350,350);
-                farmerHandLeft.init(0,350,20,350,350 );
+                farmerHandLeft.init(0,650,20,350,350 );
                 farmerHandRight.init(Gdx.graphics.getWidth()- farmerHandRight.width,350,20,350,350);
                 platformHolder.setPlatformScene(2);
                 wallHolder.setWallScene(2);
+
                 break;
             case 3: // Test level
                 playerSpawn.set(400, 5000);
@@ -122,8 +123,16 @@ public class SceneHolder {
             Globals.font.draw(batch, "DOWN THE HOLE", -400, 1800);
         } else if (scene == 2){
             ScreenUtils.clear(.6f, .2f, .2f, 1);
+            batch.draw(roadSignTexture, -5750,-400,170, 190);
+            batch.draw(truckBaseTexture, 0,-399, 2000, 150);
+            batch.draw(truckWheelTexture, 0, -499, 204.75f, 171.375f);
+            batch.draw(truckWheelTexture, 450, -499, 204.75f, 171.375f);
+            batch.draw(truckWheelTexture, 1050, -499, 204.75f, 171.375f);
+            batch.draw(truckWheelTexture, 1500, -499, 204.75f, 171.375f);
+            batch.draw(truckWheelTexture, 2100, -499, 204.75f, 171.375f);
             if(!farmerHandLeft.getIsAlive() && !farmerHandRight.getIsAlive() && !farmerHead.getIsAlive()){
-                switchScene(3);
+                switchScene(4);
+
             }
         } else if (scene == 3){
             ScreenUtils.clear(0.7f,0.8f,1f,1);
