@@ -143,7 +143,8 @@ public class SceneHolder {
             Globals.font.draw(batch, "JUMP WITH 'W'", 2000, 700);
             Globals.font.draw(batch, "SHOOT WITH 'SPACE'", 3500, 2200);
             Globals.font.draw(batch, "AIM BY HOLDING 'I' 'J' 'K' 'L'", 1700, 2200);
-            Globals.font.draw(batch, "DOWN THE HOLE", -400, 1800);
+            Globals.font.draw(batch, "DOWN THE CLIFF", -400, 1800);
+            Globals.font.draw(batch, "DASH WITH 'SHIFT'", 4500, 1250);
         } else if (scene == 2) {
             /*
             if (Gdx.input.isKeyJustPressed(Input.Keys.T)){
