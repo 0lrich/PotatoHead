@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
+import static com.mygdx.game.Globals.*;
+
 public class Platform extends InGameObj {
     float x;
     float y;
     float height;
     float width;
-    Texture currentTexture = new Texture(Gdx.files.internal("platNoFallDefault.png"));
-    Texture platNoFallTexture = new Texture(Gdx.files.internal("platNoFallDefault.png"));
-    Texture platFallTexture = new Texture(Gdx.files.internal("platFallDefault.png"));
 
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
@@ -60,12 +59,12 @@ public class Platform extends InGameObj {
         */
 
         if(canFallThroughPlat == true){
-            currentTexture = platFallTexture;
+            wallTexture = platFallTexture;
         }else{
-            currentTexture = platNoFallTexture;
+            wallTexture = platNoFallTexture;
         }
 
-        batch.draw(currentTexture, x, y, width,height);
+        batch.draw(wallTexture, x, y, width,height);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -43,6 +44,9 @@ public class SceneHolder {
                 music = Gdx.audio.newMusic(Gdx.files.internal("tutorial.mp3"));
                 music.setVolume(0.5f);
                 music.play();
+                wallTexture = cloudTexture;
+                platNoFallTexture = cloudTexture;
+                platFallTexture = cloudTexture;
                 inTutorial = true;
                 playerSpawn.set(500, 500);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);
@@ -57,7 +61,9 @@ public class SceneHolder {
                 music = Gdx.audio.newMusic(Gdx.files.internal("boss.mp3"));
                 music.setVolume(0.1f);
                 music.play();
-
+                wallTexture = roadTexture;
+                platNoFallTexture = roadStripeTexture;
+                platFallTexture = woodBlockTexture;
                 inTutorial = false;
 
                 playerSpawn.set(600, 3000);

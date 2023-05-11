@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -26,6 +27,13 @@ public class Globals { // This global class holds objects that should be accessi
     public static FirstBossHead farmerHead;
     public static FirstBossHand farmerHandRight;
     public static FirstBossHand farmerHandLeft;
+    public static Texture cloudTexture = new Texture(Gdx.files.internal("cloudBlock.png"));
+    public static Texture roadTexture = new Texture(Gdx.files.internal("roadBlock.png"));
+    public static Texture roadStripeTexture = new Texture(Gdx.files.internal("roadStripe.png"));
+    public static Texture woodBlockTexture = new Texture(Gdx.files.internal("woodBlock.png"));
+    public static Texture wallTexture;
+    public static Texture platNoFallTexture;
+    public static Texture platFallTexture;
 
 
 }
