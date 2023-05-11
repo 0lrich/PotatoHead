@@ -150,15 +150,14 @@ public class SceneHolder {
                 sizeShift += 2;
             }
             */
-            rotation += 10;
+            rotation += 30;
             ScreenUtils.clear(.6f, .2f, .2f, 1);
             batch.draw(gradientTexture, -20000 + sceneShiftX, 0 + sceneShiftY, 40000, 9000);
             batch.draw(truckBaseTexture, 3800 + sceneShiftX, 100 + sceneShiftY, 2000, 150);
-            batch.draw(truckWheelTexture, 3800 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
-            batch.draw(truckWheelTexture, 4250 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
-            batch.draw(truckWheelTexture, 4850 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
-            batch.draw(truckWheelTexture, 5300 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
-            batch.draw(truckWheelTexture, 5900 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
+            batch.draw(new TextureRegion(truckWheelTexture), 3800 + sceneShiftX, -25 + sceneShiftY, sizeShift, sizeShift, (int) 204.75,(int) 171.375, 1, 1,-rotation);
+            batch.draw(new TextureRegion(truckWheelTexture), 4250 + sceneShiftX, -25 + sceneShiftY, sizeShift, sizeShift, (int) 204.75,(int) 171.375, 1, 1,-rotation);
+            batch.draw(new TextureRegion(truckWheelTexture), 4850 + sceneShiftX, -25 + sceneShiftY, sizeShift, sizeShift, (int) 204.75,(int) 171.375, 1, 1,-rotation);
+            batch.draw(new TextureRegion(truckWheelTexture), 5300 + sceneShiftX, -25 + sceneShiftY, sizeShift, sizeShift, (int) 204.75,(int) 171.375, 1, 1,-rotation);
             batch.draw(new TextureRegion(truckWheelTexture), 5900 + sceneShiftX, -25 + sceneShiftY, sizeShift, sizeShift, (int) 204.75,(int) 171.375, 1, 1,-rotation);
 
             if (!farmerHandLeft.getIsAlive() && !farmerHandRight.getIsAlive() && !farmerHead.getIsAlive()) {
