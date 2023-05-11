@@ -115,6 +115,8 @@ public class SceneHolder {
             tempLevel1Portal();
             Globals.font.draw(batch, "RUN WITH 'A' and 'D'", 700, 700);
             Globals.font.draw(batch, "JUMP WITH 'W'", 2000, 700);
+            Globals.font.draw(batch, "SHOOT WITH 'SPACE'", 3500, 2200);
+            Globals.font.draw(batch, "AIM BY HOLDING 'I' 'J' 'K' 'L'", 1700, 2200);
         } else if (scene == 2){
             ScreenUtils.clear(.6f, .2f, .2f, 1);
             if(!farmerHandLeft.getIsAlive() && !farmerHandRight.getIsAlive() && !farmerHead.getIsAlive()){
