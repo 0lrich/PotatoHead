@@ -128,7 +128,7 @@ public class SceneHolder {
         } else if (scene == 2){
             ScreenUtils.clear(.6f, .2f, .2f, 1);
             if(!farmerHandLeft.getIsAlive() && !farmerHandRight.getIsAlive() && !farmerHead.getIsAlive()){
-                switchScene(3);
+                switchScene(4);
             }
         } else if (scene == 3){
             ScreenUtils.clear(0.7f,0.8f,1f,1);
@@ -141,6 +141,9 @@ public class SceneHolder {
             batch.draw(truckWheelTexture, 5300, -25, 204.75f, 171.375f);
             batch.draw(truckWheelTexture, 5900, -25, 204.75f, 171.375f);
             Globals.font.draw(batch, "GET INTO THE TRUCK AND FREE YOUR POTATO BRETHREN ->", 100, 100);
+            if(potato.posX > 5000){
+                switchScene(2);
+            }
         } else if (scene == 4){
             ScreenUtils.clear(1, 1, 1, 1);
             Globals.font.draw(batch, "YOU WIN!", 100, 500);
