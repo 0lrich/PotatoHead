@@ -540,6 +540,13 @@ public class Player extends InGameObj{
         }
         return false;
     }
+    public void pitchforkCollide(){
+        Rectangle testRect = new Rectangle(getPosX(), getPosY(), getWidth(), getHeight());
+        Rectangle rect = new Rectangle(pitchforks.x, pitchforks.y, pitchforks.width, pitchforks.height);
+        if(testRect.overlaps(rect)){
+            
+        }
+    }
     public void shoot(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
             sound = Gdx.audio.newSound(Gdx.files.internal("shoot.mp3"));

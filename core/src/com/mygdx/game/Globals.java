@@ -26,6 +26,7 @@ public class Globals { // This global class holds objects that should be accessi
     public static FirstBossHead farmerHead;
     public static FirstBossHand farmerHandRight;
     public static FirstBossHand farmerHandLeft;
+    public static Pitchforks pitchforks;
     public static Texture cloudTexture = new Texture(Gdx.files.internal("cloudBlock.png"));
     public static Texture roadTexture2 = new Texture(Gdx.files.internal("roadBlock.png"));
     public static Texture roadStripeTexture = new Texture(Gdx.files.internal("roadStripe.png"));
