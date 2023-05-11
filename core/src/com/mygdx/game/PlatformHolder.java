@@ -66,11 +66,11 @@ public class PlatformHolder {
                 addPlatform(4900,1750,40,200,true,false);//
                 break;
             case 2: // Boss level
-                addPlatform(200,200,20,200,true, true);
-                addPlatform(550,100,20,200,true, true);
-                addPlatform(1150,100,20,200,true, true);
-                addPlatform(1500,200,20,200,true, true);
-                addPlatform(0,-100,40,2000,true,false);
+                addPlatform(-6100,-900,500,900,true, true, cliffTexture);
+                addPlatform(200, 200, 20, 200, true, false);
+                addPlatform(550,100, 20, 200, true, false);
+                addPlatform(1150,100, 20, 200, true, false);
+                addPlatform(1500,200, 20, 200, true, false);
                 break;
             case 3: // Test level 1
                 addPlatform(-2300,-500,500,900,true, true, cliffTexture);
