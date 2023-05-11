@@ -1,12 +1,10 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
-import static com.badlogic.gdx.math.MathUtils.lerp;
 import static com.mygdx.game.Globals.*;
 
 public class WallHolder {
@@ -72,6 +70,7 @@ public class WallHolder {
             case 3: // Test level 1
                 addWall(-2000,-3000, 3000, 999999, roadTexture);
                 stairs(3000, 0);
+                addWall(3800,100, 100, 2000, truckBaseTexture);
                 break;
             case 4: // Test level 2
                 break;
