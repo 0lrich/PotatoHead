@@ -87,6 +87,7 @@ public class SceneHolder {
                 break;
             case 4: // Test level 2
                 playerSpawn.set(400, 350);
+                sound = Gdx.audio.newSound(Gdx.files.internal("fanfare.mp3"));
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);
                 moveFarmerOffscreen();
                 platformHolder.setPlatformScene(4);
