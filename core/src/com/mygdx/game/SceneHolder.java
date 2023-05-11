@@ -100,7 +100,7 @@ public class SceneHolder {
     }
     public void tempLevel1Portal(){
         if(potato.getPosX() < 0 && potato.getPosY() < -2000){
-            switchScene(2);
+            switchScene(3);
         }
     }
     public void update(){
@@ -131,9 +131,10 @@ public class SceneHolder {
         } else if (scene == 3){
             ScreenUtils.clear(0.7f,0.8f,1f,1);
             batch.draw(gradientTexture, -20000, 0, 40000, 9000);
-            Globals.font.draw(batch, "YOU WIN!", 100, 100);
+            Globals.font.draw(batch, "GET INTO THE TRUCK AND FREE YOUR POTATO BRETHEREN ->", 100, 100);
         } else if (scene == 4){
             ScreenUtils.clear(1, 1, 1, 1);
+            Globals.font.draw(batch, "YOU WIN!", 100, 100);
         }
 
         farmerHandRight.render(batch);

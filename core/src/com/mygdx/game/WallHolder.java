@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
@@ -19,8 +20,11 @@ public class WallHolder {
         walls.add(new Wall(x, y, height, width));
         //platformHolder.addPlatform(x, y + 1, height, width, true, false, nothingTexture);
         platformHolder.addPlatform(x, y + 1, height, width, true, false, wallTexture);
-
-
+    }
+    public void addWall(float x, float y, float height, float width, Texture texture){
+        walls.add(new Wall(x, y, height, width, texture));
+        //platformHolder.addPlatform(x, y + 1, height, width, true, false, nothingTexture);
+        platformHolder.addPlatform(x, y + 1, height, width, true, false, texture);
     }
     public void removeWall(int Wall){
         walls.remove(Wall);
@@ -63,9 +67,10 @@ public class WallHolder {
                 addWall(5000,1480,50,100);//
                 break;
             case 2: // Boss level
-                addWall(-2000,-300, 300, 999999);
+                addWall(-2000,-300, 300, 1500);
                 break;
             case 3: // Test level 1
+                addWall(-2000,-3000, 20000, 999999, roadTexture);
                 break;
             case 4: // Test level 2
                 break;

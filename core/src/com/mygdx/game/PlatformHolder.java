@@ -72,9 +72,6 @@ public class PlatformHolder {
                 addPlatform(0,-100,40,2000,true,false);
                 break;
             case 3: // Test level 1
-                addPlatform(0,0,400,700,true,false);
-                addPlatform(900,0,400,200,true,false);
-                addPlatform(1300,0,400,700,true,false);
                 break;
             case 4: // Test level 2
                 pyramid(20, 40, 100, 50);
