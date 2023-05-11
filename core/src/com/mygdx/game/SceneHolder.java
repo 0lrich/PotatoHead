@@ -119,6 +119,7 @@ public class SceneHolder {
             Globals.font.draw(batch, "JUMP WITH 'W'", 2000, 700);
             Globals.font.draw(batch, "SHOOT WITH 'SPACE'", 3500, 2200);
             Globals.font.draw(batch, "AIM BY HOLDING 'I' 'J' 'K' 'L'", 1700, 2200);
+            Globals.font.draw(batch, "DOWN THE HOLE", -400, 1800);
         } else if (scene == 2){
             ScreenUtils.clear(.6f, .2f, .2f, 1);
             if(!farmerHandLeft.getIsAlive() && !farmerHandRight.getIsAlive() && !farmerHead.getIsAlive()){
@@ -131,7 +132,7 @@ public class SceneHolder {
             Globals.font.draw(batch, "GET INTO THE TRUCK AND FREE YOUR POTATO BRETHEREN ->", 100, 100);
         } else if (scene == 4){
             ScreenUtils.clear(1, 1, 1, 1);
-            Globals.font.draw(batch, "YOU WIN!", 100, 100);
+            Globals.font.draw(batch, "YOU WIN!", 100, 500);
         }
 
         farmerHandRight.render(batch);

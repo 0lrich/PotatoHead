@@ -37,6 +37,10 @@ public class Globals { // This global class holds objects that should be accessi
     public static Texture roadTexture = new Texture(Gdx.files.internal("tempRoad.png"));
     public static Texture cliffTexture = new Texture(Gdx.files.internal("cliff2.png"));
     public static Texture roadSignTexture = new Texture(Gdx.files.internal("roadSign.png"));
+    public static Texture truckWheelTexture = new Texture(Gdx.files.internal("wheel.png"));
+    public static Texture truckBase = new Texture(Gdx.files.internal("truckBase.png"));
+    public static Texture truckHead = new Texture(Gdx.files.internal("truckHead.png"));
+    public static Texture pitchForks = new Texture(Gdx.files.internal("pitchforks.png"));
     public static Texture wallTexture;
     public static Texture platNoFallTexture;
     public static Texture platFallTexture;
