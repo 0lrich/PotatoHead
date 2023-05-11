@@ -113,6 +113,8 @@ public class SceneHolder {
         } else if (scene == 1){
             ScreenUtils.clear(.9f, .9f, 1, 1);
             tempLevel1Portal();
+            Globals.font.draw(batch, "RUN WITH 'A' and 'D'", 700, 700);
+            Globals.font.draw(batch, "JUMP WITH 'W'", 2000, 700);
         } else if (scene == 2){
             ScreenUtils.clear(.6f, .2f, .2f, 1);
             if(!farmerHandLeft.getIsAlive() && !farmerHandRight.getIsAlive() && !farmerHead.getIsAlive()){
