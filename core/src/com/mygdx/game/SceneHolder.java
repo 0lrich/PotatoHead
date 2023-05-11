@@ -13,6 +13,8 @@ public class SceneHolder {
     public boolean inTutorial;
 
     int scene;
+    float sceneShiftX = -3800;
+    float sceneShiftY = -475;
     Vector2 playerSpawn;
     public SceneHolder(){
 
@@ -129,6 +131,7 @@ public class SceneHolder {
             Globals.font.draw(batch, "DOWN THE HOLE", -400, 1800);
         } else if (scene == 2){
             ScreenUtils.clear(.6f, .2f, .2f, 1);
+            /*
             batch.draw(roadSignTexture, -5750,-400,170, 190);
             batch.draw(truckBaseTexture, 0,-399, 2000, 150);
             batch.draw(truckWheelTexture, 0, -499, 204.75f, 171.375f);
@@ -136,6 +139,14 @@ public class SceneHolder {
             batch.draw(truckWheelTexture, 1050, -499, 204.75f, 171.375f);
             batch.draw(truckWheelTexture, 1500, -499, 204.75f, 171.375f);
             batch.draw(truckWheelTexture, 2100, -499, 204.75f, 171.375f);
+             */
+            batch.draw(gradientTexture, -20000 + sceneShiftX, 0 + sceneShiftY, 40000, 9000);
+            batch.draw(truckBaseTexture, 3800 + sceneShiftX,100 + sceneShiftY, 2000, 150);
+            batch.draw(truckWheelTexture, 3800 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
+            batch.draw(truckWheelTexture, 4250 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
+            batch.draw(truckWheelTexture, 4850 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
+            batch.draw(truckWheelTexture, 5300 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
+            batch.draw(truckWheelTexture, 5900 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
             if(!farmerHandLeft.getIsAlive() && !farmerHandRight.getIsAlive() && !farmerHead.getIsAlive()){
                 switchScene(4);
 
