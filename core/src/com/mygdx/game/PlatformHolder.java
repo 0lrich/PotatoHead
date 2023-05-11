@@ -8,8 +8,7 @@ import com.mygdx.game.Platform;
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
-import static com.mygdx.game.Globals.cliffTexture;
-import static com.mygdx.game.Globals.defaultTexture;
+import static com.mygdx.game.Globals.*;
 
 public class PlatformHolder {
     ArrayList<Platform> platforms = new ArrayList<>();
@@ -66,11 +65,11 @@ public class PlatformHolder {
                 addPlatform(4900,1750,40,200,true,false);//
                 break;
             case 2: // Boss level
-                addPlatform(-6100,-900,500,900,true, true, cliffTexture);
-                addPlatform(200, 200, 20, 200, true, false);
-                addPlatform(550,100, 20, 200, true, false);
-                addPlatform(1150,100, 20, 200, true, false);
-                addPlatform(1500,200, 20, 200, true, false);
+                addPlatform(-2300 + sceneHolder.getSceneShiftX(),-500 + sceneHolder.getSceneShiftY(),500,900,true, true, cliffTexture);
+                addPlatform(4000 + sceneHolder.getSceneShiftX(), 600 + sceneHolder.getSceneShiftY(), 20, 200, true, false);
+                addPlatform(4350 + sceneHolder.getSceneShiftX(), 500 + sceneHolder.getSceneShiftY(), 20, 200, true, false);
+                addPlatform(4950 + sceneHolder.getSceneShiftX(), 500 + sceneHolder.getSceneShiftY(), 20, 200, true, false);
+                addPlatform(5400 + sceneHolder.getSceneShiftX(), 600 + sceneHolder.getSceneShiftY(), 20, 200, true, false);
                 break;
             case 3: // Test level 1
                 addPlatform(-2300,-500,500,900,true, true, cliffTexture);

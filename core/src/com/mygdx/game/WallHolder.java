@@ -65,8 +65,8 @@ public class WallHolder {
                 addWall(5000,1480,50,100);//
                 break;
             case 2: // Boss level
-                addWall(-2000,-3500, 3000, 999999, roadTexture);
-                addWall(2000, -399, 964, 500, truckHeadTexture);
+                addWall(-2000 + sceneHolder.getSceneShiftX(),-3000 + sceneHolder.getSceneShiftY(), 3000, 999999, roadTexture);
+                addWall(5799 + sceneHolder.getSceneShiftX(), 125 + sceneHolder.getSceneShiftY(), 964, 500, truckHeadTexture);
                 break;
             case 3: // Test level 1
                 addWall(-2000,-3000, 3000, 999999, roadTexture);
