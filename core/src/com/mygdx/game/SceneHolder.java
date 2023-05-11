@@ -111,7 +111,7 @@ public class SceneHolder {
     }
 
     public void tempLevel1Portal() {
-        if (potato.getPosX() < 0 && potato.getPosY() < -2000) {
+        if (potato.getPosX() < 1000 && potato.getPosY() < -2000) {
             switchScene(3);
         }
     }
