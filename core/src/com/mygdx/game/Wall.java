@@ -15,12 +15,21 @@ public class Wall {
     float y;
     float height;
     float width;
+    Texture currentTexture;
 
     public Wall(float x, float y, float height, float width) {
         this.height = height;
         this.width = width;
         this.x = x;
         this.y = y;
+        currentTexture = wallTexture;
+    }
+    public Wall(float x, float y, float height, float width, Texture texture) {
+        this.height = height;
+        this.width = width;
+        this.x = x;
+        this.y = y;
+        currentTexture = texture;
     }
     /**
      * this is where stuff that happens every frame is gonna go
@@ -46,8 +55,7 @@ public class Wall {
         globalRender.rect(x,y,width, height);
         globalRender.end();
          */
-
-        batch.draw(wallTexture, x, y, width, height);
+        batch.draw(currentTexture, x, y, width, height);
     }
     public float resolveX(Rectangle testRect) {
 

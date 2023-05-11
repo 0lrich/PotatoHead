@@ -1,11 +1,12 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
-import static com.mygdx.game.Globals.platformHolder;
+import static com.mygdx.game.Globals.*;
 
 public class WallHolder {
 
@@ -16,7 +17,10 @@ public class WallHolder {
     }
     public void addWall(float x, float y, float height, float width){
         walls.add(new Wall(x, y, height, width));
-        platformHolder.addPlatform(x, y + 1, height, width, true, false);
+        //platformHolder.addPlatform(x, y + 1, height, width, true, false, nothingTexture);
+        platformHolder.addPlatform(x, y + 1, height, width, true, false, wallTexture);
+
+
     }
     public void removeWall(int Wall){
         walls.remove(Wall);
@@ -47,9 +51,9 @@ public class WallHolder {
     public void updatewallScene(){
         removeAllWalls();
         switch(wallScene){
-            case 0:
+            case 0: // Main menu
                 break;
-            case 1:
+            case 1: // Tutorial
                 addWall(-20,0,2000,20); // Wall on left
                 addWall(0,0,400,2000); // Spawn wall
                 addWall(2000,0,500,200); // Force-to-jump wall
@@ -58,12 +62,12 @@ public class WallHolder {
                 addWall(5100,1480,500,100);//
                 addWall(5000,1480,50,100);//
                 break;
-            case 2:
+            case 2: // Boss level
                 addWall(-2000,-300, 300, 999999);
                 break;
-            case 3:
+            case 3: // Test level 1
                 break;
-            case 4:
+            case 4: // Test level 2
                 break;
         }
     }

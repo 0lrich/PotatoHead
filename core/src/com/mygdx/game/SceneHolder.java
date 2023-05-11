@@ -76,7 +76,7 @@ public class SceneHolder {
                 wallHolder.setWallScene(2);
                 break;
             case 3: // Test level
-                playerSpawn.set(400, 500);
+                playerSpawn.set(400, 5000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);
                 farmerHandLeft.init(-35000,350,20,350,350 );
                 farmerHandRight.init(3500,350,20,350,350 );
@@ -129,7 +129,8 @@ public class SceneHolder {
                 switchScene(3);
             }
         } else if (scene == 3){
-            ScreenUtils.clear(.5f, .5f, 1, 1);
+            ScreenUtils.clear(0.7f,0.8f,1f,1);
+            batch.draw(gradientTexture, -20000, 0, 40000, 9000);
             Globals.font.draw(batch, "YOU WIN!", 100, 100);
         } else if (scene == 4){
             ScreenUtils.clear(1, 1, 1, 1);

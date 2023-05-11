@@ -18,8 +18,7 @@ public class Platform extends InGameObj {
     Boolean tangible;
     Boolean isFallingThrough;
     Boolean canFallThroughPlat;
-
-
+    Texture currentTexture;
     public Platform(float x, float y, float height, float width, Boolean tangible, boolean isFallThrough) {
         this.canFallThroughPlat = isFallThrough;
         this.height = height;
@@ -27,6 +26,20 @@ public class Platform extends InGameObj {
         this.tangible = tangible;
         this.x = x;
         this.y = y;
+        if(isFallThrough){
+            currentTexture = platFallTexture;
+        } else{
+            currentTexture = platNoFallTexture;
+        }
+    }
+    public Platform(float x, float y, float height, float width, Boolean tangible, boolean isFallThrough, Texture texture) {
+        this.canFallThroughPlat = isFallThrough;
+        this.height = height;
+        this.width = width;
+        this.tangible = tangible;
+        this.x = x;
+        this.y = y;
+        currentTexture = texture;
     }
     /**
      * this is where stuff that happens every frame is gonna go
@@ -58,13 +71,7 @@ public class Platform extends InGameObj {
         Globals.globalRender.end();
         */
 
-        if(canFallThroughPlat == true){
-            wallTexture = platFallTexture;
-        }else{
-            wallTexture = platNoFallTexture;
-        }
-
-        batch.draw(wallTexture, x, y, width,height);
+        batch.draw(currentTexture, x, y, width,height);
     }
 
     /**

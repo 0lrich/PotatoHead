@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Platform;
@@ -7,6 +8,7 @@ import com.mygdx.game.Platform;
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
+import static com.mygdx.game.Globals.defaultTexture;
 
 public class PlatformHolder {
     ArrayList<Platform> platforms = new ArrayList<>();
@@ -16,6 +18,9 @@ public class PlatformHolder {
     }
     public void addPlatform(float x, float y, float height, float width, Boolean tangible, Boolean isFallThrough){
         platforms.add(new Platform(x, y, height, width, tangible, isFallThrough));
+    }
+    public void addPlatform(float x, float y, float height, float width, Boolean tangible, Boolean isFallThrough, Texture texture){
+        platforms.add(new Platform(x, y, height, width, tangible, isFallThrough, texture));
     }
     public void removePlatform(int platform){
         platforms.remove(platform);
@@ -46,9 +51,9 @@ public class PlatformHolder {
     public void updatePlatformScene(){
         removeAllPlatforms();
         switch(platformScene){
-            case 0:
+            case 0: // Main menu
                 break;
-            case 1:
+            case 1: // Tutorial level
                 addPlatform(2400,510,40,200, true, false); //
                 addPlatform(2800,510,40,200, true, false); //
                 addPlatform(3400,510,40,200, true, false); //
@@ -59,22 +64,20 @@ public class PlatformHolder {
                 addPlatform(4500,1900,40,200,true,false);//
                 addPlatform(4900,1750,40,200,true,false);//
                 break;
-            case 2:
+            case 2: // Boss level
                 addPlatform(200,200,20,200,true, true);
                 addPlatform(550,100,20,200,true, true);
                 addPlatform(1150,100,20,200,true, true);
                 addPlatform(1500,200,20,200,true, true);
                 addPlatform(0,-100,40,2000,true,false);
                 break;
-            case 3:
+            case 3: // Test level 1
                 addPlatform(0,0,400,700,true,false);
                 addPlatform(900,0,400,200,true,false);
                 addPlatform(1300,0,400,700,true,false);
                 break;
-            case 4:
-
+            case 4: // Test level 2
                 pyramid(20, 40, 100, 50);
-
                 break;
             case 5:
                 float baseWidth =  800;
