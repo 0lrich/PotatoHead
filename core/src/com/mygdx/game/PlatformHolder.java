@@ -8,6 +8,7 @@ import com.mygdx.game.Platform;
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.math.MathUtils.lerp;
+import static com.mygdx.game.Globals.cliffTexture;
 import static com.mygdx.game.Globals.defaultTexture;
 
 public class PlatformHolder {
@@ -72,6 +73,7 @@ public class PlatformHolder {
                 addPlatform(0,-100,40,2000,true,false);
                 break;
             case 3: // Test level 1
+                addPlatform(-2300,-500,500,900,true, true, cliffTexture);
                 break;
             case 4: // Test level 2
                 pyramid(20, 40, 100, 50);

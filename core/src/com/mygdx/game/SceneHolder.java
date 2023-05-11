@@ -35,9 +35,7 @@ public class SceneHolder {
                 mainMenuScreen.show();
                 playerSpawn.set(5000, 5000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);
-                farmerHead.init(53500,400,30,350,350);
-                farmerHandLeft.init(-3500000,350,20,350,350);
-                farmerHandRight.init(350000,350,20,350,350);
+                moveFarmerOffscreen();
                 break;
             case 1: // Tutorial level
 
@@ -52,7 +50,7 @@ public class SceneHolder {
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);
                 farmerHead.init(53500,400,30,350,350);
                 farmerHandLeft.init(-3500000,350,20,350,350);
-                farmerHandRight.init(350000,350,20,350,350);
+                farmerHandRight.init(3500000,350,20,350,350);
                 platformHolder.setPlatformScene(1);
                 wallHolder.setWallScene(1);
                 break;
@@ -71,27 +69,20 @@ public class SceneHolder {
                 farmerHead.init(Gdx.graphics.getWidth()/2 - farmerHead.width/2,400,30,350,350);
                 farmerHandLeft.init(0,350,20,350,350 );
                 farmerHandRight.init(Gdx.graphics.getWidth()- farmerHandRight.width,350,20,350,350);
-
                 platformHolder.setPlatformScene(2);
                 wallHolder.setWallScene(2);
                 break;
             case 3: // Test level
                 playerSpawn.set(400, 5000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);
-                farmerHandLeft.init(-35000,350,20,350,350 );
-                farmerHandRight.init(3500,350,20,350,350 );
-                farmerHead.init(53500,400,30,350,350 );
-
+                moveFarmerOffscreen();
                 platformHolder.setPlatformScene(3);
                 wallHolder.setWallScene(3);
                 break;
             case 4: // Test level 2
                 playerSpawn.set(400, 350);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);
-                farmerHandLeft.init(-35000,350,20,350,350 );
-                farmerHandRight.init(3500,350,20,350,350 );
-                farmerHead.init(53500,400,30,350,350 );
-
+                moveFarmerOffscreen();
                 platformHolder.setPlatformScene(4);
                 wallHolder.setWallScene(4);
                 break;
@@ -102,6 +93,11 @@ public class SceneHolder {
         if(potato.getPosX() < 0 && potato.getPosY() < -2000){
             switchScene(3);
         }
+    }
+    public void moveFarmerOffscreen(){
+        farmerHead.init(3500000,400,30,350,350);
+        farmerHandLeft.init(-3500000,350,20,350,350);
+        farmerHandRight.init(3500000,350,20,350,350);
     }
     public void update(){
         if(scene != 0) {
@@ -131,6 +127,7 @@ public class SceneHolder {
         } else if (scene == 3){
             ScreenUtils.clear(0.7f,0.8f,1f,1);
             batch.draw(gradientTexture, -20000, 0, 40000, 9000);
+            batch.draw(roadSignTexture, -1900,0,170, 190);
             Globals.font.draw(batch, "GET INTO THE TRUCK AND FREE YOUR POTATO BRETHEREN ->", 100, 100);
         } else if (scene == 4){
             ScreenUtils.clear(1, 1, 1, 1);

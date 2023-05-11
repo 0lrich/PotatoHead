@@ -70,10 +70,16 @@ public class WallHolder {
                 addWall(-2000,-300, 300, 1500);
                 break;
             case 3: // Test level 1
-                addWall(-2000,-3000, 20000, 999999, roadTexture);
+                addWall(-2000,-3000, 3000, 999999, roadTexture);
+                stairs(3000, 0);
                 break;
             case 4: // Test level 2
                 break;
+        }
+    }
+    public void stairs(float x, float y){
+        for(int i = 0; i < 15; i++){
+            addWall(x + (50 * i),y + (50 * i), 50, 50);
         }
     }
 }
