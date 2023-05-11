@@ -58,6 +58,7 @@ public class Player extends InGameObj{
     float fireRate = 3;
     float maxCoyoteSeconds = 0.08f;
     float coyoteSeconds = 0;
+    float dodgecooldown = 0;
     boolean isOnFloor = false;
     Vector2 playerSpawn;
     int damage = 1;
@@ -119,7 +120,7 @@ public class Player extends InGameObj{
      */
     public void update(float deltaTime) {
         death();
-
+        dodgecooldown -= Gdx.graphics.getDeltaTime();
         invlunerableTime -= Gdx.graphics.getDeltaTime();
         shoot(deltaTime);
         movement();
@@ -192,12 +193,16 @@ public class Player extends InGameObj{
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)){
+            if (dodgecooldown > 1){
+            System.out.println("ON COOLDOWN " + dodgecooldown + " SECONDS LEFT");
+            }else{
             if(isFacingRight == true){
                 jumpForce = 0;
                 gravity = 0;
                 xVelocity+=100;
                 dashPressed = true;
                 yVelocity = 0;
+                dodgecooldown = 3;
             }
             else{
                 jumpForce = 0;
@@ -205,7 +210,8 @@ public class Player extends InGameObj{
                 xVelocity-=100;
                 dashPressed = true;
                 yVelocity = 0;
-            }}
+                dodgecooldown = 3;
+            }}}
         if(dashPressed == true){
         dashTime -=Gdx.graphics.getDeltaTime();
         invulnerable = true;
@@ -614,11 +620,22 @@ public class Player extends InGameObj{
     public void amIDead(){
         if (health <= 0){
             this.inTutorial = Globals.sceneHolder.getInTutorial();
+<<<<<<< Updated upstream
             if(this.inTutorial == false){
             sceneHolder.switchScene(2);
         }else{
                 sceneHolder.switchScene(1);
             }
+=======
+            int tempScene = sceneHolder.getScene();
+            if (tempScene == 2){
+                tempScene = 3; //if u die while in boss you go back to walking to him again
+            }
+            if (tempScene == 4){
+                tempScene = 0;
+            }
+            sceneHolder.switchScene(tempScene);
+>>>>>>> Stashed changes
         }
     }
     public void printLocation(){
