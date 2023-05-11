@@ -58,9 +58,8 @@ public class SceneHolder {
                 inTutorial = true;
                 playerSpawn.set(500, 500);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50, 36);
-                farmerHead.init(53500, 400, 30, 350, 350);
-                farmerHandLeft.init(-3500000, 350, 20, 350, 350);
-                farmerHandRight.init(3500000, 350, 20, 350, 350);
+                pitchforks.init(-3500000, 350);
+                moveFarmerOffscreen();
                 platformHolder.setPlatformScene(1);
                 wallHolder.setWallScene(1);
                 break;
@@ -76,6 +75,7 @@ public class SceneHolder {
 
                 playerSpawn.set(618, 120);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50, 36);
+                pitchforks.init(3800 + sceneShiftX, 190 + sceneShiftY);
                 farmerHead.init(Gdx.graphics.getWidth() / 2 - farmerHead.width / 2, 400, 30, 350, 350);
                 farmerHandLeft.init(0, 650, 20, 350, 350);
                 farmerHandRight.init(Gdx.graphics.getWidth() - farmerHandRight.width, 350, 20, 350, 350);
@@ -89,6 +89,7 @@ public class SceneHolder {
                 platFallTexture = woodBlockTexture;
                 playerSpawn.set(400, 5000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50, 36);
+                pitchforks.init(3800, 190);
                 moveFarmerOffscreen();
                 platformHolder.setPlatformScene(3);
                 wallHolder.setWallScene(3);

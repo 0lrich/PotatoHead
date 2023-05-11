@@ -11,6 +11,10 @@ public class Pitchforks extends Wall{
         super(3800, 190, 100, 1800);
 
     }
+    public void init(float x, float y){
+        this.x = x;
+        this.y = y;
+    }
     public void render (SpriteBatch batch) {
         batch.draw(pitchForksTexture, x, y, width, height);
     }
