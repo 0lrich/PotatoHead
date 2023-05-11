@@ -6,21 +6,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
+import static com.mygdx.game.Globals.*;
+
 public class Platform extends InGameObj {
     float x;
     float y;
     float height;
     float width;
-    Texture currentTexture = new Texture(Gdx.files.internal("platNoFallDefault.png"));
-    Texture platNoFallTexture = new Texture(Gdx.files.internal("platNoFallDefault.png"));
-    Texture platFallTexture = new Texture(Gdx.files.internal("platFallDefault.png"));
 
 // if you wonder why i put this one here i think it'll be used for when a boss can make a floor not usable anymore ~ Olrich
     Boolean tangible;
     Boolean isFallingThrough;
     Boolean canFallThroughPlat;
-
-
+    Texture currentTexture;
     public Platform(float x, float y, float height, float width, Boolean tangible, boolean isFallThrough) {
         this.canFallThroughPlat = isFallThrough;
         this.height = height;
@@ -28,6 +26,20 @@ public class Platform extends InGameObj {
         this.tangible = tangible;
         this.x = x;
         this.y = y;
+        if(isFallThrough){
+            currentTexture = platFallTexture;
+        } else{
+            currentTexture = platNoFallTexture;
+        }
+    }
+    public Platform(float x, float y, float height, float width, Boolean tangible, boolean isFallThrough, Texture texture) {
+        this.canFallThroughPlat = isFallThrough;
+        this.height = height;
+        this.width = width;
+        this.tangible = tangible;
+        this.x = x;
+        this.y = y;
+        currentTexture = texture;
     }
     /**
      * this is where stuff that happens every frame is gonna go
@@ -58,12 +70,6 @@ public class Platform extends InGameObj {
         Globals.globalRender.rect(x,y,width, height);
         Globals.globalRender.end();
         */
-
-        if(canFallThroughPlat == true){
-            currentTexture = platFallTexture;
-        }else{
-            currentTexture = platNoFallTexture;
-        }
 
         batch.draw(currentTexture, x, y, width,height);
     }

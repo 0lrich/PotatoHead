@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import static com.mygdx.game.Globals.sound;
+
 public class FirstBossHead extends Boss {
     boolean disabledMovementpattern = false;
 
@@ -36,6 +38,8 @@ public class FirstBossHead extends Boss {
             if (canGetHurt = true) {
                 for (int i = 0; i < Globals.bulletHolder.bullets.size(); i++) {
                     if (amIHit(Globals.bulletHolder.bullets.get(i))) {
+                        sound = Gdx.audio.newSound(Gdx.files.internal("hit.mp3"));
+                        sound.play(1);
                         currentTexture = hitTexture;
                         health = health - Globals.bulletHolder.bullets.get(i).damage;
                         Globals.bulletHolder.bullets.get(i).alreadyHitSomething();

@@ -3,8 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -26,6 +26,25 @@ public class Globals { // This global class holds objects that should be accessi
     public static FirstBossHead farmerHead;
     public static FirstBossHand farmerHandRight;
     public static FirstBossHand farmerHandLeft;
+    public static Pitchforks pitchforks = new Pitchforks();
+    public static Texture cloudTexture = new Texture(Gdx.files.internal("cloudBlock.png"));
+    public static Texture roadTexture2 = new Texture(Gdx.files.internal("roadBlock.png"));
+    public static Texture roadStripeTexture = new Texture(Gdx.files.internal("roadStripe.png"));
+    public static Texture woodBlockTexture = new Texture(Gdx.files.internal("woodBlock.png"));
+    public static Texture nothingTexture = new Texture(Gdx.files.internal("nothing.png"));
+    public static Texture defaultTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
+    public static Texture gradientTexture = new Texture(Gdx.files.internal("gradient2.png"));
+    public static Texture roadTexture = new Texture(Gdx.files.internal("tempRoad.png"));
+    public static Texture cliffTexture = new Texture(Gdx.files.internal("cliff2.png"));
+    public static Texture roadSignTexture = new Texture(Gdx.files.internal("roadSign.png"));
+    public static Texture truckWheelTexture = new Texture(Gdx.files.internal("wheel.png"));
+    public static Texture truckBaseTexture = new Texture(Gdx.files.internal("truckBase.png"));
+    public static Texture truckHeadTexture = new Texture(Gdx.files.internal("truckHead.png"));
+    public static Texture pitchForksTexture = new Texture(Gdx.files.internal("pitchforks.png"));
+    public static Texture wallTexture;
+    public static Texture platNoFallTexture;
+    public static Texture platFallTexture;
+
 
 
 }

@@ -1,11 +1,11 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
-import static com.badlogic.gdx.math.MathUtils.lerp;
-import static com.mygdx.game.Globals.platformHolder;
+import static com.mygdx.game.Globals.*;
 
 public class WallHolder {
 
@@ -16,7 +16,13 @@ public class WallHolder {
     }
     public void addWall(float x, float y, float height, float width){
         walls.add(new Wall(x, y, height, width));
-        platformHolder.addPlatform(x, y + 1, height, width, true, false);
+        //platformHolder.addPlatform(x, y + 1, height, width, true, false, nothingTexture);
+        platformHolder.addPlatform(x, y + 1, height, width, true, false, wallTexture);
+    }
+    public void addWall(float x, float y, float height, float width, Texture texture){
+        walls.add(new Wall(x, y, height, width, texture));
+        //platformHolder.addPlatform(x, y + 1, height, width, true, false, nothingTexture);
+        platformHolder.addPlatform(x, y + 1, height, width, true, false, texture);
     }
     public void removeWall(int Wall){
         walls.remove(Wall);
@@ -47,24 +53,35 @@ public class WallHolder {
     public void updatewallScene(){
         removeAllWalls();
         switch(wallScene){
-            case 0:
+            case 0: // Main menu
                 break;
-            case 1:
+            case 1: // Tutorial
                 addWall(-20,0,2000,20); // Wall on left
                 addWall(0,0,400,2000); // Spawn wall
                 addWall(2000,0,500,200); // Force-to-jump wall
-                addWall(4000,0,600,900);//
+                addWall(3990,0,600,900);//
                 addWall(4800, 600, 265, 100);//
                 addWall(5100,1480,500,100);//
                 addWall(5000,1480,50,100);//
                 break;
-            case 2:
+            case 2: // Boss level
+                addWall(-2000 + sceneHolder.getSceneShiftX(),-3000 + sceneHolder.getSceneShiftY(), 3000, 999999, roadTexture);
+                addWall(5799 + sceneHolder.getSceneShiftX(), 125 + sceneHolder.getSceneShiftY(), 964, 500, truckHeadTexture);
+                break;
+            case 3: // Test level 1
+                addWall(-2000,-3000, 3000, 999999, roadTexture);
+                stairs(3000, 0);
+                //addWall(3800,100, 100, 2000, truckBaseTexture);
+                addWall(5799, 125, 964, 500, truckHeadTexture);
 
                 break;
-            case 3:
+            case 4: // Test level 2
                 break;
-            case 4:
-                break;
+        }
+    }
+    public void stairs(float x, float y){
+        for(int i = 0; i < 15; i++){
+            addWall(x + (50 * i),y + (50 * i), 50, 50);
         }
     }
 }

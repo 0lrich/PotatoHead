@@ -66,6 +66,7 @@ public class Player extends InGameObj{
     boolean dontRender = false;
 
     boolean debugToggle = false;
+    boolean godKillerToggle = false;
 
 
     public Player(float x, float y, float health, float height, float width) {
@@ -119,6 +120,7 @@ public class Player extends InGameObj{
      *   V
      */
     public void update(float deltaTime) {
+        pitchforkCollide();
         death();
         dodgecooldown -= Gdx.graphics.getDeltaTime();
         invlunerableTime -= Gdx.graphics.getDeltaTime();
@@ -133,7 +135,6 @@ public class Player extends InGameObj{
             }
         }
         currentAnimation.update();
-
 
     }
     /**
@@ -160,7 +161,18 @@ public class Player extends InGameObj{
 		if(debugToggle){
             playerDebug(batch);
         }
+
+        if(godKillerToggle){
+            health = 999999;
+            damage = 99;
+            fireRate = 20;
+        } else{
+            damage = 1;
+            fireRate = 3;
+        }
+
 		}
+
     }
     public void dispose () {}
 
@@ -260,6 +272,9 @@ public class Player extends InGameObj{
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
             debugToggle = !debugToggle;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O) && debugToggle){
+            godKillerToggle = !godKillerToggle;
         }
 
         xVelocity = lerp(xVelocity, 0, 0.25f);
@@ -521,6 +536,7 @@ public class Player extends InGameObj{
 
     }
 
+
     public boolean isRectCollideWithWalls(Rectangle testRect){
         for(int i = 0; i < wallHolder.getWalls().size(); i++){
             Wall w = wallHolder.getWalls().get(i);
@@ -530,6 +546,17 @@ public class Player extends InGameObj{
             }
         }
         return false;
+    }
+    public void pitchforkCollide(){
+        Rectangle testRect = new Rectangle(getPosX(), getPosY(), getWidth(), getHeight());
+        Rectangle rect = new Rectangle(pitchforks.x, pitchforks.y, pitchforks.width, pitchforks.height);
+        if(testRect.overlaps(rect)){
+            health--;
+            posX = sceneHolder.getPlayerSpawn().x;
+            posY = sceneHolder.getPlayerSpawn().y;
+            xVelocity = 0;
+            yVelocity = 0;
+        }
     }
     public void shoot(float deltaTime) {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && reload < 1) {
@@ -618,15 +645,15 @@ public class Player extends InGameObj{
         return false;
     }
     public void amIDead(){
-        if (health <= 0){
+        if (health <= 0) {
             this.inTutorial = Globals.sceneHolder.getInTutorial();
-<<<<<<< Updated upstream
+
             if(this.inTutorial == false){
             sceneHolder.switchScene(2);
         }else{
                 sceneHolder.switchScene(1);
             }
-=======
+
             int tempScene = sceneHolder.getScene();
             if (tempScene == 2){
                 tempScene = 3; //if u die while in boss you go back to walking to him again
@@ -635,7 +662,9 @@ public class Player extends InGameObj{
                 tempScene = 0;
             }
             sceneHolder.switchScene(tempScene);
->>>>>>> Stashed changes
+
+            int tempScene = sceneHolder.getScene();
+            sceneHolder.switchScene(tempScene);
         }
     }
     public void printLocation(){
@@ -645,10 +674,11 @@ public class Player extends InGameObj{
 
         Globals.font.draw(batch, "(" + posX + ", " + posY + ")",  posX, posY+100);
         Globals.font.draw(batch, "" +
-                "MOVEMENT: WASD\n" +
-                "SHOOT: SPACE\n" +
-                "AIM: IJKL\n" +
-                "SWITCH SCENE: R\n" +
+                "Controls:\n" +
+                "MOVEMENT - W,A,D | SHOOT - SPACE | AIM - I,J,K,L\n\n" +
+                "Debug Controls:\n" +
+                "SWITCH SCENE - R | GOD-KILLER - O\n\n" +
+                "Debug info:\n" +
                 "LIVES: " + health + "\n" +
                 "LEFT HAND ALIVE? " + farmerHandLeft.getIsAlive() + "\n" +
                 "RIGHT HAND ALIVE? " + farmerHandRight.getIsAlive() + "\n" +
