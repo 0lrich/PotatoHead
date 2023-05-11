@@ -647,13 +647,6 @@ public class Player extends InGameObj{
     public void amIDead(){
         if (health <= 0) {
             this.inTutorial = Globals.sceneHolder.getInTutorial();
-
-            if(this.inTutorial == false){
-            sceneHolder.switchScene(2);
-        }else{
-                sceneHolder.switchScene(1);
-            }
-
             int tempScene = sceneHolder.getScene();
             if (tempScene == 2){
                 tempScene = 3; //if u die while in boss you go back to walking to him again
@@ -661,9 +654,7 @@ public class Player extends InGameObj{
             if (tempScene == 4){
                 tempScene = 0;
             }
-            sceneHolder.switchScene(tempScene);
 
-            int tempScene = sceneHolder.getScene();
             sceneHolder.switchScene(tempScene);
         }
     }
