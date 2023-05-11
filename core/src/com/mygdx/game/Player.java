@@ -548,6 +548,8 @@ public class Player extends InGameObj{
             health--;
             posX = sceneHolder.getPlayerSpawn().x;
             posY = sceneHolder.getPlayerSpawn().y;
+            xVelocity = 0;
+            yVelocity = 0;
         }
     }
     public void shoot(float deltaTime) {

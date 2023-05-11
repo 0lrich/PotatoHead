@@ -1,8 +1,10 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -16,6 +18,8 @@ public class SceneHolder {
     float sceneShiftX = -3800;
     float sceneShiftY = -475;
     Vector2 playerSpawn;
+    float rotation = 0;
+    float sizeShift = 90; // TEMP
 
     public SceneHolder() {
 
@@ -64,7 +68,6 @@ public class SceneHolder {
                 wallHolder.setWallScene(1);
                 break;
             case 2: // Boss level
-
                 music = Gdx.audio.newMusic(Gdx.files.internal("boss.mp3"));
                 music.setVolume(0.1f);
                 music.play();
@@ -142,6 +145,12 @@ public class SceneHolder {
             Globals.font.draw(batch, "AIM BY HOLDING 'I' 'J' 'K' 'L'", 1700, 2200);
             Globals.font.draw(batch, "DOWN THE HOLE", -400, 1800);
         } else if (scene == 2) {
+            /*
+            if (Gdx.input.isKeyJustPressed(Input.Keys.T)){
+                sizeShift += 2;
+            }
+            */
+            rotation += 10;
             ScreenUtils.clear(.6f, .2f, .2f, 1);
             batch.draw(gradientTexture, -20000 + sceneShiftX, 0 + sceneShiftY, 40000, 9000);
             batch.draw(truckBaseTexture, 3800 + sceneShiftX, 100 + sceneShiftY, 2000, 150);
@@ -150,11 +159,17 @@ public class SceneHolder {
             batch.draw(truckWheelTexture, 4850 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
             batch.draw(truckWheelTexture, 5300 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
             batch.draw(truckWheelTexture, 5900 + sceneShiftX, -25 + sceneShiftY, 204.75f, 171.375f);
+            batch.draw(new TextureRegion(truckWheelTexture), 5900 + sceneShiftX, -25 + sceneShiftY, sizeShift, sizeShift, (int) 204.75,(int) 171.375, 1, 1,-rotation);
+
             if (!farmerHandLeft.getIsAlive() && !farmerHandRight.getIsAlive() && !farmerHead.getIsAlive()) {
                 switchScene(4);
             }
             if (potato.getPosY() <= -474) {
                 potato.health--;
+                potato.posX = sceneHolder.getPlayerSpawn().x;
+                potato.posY = sceneHolder.getPlayerSpawn().y;
+                potato.xVelocity = 0;
+                potato.yVelocity = 0;
             }
         } else if (scene == 3) {
             ScreenUtils.clear(0.7f, 0.8f, 1f, 1);
