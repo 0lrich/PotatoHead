@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -101,6 +102,8 @@ public class SceneHolder {
             case 4: // Test level 2
                 playerSpawn.set(400, 350);
                 sound = Gdx.audio.newSound(Gdx.files.internal("fanfare.mp3"));
+                sound.setVolume((long) 0.5f,0.5f);
+                sound.play();
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50, 36);
                 moveFarmerOffscreen();
                 platformHolder.setPlatformScene(4);
