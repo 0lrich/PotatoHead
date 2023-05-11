@@ -16,6 +16,7 @@ public class SceneHolder {
     Vector2 playerSpawn;
     public SceneHolder(){
 
+
         potato = new Player(0,20, 10, 50,36);
         farmerHandRight = new FirstBossHand(350,350,20,350,350 );
         farmerHandLeft = new FirstBossHand(0,350,20,350,350 );
@@ -73,11 +74,15 @@ public class SceneHolder {
                 wallHolder.setWallScene(2);
                 break;
             case 3: // Test level
+                wallTexture = roadTexture;
+                platNoFallTexture = roadStripeTexture;
+                platFallTexture = woodBlockTexture;
                 playerSpawn.set(400, 5000);
                 potato.init(playerSpawn.x, playerSpawn.y, 3, 50,36);
                 moveFarmerOffscreen();
                 platformHolder.setPlatformScene(3);
                 wallHolder.setWallScene(3);
+
                 break;
             case 4: // Test level 2
                 playerSpawn.set(400, 350);
@@ -145,6 +150,7 @@ public class SceneHolder {
         farmerHandLeft.render(batch);
         farmerHead.render(batch);
         potato.render(batch);
+        pitchforks.render(batch);
     }
     public void resetScene(){
         music.stop();
