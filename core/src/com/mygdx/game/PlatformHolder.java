@@ -74,6 +74,10 @@ public class PlatformHolder {
                 break;
             case 3: // Test level 1
                 addPlatform(-2300,-500,500,900,true, true, cliffTexture);
+                addPlatform(4000, 600, 20, 200, true, false);
+                addPlatform(4350, 500, 20, 200, true, false);
+                addPlatform(4950, 500, 20, 200, true, false);
+                addPlatform(5400, 600, 20, 200, true, false);
                 break;
             case 4: // Test level 2
                 pyramid(20, 40, 100, 50);

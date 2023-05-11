@@ -70,7 +70,9 @@ public class WallHolder {
             case 3: // Test level 1
                 addWall(-2000,-3000, 3000, 999999, roadTexture);
                 stairs(3000, 0);
-                addWall(3800,100, 100, 2000, truckBaseTexture);
+                //addWall(3800,100, 100, 2000, truckBaseTexture);
+                addWall(5799, 125, 964, 500, truckHeadTexture);
+
                 break;
             case 4: // Test level 2
                 break;
