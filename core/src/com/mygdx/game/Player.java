@@ -566,17 +566,17 @@ public class Player extends InGameObj{
             float tempSpeedy = 0;
             boolean isAim = false;
 
-            if (Gdx.input.isKeyPressed(Input.Keys.I)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
                 tempSpeedy = bulletSpeed;
                 isAim = true;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.K)) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
                 tempSpeedy = -bulletSpeed;
                 isAim = true;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.J)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
                 tempSpeedx = -bulletSpeed;
                 isAim = true;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
                 tempSpeedx = bulletSpeed;
                 isAim = true;
             }
